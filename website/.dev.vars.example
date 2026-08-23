@@ -1,0 +1,7 @@
+ADMIN_USERNAME=change-me
+ADMIN_PASSWORD_SHA256=replace-with-the-sha256-hash-of-your-password
+ADMIN_SESSION_SECRET=replace-with-a-long-random-secret
+DATABASE_URL=postgresql://postgres.project-ref:password@aws-0-region.pooler.supabase.com:6543/postgres
+SUPABASE_URL=https://project-ref.supabase.co
+SUPABASE_SERVICE_ROLE_KEY=replace-with-your-service-role-key
+SUPABASE_STORAGE_BUCKET=private-files
