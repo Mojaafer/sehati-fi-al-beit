@@ -16,12 +16,11 @@
 .cxx
 local.properties
 .env
-# The debug keystore and google-services.json are COMMITTED on purpose so a collaborator can
-# clone and run immediately: this repo must stay PRIVATE. The Firebase key is a client
-# identifier, not a secret — access is enforced by firestore.rules, and the API key should be
-# restricted (package name + SHA-1) in Google Cloud console. Never make this repo public
-# without purging these from history first.
-debug.keystore
+# google-services.json and debug.keystore are COMMITTED on purpose so a collaborator can
+# clone, build and sign in immediately: this repo must stay PRIVATE. The Firebase key is a
+# client identifier, not a secret — access is enforced by firestore.rules, and the API key
+# should be restricted (package name + SHA-1) in Google Cloud console. Never make this repo
+# public without purging these from history first.
 
 # Build outputs and local-only artifacts
 *.apk
