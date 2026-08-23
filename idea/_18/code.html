@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+
+<html dir="rtl" lang="ar"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>تسجيل الدخول - صحتي في البيت</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700&amp;family=Public+Sans:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "on-tertiary-fixed": "#321300",
+                      "on-background": "#1a1c1a",
+                      "tertiary-fixed": "#ffdbc8",
+                      "secondary-fixed": "#c6ecc8",
+                      "surface-container": "#efeeeb",
+                      "tertiary-fixed-dim": "#ffb68a",
+                      "surface-container-high": "#e9e8e5",
+                      "secondary-container": "#c3e9c5",
+                      "primary-container": "#0d7c84",
+                      "surface-variant": "#e3e2e0",
+                      "surface-container-highest": "#e3e2e0",
+                      "surface-container-lowest": "#ffffff",
+                      "on-primary-fixed": "#002022",
+                      "on-primary-container": "#d9fcff",
+                      "surface-bright": "#faf9f6",
+                      "secondary": "#45664a",
+                      "on-secondary": "#ffffff",
+                      "on-primary": "#ffffff",
+                      "on-primary-fixed-variant": "#004f54",
+                      "surface-dim": "#dbdad7",
+                      "surface-container-low": "#f4f3f1",
+                      "inverse-primary": "#7cd4dd",
+                      "on-error": "#ffffff",
+                      "tertiary": "#84481f",
+                      "error-container": "#ffdad6",
+                      "surface-tint": "#006970",
+                      "on-surface": "#1a1c1a",
+                      "on-tertiary-container": "#fff3ed",
+                      "primary-fixed": "#98f1f9",
+                      "on-error-container": "#93000a",
+                      "tertiary-container": "#a16034",
+                      "primary-fixed-dim": "#7cd4dd",
+                      "outline-variant": "#bdc9ca",
+                      "on-secondary-container": "#496a4e",
+                      "on-secondary-fixed-variant": "#2d4e33",
+                      "error": "#ba1a1a",
+                      "on-secondary-fixed": "#01210b",
+                      "background": "#faf9f6",
+                      "primary": "#006168",
+                      "inverse-on-surface": "#f2f1ee",
+                      "secondary-fixed-dim": "#abd0ad",
+                      "on-surface-variant": "#3e494a",
+                      "on-tertiary-fixed-variant": "#6f380f",
+                      "outline": "#6e797a",
+                      "inverse-surface": "#2f312f",
+                      "on-tertiary": "#ffffff",
+                      "surface": "#faf9f6"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "xs": "4px",
+                      "unit": "4px",
+                      "gutter": "24px",
+                      "margin-desktop": "64px",
+                      "xl": "48px",
+                      "max-width": "1280px",
+                      "margin-mobile": "16px",
+                      "sm": "8px",
+                      "lg": "24px",
+                      "md": "16px"
+              },
+              "fontFamily": {
+                      "headline-xl": [
+                              "Manrope"
+                      ],
+                      "label-sm": [
+                              "Public Sans"
+                      ],
+                      "headline-lg-mobile": [
+                              "Manrope"
+                      ],
+                      "headline-md": [
+                              "Manrope"
+                      ],
+                      "body-lg": [
+                              "Public Sans"
+                      ],
+                      "label-md": [
+                              "Public Sans"
+                      ],
+                      "body-md": [
+                              "Public Sans"
+                      ],
+                      "headline-lg": [
+                              "Manrope"
+                      ]
+              },
+              "fontSize": {
+                      "headline-xl": [
+                              "40px",
+                              {
+                                      "lineHeight": "48px",
+                                      "letterSpacing": "-0.02em",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "label-sm": [
+                              "12px",
+                              {
+                                      "lineHeight": "16px",
+                                      "fontWeight": "500"
+                              }
+                      ],
+                      "headline-lg-mobile": [
+                              "28px",
+                              {
+                                      "lineHeight": "36px",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "headline-md": [
+                              "24px",
+                              {
+                                      "lineHeight": "32px",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "body-lg": [
+                              "18px",
+                              {
+                                      "lineHeight": "28px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "label-md": [
+                              "14px",
+                              {
+                                      "lineHeight": "20px",
+                                      "letterSpacing": "0.01em",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "body-md": [
+                              "16px",
+                              {
+                                      "lineHeight": "24px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "headline-lg": [
+                              "32px",
+                              {
+                                      "lineHeight": "40px",
+                                      "letterSpacing": "-0.01em",
+                                      "fontWeight": "600"
+                              }
+                      ]
+              }
+      },
+          },
+        }
+    </script>
+<style>
+        body { font-family: 'Public Sans', sans-serif; }
+        h1, h2, h3, h4, h5, h6, .font-headline-md, .font-headline-lg, .font-headline-xl, .font-headline-lg-mobile { font-family: 'Manrope', sans-serif; }
+    </style>
+</head>
+<body class="bg-background text-on-background min-h-screen flex items-center justify-center p-margin-mobile md:p-margin-desktop relative overflow-hidden">
+<!-- Background atmospheric element -->
+<div class="absolute top-0 right-0 w-[800px] h-[800px] bg-primary-container/20 rounded-full blur-3xl -translate-y-1/2 translate-x-1/3 opacity-60 z-0"></div>
+<div class="absolute bottom-0 left-0 w-[600px] h-[600px] bg-tertiary-fixed/30 rounded-full blur-3xl translate-y-1/3 -translate-x-1/4 opacity-50 z-0"></div>
+<div class="w-full max-w-[480px] bg-surface-container-lowest rounded-xl shadow-[0_4px_16px_rgba(13,124,132,0.08)] z-10 relative border border-surface-variant overflow-hidden flex flex-col">
+<!-- Top decorative bar -->
+<div class="h-2 w-full bg-gradient-to-r from-primary to-inverse-primary"></div>
+<div class="p-lg md:p-xl flex flex-col gap-lg">
+<!-- Header Section -->
+<div class="text-center flex flex-col items-center gap-sm">
+<div class="w-16 h-16 rounded-full bg-primary-container text-on-primary-container flex items-center justify-center mb-xs">
+<span class="material-symbols-outlined text-[32px]">health_and_safety</span>
+</div>
+<h1 class="font-headline-lg-mobile md:font-headline-lg text-headline-lg-mobile md:text-headline-lg text-primary">أهلاً بك في صحتي في البيت</h1>
+<p class="font-body-md text-body-md text-on-surface-variant">أدخل رقم هاتفك للمتابعة</p>
+</div>
+<!-- Form Section -->
+<form class="flex flex-col gap-md mt-sm">
+<!-- Phone Input Group -->
+<div class="flex flex-col gap-xs">
+<label class="font-label-md text-label-md text-on-surface" for="phone">رقم الهاتف الجوال</label>
+<div class="relative flex items-center w-full focus-within:ring-2 focus-within:ring-primary focus-within:border-primary rounded-lg border border-outline-variant bg-surface-bright overflow-hidden transition-all duration-200">
+<!-- Country Code Selector (Simplified for UI mockup) -->
+<div class="flex items-center gap-xs px-sm py-3 bg-surface-container border-l border-outline-variant text-on-surface-variant font-label-md text-label-md cursor-pointer hover:bg-surface-container-high transition-colors">
+<span class="material-symbols-outlined text-[18px]">public</span>
+<span>+966</span>
+<span class="material-symbols-outlined text-[20px]">arrow_drop_down</span>
+</div>
+<input autocomplete="tel" class="flex-1 w-full border-none focus:ring-0 bg-transparent py-3 px-md font-body-md text-body-md text-on-surface placeholder:text-outline-variant text-right" dir="ltr" id="phone" placeholder="5X XXX XXXX" type="tel"/>
+</div>
+</div>
+<!-- Remember Me Checkbox -->
+<div class="flex items-center justify-start gap-sm mt-xs">
+<div class="relative flex items-center">
+<input class="peer h-5 w-5 cursor-pointer appearance-none rounded-DEFAULT border border-outline-variant checked:border-primary checked:bg-primary transition-all" id="remember" type="checkbox"/>
+<span class="material-symbols-outlined text-on-primary absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none opacity-0 peer-checked:opacity-100 text-[16px]" style="font-variation-settings: 'FILL' 1;">check</span>
+</div>
+<label class="font-label-md text-label-md text-on-surface-variant cursor-pointer select-none" for="remember">تذكرني على هذا الجهاز</label>
+</div>
+<!-- Primary CTA -->
+<button class="w-full bg-primary text-on-primary font-label-md text-label-md py-4 rounded-lg flex items-center justify-center gap-sm mt-sm hover:bg-on-primary-fixed-variant transition-colors duration-200 shadow-[0_2px_4px_rgba(13,124,132,0.15)] active:scale-[0.98]" type="button">
+<span>إرسال رمز التحقق</span>
+<span class="material-symbols-outlined">arrow_forward</span>
+</button>
+</form>
+<!-- Divider -->
+<div class="relative flex items-center py-sm">
+<div class="flex-grow border-t border-surface-variant"></div>
+<span class="flex-shrink-0 mx-4 font-label-sm text-label-sm text-on-surface-variant bg-surface-container-lowest px-2">أو</span>
+<div class="flex-grow border-t border-surface-variant"></div>
+</div>
+<!-- Secondary Actions -->
+<div class="flex flex-col gap-sm">
+<button class="w-full bg-surface-container text-on-surface font-label-md text-label-md py-3 rounded-lg flex items-center justify-center gap-sm hover:bg-surface-container-high transition-colors duration-200" type="button">
+<span class="material-symbols-outlined text-on-surface-variant">person_outline</span>
+<span>المتابعة كزائر</span>
+</button>
+<button class="w-full bg-secondary-container text-on-secondary-container font-label-md text-label-md py-3 rounded-lg flex items-center justify-center gap-sm hover:bg-secondary-fixed-dim transition-colors duration-200 mt-xs" type="button">
+<span class="material-symbols-outlined">medical_services</span>
+<span>التسجيل كمقدم رعاية صحية</span>
+</button>
+</div>
+<p class="text-center font-label-sm text-label-sm text-outline mt-sm">
+                بتسجيل الدخول، أنت توافق على <a class="text-primary hover:underline" href="#">الشروط والأحكام</a> و <a class="text-primary hover:underline" href="#">سياسة الخصوصية</a>.
+            </p>
+</div>
+</div>
+</body></html>

@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+
+<html dir="rtl" lang="ar"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<title>طريقة الدفع</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "tertiary-container": "#6e3900",
+                        "on-primary-container": "#85bce2",
+                        "on-primary-fixed-variant": "#004c6d",
+                        "surface-container-low": "#f0f3ff",
+                        "on-background": "#151c27",
+                        "on-tertiary-fixed": "#2f1500",
+                        "background": "#f9f9ff",
+                        "secondary-fixed": "#7af7e1",
+                        "secondary": "#006b5e",
+                        "primary-container": "#004c6d",
+                        "surface-container-highest": "#dce2f3",
+                        "on-surface-variant": "#41484d",
+                        "on-tertiary-container": "#fba050",
+                        "primary": "#00344d",
+                        "surface-bright": "#f9f9ff",
+                        "surface-container": "#e7eefe",
+                        "on-primary": "#ffffff",
+                        "on-surface": "#151c27",
+                        "primary-fixed": "#c7e7ff",
+                        "on-secondary-fixed": "#00201b",
+                        "surface-tint": "#286486",
+                        "on-secondary": "#ffffff",
+                        "inverse-primary": "#96cdf4",
+                        "tertiary": "#4d2600",
+                        "tertiary-fixed-dim": "#ffb77d",
+                        "surface": "#f9f9ff",
+                        "on-primary-fixed": "#001e2e",
+                        "error": "#ba1a1a",
+                        "on-secondary-container": "#007164",
+                        "surface-dim": "#d3daea",
+                        "outline": "#71787e",
+                        "surface-container-lowest": "#ffffff",
+                        "surface-container-high": "#e2e8f8",
+                        "on-secondary-fixed-variant": "#005046",
+                        "inverse-on-surface": "#ebf1ff",
+                        "inverse-surface": "#2a313d",
+                        "on-error-container": "#93000a",
+                        "secondary-container": "#7af7e1",
+                        "on-error": "#ffffff",
+                        "primary-fixed-dim": "#96cdf4",
+                        "on-tertiary": "#ffffff",
+                        "tertiary-fixed": "#ffdcc3",
+                        "error-container": "#ffdad6",
+                        "secondary-fixed-dim": "#5bdac6",
+                        "on-tertiary-fixed-variant": "#6e3900",
+                        "surface-variant": "#dce2f3",
+                        "outline-variant": "#c0c7ce"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "stack-md": "16px",
+                        "stack-sm": "8px",
+                        "gutter": "16px",
+                        "margin-page": "20px",
+                        "stack-lg": "24px"
+                    },
+                    "fontFamily": {
+                        "headline-md": ["Tajawal"],
+                        "headline-lg": ["Tajawal"],
+                        "headline-lg-mobile": ["Tajawal"],
+                        "headline-sm": ["Tajawal"],
+                        "body-lg": ["Tajawal"],
+                        "label-md": ["Tajawal"],
+                        "body-md": ["Tajawal"]
+                    },
+                    "fontSize": {
+                        "headline-md": ["20px", { "lineHeight": "28px", "fontWeight": "600" }],
+                        "headline-lg": ["28px", { "lineHeight": "36px", "fontWeight": "700" }],
+                        "headline-lg-mobile": ["24px", { "lineHeight": "32px", "fontWeight": "700" }],
+                        "headline-sm": ["16px", { "lineHeight": "24px", "fontWeight": "600" }],
+                        "body-lg": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "label-md": ["12px", { "lineHeight": "16px", "fontWeight": "500" }],
+                        "body-md": ["14px", { "lineHeight": "20px", "fontWeight": "400" }]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            -webkit-tap-highlight-color: transparent;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .material-symbols-outlined.fill {
+            font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-background font-body-lg antialiased min-h-screen flex flex-col">
+<!-- Header -->
+<header class="flex justify-between items-center w-full px-margin-page py-4 bg-surface z-10 sticky top-0">
+<div class="flex-1"></div>
+<h1 class="text-headline-md font-headline-md text-on-surface">طريقة الدفع</h1>
+<div class="flex-1 flex justify-end">
+<button aria-label="الرجوع" class="p-2 -mr-2 rounded-full hover:bg-surface-container-low transition-colors">
+<span class="material-symbols-outlined text-on-surface">arrow_forward</span>
+</button>
+</div>
+</header>
+<main class="flex-1 px-margin-page py-stack-md flex flex-col gap-stack-lg pb-32">
+<!-- Order Summary Card -->
+<section class="bg-surface-container-lowest rounded-xl p-4 shadow-[0px_4px_12px_rgba(0,0,0,0.05)] border border-surface-container-highest">
+<div class="flex justify-between items-center">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-full bg-primary-fixed flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-on-primary-fixed">science</span>
+</div>
+<div>
+<h2 class="text-headline-sm font-headline-sm text-on-surface mb-1">سحب عينات منزلية</h2>
+<p class="text-body-md font-body-md text-on-surface-variant">مريض واحد • 3 فحوصات</p>
+</div>
+</div>
+<div class="text-left whitespace-nowrap">
+<span class="text-headline-sm font-headline-sm text-on-surface">15,000 ج.س</span>
+</div>
+</div>
+</section>
+<!-- Payment Options -->
+<section>
+<div class="mb-stack-md">
+<h2 class="text-headline-md font-headline-md text-on-surface mb-2">اختر طريقة الدفع</h2>
+<p class="text-body-md font-body-md text-on-surface-variant">اختر الوسيلة الأنسب لك لإتمام عملية الدفع بشكل آمن وسريع</p>
+</div>
+<div class="flex flex-col gap-stack-sm" id="payment-options">
+<!-- Option 1: Bank Card -->
+<label class="relative flex items-center p-4 bg-surface-container-lowest border-2 border-primary rounded-xl cursor-pointer transition-all hover:bg-surface-container-low">
+<input checked="" class="peer sr-only" name="payment_method" type="radio" value="card"/>
+<div class="w-6 h-6 rounded-full border-2 border-primary flex items-center justify-center ml-4 shrink-0 peer-checked:border-primary">
+<div class="w-3 h-3 rounded-full bg-primary opacity-100 transition-opacity"></div>
+</div>
+<div class="flex-1 flex justify-between items-center">
+<div>
+<div class="flex items-center gap-2 mb-1">
+<span class="text-headline-sm font-headline-sm text-on-surface">بطاقة بنكية</span>
+<span class="text-label-md font-label-md text-secondary bg-secondary-fixed-dim/20 px-2 py-0.5 rounded-full">موصى بها</span>
+</div>
+<p class="text-body-md font-body-md text-on-surface-variant">ادفع باستخدام بطاقتك البنكية فيزا أو ماستركارد</p>
+</div>
+<div class="w-12 h-12 rounded-lg bg-primary flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-on-primary">credit_card</span>
+</div>
+</div>
+</label>
+<!-- Option 2: Fawry -->
+<label class="relative flex items-center p-4 bg-surface-container-lowest border border-surface-container-highest rounded-xl cursor-pointer transition-all hover:bg-surface-container-low">
+<input class="peer sr-only" name="payment_method" type="radio" value="fawry"/>
+<div class="w-6 h-6 rounded-full border-2 border-outline-variant flex items-center justify-center ml-4 shrink-0 peer-checked:border-primary">
+<div class="w-3 h-3 rounded-full bg-primary opacity-0 transition-opacity peer-checked:opacity-100"></div>
+</div>
+<div class="flex-1 flex justify-between items-center">
+<div>
+<div class="text-headline-sm font-headline-sm text-on-surface mb-1">فوري</div>
+<p class="text-body-md font-body-md text-on-surface-variant">ادفع عبر خدمة فوري</p>
+</div>
+<div class="w-12 h-12 rounded-lg bg-surface-container flex items-center justify-center shrink-0 text-primary font-bold">
+                             في
+                        </div>
+</div>
+</label>
+<!-- Option 3: Instapay -->
+<label class="relative flex items-center p-4 bg-surface-container-lowest border border-surface-container-highest rounded-xl cursor-pointer transition-all hover:bg-surface-container-low">
+<input class="peer sr-only" name="payment_method" type="radio" value="instapay"/>
+<div class="w-6 h-6 rounded-full border-2 border-outline-variant flex items-center justify-center ml-4 shrink-0 peer-checked:border-primary">
+<div class="w-3 h-3 rounded-full bg-primary opacity-0 transition-opacity peer-checked:opacity-100"></div>
+</div>
+<div class="flex-1 flex justify-between items-center">
+<div>
+<div class="text-headline-sm font-headline-sm text-on-surface mb-1">إنستاباي</div>
+<p class="text-body-md font-body-md text-on-surface-variant">ادفع عبر تطبيق إنستاباي</p>
+</div>
+<div class="w-12 h-12 rounded-lg bg-surface-container flex items-center justify-center shrink-0 text-primary font-bold text-[10px] leading-tight text-center">
+                             INSTA<br/>PAY
+                        </div>
+</div>
+</label>
+<!-- Option 4: Bank Transfer -->
+<label class="relative flex items-center p-4 bg-surface-container-lowest border border-surface-container-highest rounded-xl cursor-pointer transition-all hover:bg-surface-container-low">
+<input class="peer sr-only" name="payment_method" type="radio" value="bank_transfer"/>
+<div class="w-6 h-6 rounded-full border-2 border-outline-variant flex items-center justify-center ml-4 shrink-0 peer-checked:border-primary">
+<div class="w-3 h-3 rounded-full bg-primary opacity-0 transition-opacity peer-checked:opacity-100"></div>
+</div>
+<div class="flex-1 flex justify-between items-center">
+<div>
+<div class="text-headline-sm font-headline-sm text-on-surface mb-1">تحويل بنكي آخر</div>
+<p class="text-body-md font-body-md text-on-surface-variant">حوّل المبلغ من حسابك البنكي</p>
+</div>
+<div class="w-12 h-12 rounded-lg bg-surface-container flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-primary">account_balance</span>
+</div>
+</div>
+</label>
+</div>
+</section>
+</main>
+<!-- Bottom Footer -->
+<div class="fixed bottom-0 left-0 w-full bg-surface-container-lowest p-margin-page pb-safe shadow-[0px_-4px_16px_rgba(0,0,0,0.05)] rounded-t-2xl z-50">
+<div class="bg-surface p-4 rounded-xl mb-4 flex justify-between items-center border border-surface-container-highest">
+<span class="text-body-md font-body-md text-on-surface-variant">المبلغ المطلوب:</span>
+<span class="text-headline-sm font-headline-sm text-on-surface">15,093 ج.س</span>
+</div>
+<button class="w-full h-14 bg-primary text-on-primary rounded-xl text-headline-sm font-headline-sm flex items-center justify-center transition-transform active:scale-[0.98]">
+            متابعة للدفع
+        </button>
+</div>
+<script>
+        // Simple logic to handle radio button visual state changes
+        document.addEventListener('DOMContentLoaded', () => {
+            const labels = document.querySelectorAll('#payment-options label');
+            const radios = document.querySelectorAll('#payment-options input[type="radio"]');
+
+            function updateStyles() {
+                radios.forEach((radio, index) => {
+                    const label = labels[index];
+                    const innerCircle = label.querySelector('.w-3.h-3');
+                    const outerCircle = label.querySelector('.w-6.h-6');
+                    
+                    if (radio.checked) {
+                        label.classList.add('border-2', 'border-primary');
+                        label.classList.remove('border', 'border-surface-container-highest');
+                        outerCircle.classList.add('border-primary');
+                        outerCircle.classList.remove('border-outline-variant');
+                        innerCircle.classList.add('opacity-100');
+                        innerCircle.classList.remove('opacity-0');
+                    } else {
+                        label.classList.remove('border-2', 'border-primary');
+                        label.classList.add('border', 'border-surface-container-highest');
+                        outerCircle.classList.remove('border-primary');
+                        outerCircle.classList.add('border-outline-variant');
+                        innerCircle.classList.remove('opacity-100');
+                        innerCircle.classList.add('opacity-0');
+                    }
+                });
+            }
+
+            radios.forEach(radio => {
+                radio.addEventListener('change', updateStyles);
+            });
+        });
+    </script>
+</body></html>

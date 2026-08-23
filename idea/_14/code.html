@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+
+<html dir="rtl" lang="ar"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>سحب عينات - مقدمي الخدمة</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&amp;family=Public+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+  tailwind.config = {
+    darkMode: "class",
+    theme: {
+      extend: {
+        "colors": {
+                "surface-container-highest": "#e3e2e0",
+                "surface": "#faf9f6",
+                "secondary-container": "#c3e9c5",
+                "on-tertiary": "#ffffff",
+                "on-secondary": "#ffffff",
+                "on-tertiary-container": "#fff3ed",
+                "surface-dim": "#dbdad7",
+                "on-primary-fixed": "#002022",
+                "surface-tint": "#006970",
+                "primary-container": "#0d7c84",
+                "error": "#ba1a1a",
+                "primary": "#006168",
+                "surface-variant": "#e3e2e0",
+                "surface-container-lowest": "#ffffff",
+                "on-error": "#ffffff",
+                "tertiary-container": "#a16034",
+                "surface-container": "#efeeeb",
+                "on-error-container": "#93000a",
+                "on-background": "#1a1c1a",
+                "on-surface-variant": "#3e494a",
+                "on-secondary-fixed": "#01210b",
+                "tertiary-fixed": "#ffdbc8",
+                "outline": "#6e797a",
+                "on-secondary-fixed-variant": "#2d4e33",
+                "surface-bright": "#faf9f6",
+                "secondary": "#45664a",
+                "inverse-surface": "#2f312f",
+                "on-primary-container": "#d9fcff",
+                "secondary-fixed": "#c6ecc8",
+                "on-primary": "#ffffff",
+                "primary-fixed-dim": "#7cd4dd",
+                "outline-variant": "#bdc9ca",
+                "on-tertiary-fixed-variant": "#6f380f",
+                "surface-container-high": "#e9e8e5",
+                "background": "#faf9f6",
+                "error-container": "#ffdad6",
+                "surface-container-low": "#f4f3f1",
+                "on-surface": "#1a1c1a",
+                "on-primary-fixed-variant": "#004f54",
+                "inverse-on-surface": "#f2f1ee",
+                "secondary-fixed-dim": "#abd0ad",
+                "on-tertiary-fixed": "#321300",
+                "inverse-primary": "#7cd4dd",
+                "tertiary": "#84481f",
+                "on-secondary-container": "#496a4e",
+                "tertiary-fixed-dim": "#ffb68a",
+                "primary-fixed": "#98f1f9"
+        },
+        "borderRadius": {
+                "DEFAULT": "0.25rem",
+                "lg": "0.5rem",
+                "xl": "0.75rem",
+                "full": "9999px"
+        },
+        "spacing": {
+                "lg": "24px",
+                "unit": "4px",
+                "xl": "48px",
+                "sm": "8px",
+                "md": "16px",
+                "gutter": "24px",
+                "xs": "4px",
+                "margin-desktop": "64px",
+                "margin-mobile": "16px",
+                "max-width": "1280px"
+        },
+        "fontFamily": {
+                "headline-md": [
+                        "Manrope"
+                ],
+                "headline-xl": [
+                        "Manrope"
+                ],
+                "headline-lg": [
+                        "Manrope"
+                ],
+                "label-md": [
+                        "Public Sans"
+                ],
+                "label-sm": [
+                        "Public Sans"
+                ],
+                "body-md": [
+                        "Public Sans"
+                ],
+                "body-lg": [
+                        "Public Sans"
+                ],
+                "headline-lg-mobile": [
+                        "Manrope"
+                ]
+        },
+        "fontSize": {
+                "headline-md": [
+                        "24px",
+                        {
+                                "lineHeight": "32px",
+                                "fontWeight": "600"
+                        }
+                ],
+                "headline-xl": [
+                        "40px",
+                        {
+                                "lineHeight": "48px",
+                                "letterSpacing": "-0.02em",
+                                "fontWeight": "700"
+                        }
+                ],
+                "headline-lg": [
+                        "32px",
+                        {
+                                "lineHeight": "40px",
+                                "letterSpacing": "-0.01em",
+                                "fontWeight": "600"
+                        }
+                ],
+                "label-md": [
+                        "14px",
+                        {
+                                "lineHeight": "20px",
+                                "letterSpacing": "0.01em",
+                                "fontWeight": "600"
+                        }
+                ],
+                "label-sm": [
+                        "12px",
+                        {
+                                "lineHeight": "16px",
+                                "fontWeight": "500"
+                        }
+                ],
+                "body-md": [
+                        "16px",
+                        {
+                                "lineHeight": "24px",
+                                "fontWeight": "400"
+                        }
+                ],
+                "body-lg": [
+                        "18px",
+                        {
+                                "lineHeight": "28px",
+                                "fontWeight": "400"
+                        }
+                ],
+                "headline-lg-mobile": [
+                        "28px",
+                        {
+                                "lineHeight": "36px",
+                                "fontWeight": "600"
+                        }
+                ]
+        }
+},
+    },
+  }
+</script>
+<style>
+        body { font-family: 'Public Sans', sans-serif; background-color: #faf9f6; }
+        .hide-scroll::-webkit-scrollbar { display: none; }
+        .hide-scroll { -ms-overflow-style: none; scrollbar-width: none; }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+</head>
+<body class="bg-background text-on-background min-h-screen pb-24 md:pb-0">
+<!-- Top Navigation for Linear Journey -->
+<header class="bg-surface sticky top-0 z-40 px-margin-mobile py-4 flex items-center shadow-sm h-16">
+<button class="text-on-surface hover:bg-surface-container-low p-2 rounded-full transition-colors flex-shrink-0">
+<span class="material-symbols-outlined">arrow_forward</span>
+</button>
+<h1 class="text-headline-md font-headline-md text-center flex-grow">سحب عينات</h1>
+<div class="w-10"></div> <!-- Spacer for centering -->
+</header>
+<main class="px-margin-mobile pt-lg max-w-4xl mx-auto">
+<!-- Section Header -->
+<div class="text-center mb-lg">
+<h2 class="text-headline-lg-mobile md:text-headline-lg font-headline-lg-mobile md:font-headline-lg text-primary mb-sm">اختر مقدم الخدمة المناسب</h2>
+<p class="text-body-lg font-body-lg text-on-surface-variant">مرتبة حسب الأقرب والأعلي تقييماً</p>
+</div>
+<!-- Filters / Chips -->
+<div class="flex overflow-x-auto hide-scroll gap-sm mb-lg pb-2">
+<button class="whitespace-nowrap px-4 py-2 rounded-full border border-primary text-primary font-label-md text-label-md bg-inverse-primary/10">متاح الآن</button>
+<button class="whitespace-nowrap px-4 py-2 rounded-full border border-outline-variant text-on-surface font-label-md text-label-md bg-surface hover:bg-surface-container-low transition-colors">الأقرب</button>
+<button class="whitespace-nowrap px-4 py-2 rounded-full border border-outline-variant text-on-surface font-label-md text-label-md bg-surface hover:bg-surface-container-low transition-colors">الأعلى تقييماً</button>
+<button class="whitespace-nowrap px-4 py-2 rounded-full border border-outline-variant text-on-surface font-label-md text-label-md bg-surface hover:bg-surface-container-low transition-colors">السعر</button>
+</div>
+<!-- Provider List -->
+<div class="flex flex-col gap-gutter">
+<!-- Card 1 -->
+<div class="bg-surface-container-lowest rounded-xl p-md shadow-[0px_4px_12px_rgba(0,0,0,0.05)] border border-transparent hover:border-primary transition-colors">
+<div class="flex items-start gap-md mb-md">
+<!-- Avatar Area -->
+<div class="relative flex-shrink-0">
+<div class="w-16 h-16 rounded-full bg-surface-container overflow-hidden border border-outline-variant flex items-center justify-center">
+<span class="material-symbols-outlined text-4xl text-primary opacity-50">person</span>
+</div>
+<div class="absolute -bottom-2 -left-2 bg-secondary text-on-secondary text-[10px] font-bold px-1.5 py-0.5 rounded-full flex items-center gap-0.5 border-2 border-surface-container-lowest">
+                            4.9
+                        </div>
+</div>
+<!-- Info Area -->
+<div class="flex-grow">
+<div class="flex justify-between items-start">
+<div>
+<h3 class="text-headline-md font-headline-md text-primary flex items-center gap-1">
+                                    محمد عبدالرحمن
+                                    <span class="material-symbols-outlined text-sm text-secondary-container" data-weight="fill" style="font-variation-settings: 'FILL' 1;">verified</span>
+</h3>
+<p class="text-body-md font-body-md text-on-surface-variant">طبيب عام</p>
+<p class="text-label-md font-label-md text-outline mt-1">خبرة 6 سنوات • سحب عينات منزلية</p>
+</div>
+<div class="bg-secondary/10 text-secondary px-2 py-1 rounded-full text-label-md font-label-md whitespace-nowrap">متاح الآن</div>
+</div>
+</div>
+</div>
+<!-- Stats Row -->
+<div class="grid grid-cols-3 gap-sm mb-md bg-surface-container-low rounded-lg p-3 text-center">
+<div>
+<div class="text-body-md font-body-md font-bold text-on-surface flex items-center justify-center gap-1">
+<span class="material-symbols-outlined text-[16px] text-tertiary-container" data-weight="fill" style="font-variation-settings: 'FILL' 1;">star</span>
+                            4.9 <span class="text-outline text-xs font-normal">(129)</span>
+</div>
+<div class="text-label-md font-label-md text-outline">التقييم</div>
+</div>
+<div class="border-x border-outline-variant">
+<div class="text-body-md font-body-md font-bold text-on-surface">1.8 كم</div>
+<div class="text-label-md font-label-md text-outline">المسافة</div>
+</div>
+<div>
+<div class="text-body-md font-body-md font-bold text-primary">15,000 ج.س</div>
+<div class="text-label-md font-label-md text-outline">سعر الخدمة</div>
+</div>
+</div>
+<!-- Action -->
+<button class="w-full bg-inverse-primary/20 hover:bg-inverse-primary/30 text-primary font-label-md text-label-md py-3 rounded-lg flex items-center justify-center gap-2 transition-colors">
+                    طلب الآن
+                    <span class="material-symbols-outlined text-[20px]">calendar_month</span>
+</button>
+</div>
+<!-- Card 2 -->
+<div class="bg-surface-container-lowest rounded-xl p-md shadow-[0px_4px_12px_rgba(0,0,0,0.05)] border border-transparent hover:border-primary transition-colors">
+<div class="flex items-start gap-md mb-md">
+<!-- Avatar Area -->
+<div class="relative flex-shrink-0">
+<div class="w-16 h-16 rounded-full bg-surface-container overflow-hidden border border-outline-variant flex items-center justify-center">
+<span class="material-symbols-outlined text-4xl text-primary opacity-50">person_3</span>
+</div>
+<div class="absolute -bottom-2 -left-2 bg-secondary text-on-secondary text-[10px] font-bold px-1.5 py-0.5 rounded-full flex items-center gap-0.5 border-2 border-surface-container-lowest">
+                            4.8
+                        </div>
+</div>
+<!-- Info Area -->
+<div class="flex-grow">
+<div class="flex justify-between items-start">
+<div>
+<h3 class="text-headline-md font-headline-md text-primary flex items-center gap-1">
+                                    سارة عثمان
+                                    <span class="material-symbols-outlined text-sm text-secondary-container" data-weight="fill" style="font-variation-settings: 'FILL' 1;">verified</span>
+</h3>
+<p class="text-body-md font-body-md text-on-surface-variant">ممرضة منزلية</p>
+<p class="text-label-md font-label-md text-outline mt-1">خبرة 8 سنوات • سحب عينات منزلية</p>
+</div>
+<div class="bg-secondary/10 text-secondary px-2 py-1 rounded-full text-label-md font-label-md whitespace-nowrap">متاح الآن</div>
+</div>
+</div>
+</div>
+<!-- Stats Row -->
+<div class="grid grid-cols-3 gap-sm mb-md bg-surface-container-low rounded-lg p-3 text-center">
+<div>
+<div class="text-body-md font-body-md font-bold text-on-surface flex items-center justify-center gap-1">
+<span class="material-symbols-outlined text-[16px] text-tertiary-container" data-weight="fill" style="font-variation-settings: 'FILL' 1;">star</span>
+                            4.8 <span class="text-outline text-xs font-normal">(94)</span>
+</div>
+<div class="text-label-md font-label-md text-outline">التقييم</div>
+</div>
+<div class="border-x border-outline-variant">
+<div class="text-body-md font-body-md font-bold text-on-surface">2.4 كم</div>
+<div class="text-label-md font-label-md text-outline">المسافة</div>
+</div>
+<div>
+<div class="text-body-md font-body-md font-bold text-primary">18,000 ج.س</div>
+<div class="text-label-md font-label-md text-outline">سعر الخدمة</div>
+</div>
+</div>
+<!-- Action -->
+<button class="w-full bg-inverse-primary/20 hover:bg-inverse-primary/30 text-primary font-label-md text-label-md py-3 rounded-lg flex items-center justify-center gap-2 transition-colors">
+                    طلب الآن
+                    <span class="material-symbols-outlined text-[20px]">calendar_month</span>
+</button>
+</div>
+<!-- Card 3 -->
+<div class="bg-surface-container-lowest rounded-xl p-md shadow-[0px_4px_12px_rgba(0,0,0,0.05)] border border-transparent opacity-80 hover:opacity-100 transition-opacity">
+<div class="flex items-start gap-md mb-md">
+<!-- Avatar Area -->
+<div class="relative flex-shrink-0">
+<div class="w-16 h-16 rounded-full bg-surface-container overflow-hidden border border-outline-variant flex items-center justify-center">
+<span class="material-symbols-outlined text-4xl text-primary opacity-50">person</span>
+</div>
+<div class="absolute -bottom-2 -left-2 bg-secondary text-on-secondary text-[10px] font-bold px-1.5 py-0.5 rounded-full flex items-center gap-0.5 border-2 border-surface-container-lowest">
+                            4.7
+                        </div>
+</div>
+<!-- Info Area -->
+<div class="flex-grow">
+<div class="flex justify-between items-start">
+<div>
+<h3 class="text-headline-md font-headline-md text-primary flex items-center gap-1">
+                                    أحمد الطيب
+                                    <span class="material-symbols-outlined text-sm text-secondary-container" data-weight="fill" style="font-variation-settings: 'FILL' 1;">verified</span>
+</h3>
+<p class="text-body-md font-body-md text-on-surface-variant">أخصائي علاج طبيعي</p>
+<p class="text-label-md font-label-md text-outline mt-1">خبرة 12 سنة • سحب عينات منزلية</p>
+</div>
+<div class="bg-surface-variant text-on-surface-variant px-2 py-1 rounded-full text-label-md font-label-md whitespace-nowrap">متاح لاحقاً</div>
+</div>
+</div>
+</div>
+<!-- Stats Row -->
+<div class="grid grid-cols-3 gap-sm mb-md bg-surface-container-low rounded-lg p-3 text-center">
+<div>
+<div class="text-body-md font-body-md font-bold text-on-surface flex items-center justify-center gap-1">
+<span class="material-symbols-outlined text-[16px] text-tertiary-container" data-weight="fill" style="font-variation-settings: 'FILL' 1;">star</span>
+                            4.7 <span class="text-outline text-xs font-normal">(71)</span>
+</div>
+<div class="text-label-md font-label-md text-outline">التقييم</div>
+</div>
+<div class="border-x border-outline-variant">
+<div class="text-body-md font-body-md font-bold text-on-surface">3.2 كم</div>
+<div class="text-label-md font-label-md text-outline">المسافة</div>
+</div>
+<div>
+<div class="text-body-md font-body-md font-bold text-primary">28,000 ج.س</div>
+<div class="text-label-md font-label-md text-outline">سعر الخدمة</div>
+</div>
+</div>
+<!-- Action -->
+<button class="w-full bg-surface-variant text-on-surface-variant font-label-md text-label-md py-3 rounded-lg flex items-center justify-center gap-2 cursor-not-allowed">
+                    غير متاح الآن
+                    <span class="material-symbols-outlined text-[20px]">event_busy</span>
+</button>
+</div>
+</div>
+</main>
+<!-- Bottom Navigation Omitted based on Shared Components Logic:
+         This is a Task-Focused sub-page (linear transactional journey to select a provider) 
+         with a 'Back' action implying temporary departure from main nav flow. -->
+</body></html>

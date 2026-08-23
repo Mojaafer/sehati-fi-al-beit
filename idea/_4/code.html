@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+
+<html dir="rtl" lang="ar"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>نجاح إرسال الطلب</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body {
+            font-family: 'Tajawal', sans-serif;
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "tertiary-container": "#6e3900",
+                        "on-primary-container": "#85bce2",
+                        "on-primary-fixed-variant": "#004c6d",
+                        "surface-container-low": "#f0f3ff",
+                        "on-background": "#151c27",
+                        "on-tertiary-fixed": "#2f1500",
+                        "background": "#f9f9ff",
+                        "secondary-fixed": "#7af7e1",
+                        "secondary": "#006b5e",
+                        "primary-container": "#004c6d",
+                        "surface-container-highest": "#dce2f3",
+                        "on-surface-variant": "#41484d",
+                        "on-tertiary-container": "#fba050",
+                        "primary": "#00344d",
+                        "surface-bright": "#f9f9ff",
+                        "surface-container": "#e7eefe",
+                        "on-primary": "#ffffff",
+                        "on-surface": "#151c27",
+                        "primary-fixed": "#c7e7ff",
+                        "on-secondary-fixed": "#00201b",
+                        "surface-tint": "#286486",
+                        "on-secondary": "#ffffff",
+                        "inverse-primary": "#96cdf4",
+                        "tertiary": "#4d2600",
+                        "tertiary-fixed-dim": "#ffb77d",
+                        "surface": "#f9f9ff",
+                        "on-primary-fixed": "#001e2e",
+                        "error": "#ba1a1a",
+                        "on-secondary-container": "#007164",
+                        "surface-dim": "#d3daea",
+                        "outline": "#71787e",
+                        "surface-container-lowest": "#ffffff",
+                        "surface-container-high": "#e2e8f8",
+                        "on-secondary-fixed-variant": "#005046",
+                        "inverse-on-surface": "#ebf1ff",
+                        "inverse-surface": "#2a313d",
+                        "on-error-container": "#93000a",
+                        "secondary-container": "#7af7e1",
+                        "on-error": "#ffffff",
+                        "primary-fixed-dim": "#96cdf4",
+                        "on-tertiary": "#ffffff",
+                        "tertiary-fixed": "#ffdcc3",
+                        "error-container": "#ffdad6",
+                        "secondary-fixed-dim": "#5bdac6",
+                        "on-tertiary-fixed-variant": "#6e3900",
+                        "surface-variant": "#dce2f3",
+                        "outline-variant": "#c0c7ce"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "stack-md": "16px",
+                        "stack-sm": "8px",
+                        "gutter": "16px",
+                        "margin-page": "20px",
+                        "stack-lg": "24px"
+                    },
+                    "fontFamily": {
+                        "headline-md": ["Tajawal"],
+                        "headline-lg": ["Tajawal"],
+                        "headline-lg-mobile": ["Tajawal"],
+                        "headline-sm": ["Tajawal"],
+                        "body-lg": ["Tajawal"],
+                        "label-md": ["Tajawal"],
+                        "body-md": ["Tajawal"]
+                    },
+                    "fontSize": {
+                        "headline-md": ["20px", { "lineHeight": "28px", "fontWeight": "600" }],
+                        "headline-lg": ["28px", { "lineHeight": "36px", "fontWeight": "700" }],
+                        "headline-lg-mobile": ["24px", { "lineHeight": "32px", "fontWeight": "700" }],
+                        "headline-sm": ["16px", { "lineHeight": "24px", "fontWeight": "600" }],
+                        "body-lg": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "label-md": ["12px", { "lineHeight": "16px", "fontWeight": "500" }],
+                        "body-md": ["14px", { "lineHeight": "20px", "fontWeight": "400" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-background antialiased pb-24 md:pb-0">
+<!-- Top App Bar (Transactional - Back only) -->
+<header class="bg-surface sticky top-0 z-40 w-full px-margin-page py-4 flex items-center shadow-sm h-16">
+<button aria-label="Back" class="p-2 -mr-2 text-on-surface hover:bg-surface-container-low rounded-full transition-colors">
+<span class="material-symbols-outlined" data-icon="arrow_forward">arrow_forward</span>
+</button>
+<h1 class="flex-1 text-center font-headline-md text-headline-md text-on-surface">نجاح إرسال الطلب</h1>
+<div class="w-10"></div> <!-- Spacer for centering -->
+</header>
+<main class="max-w-md mx-auto px-margin-page pt-8 pb-12 flex flex-col gap-stack-lg">
+<!-- Success Header Section -->
+<section class="flex flex-col items-center text-center gap-stack-sm mb-4">
+<div class="w-20 h-20 bg-[#E8F5E9] rounded-full flex items-center justify-center mb-2">
+<span class="material-symbols-outlined text-[48px] text-[#4CAF50]" data-icon="check" style="font-variation-settings: 'wght' 600;">check</span>
+</div>
+<h2 class="font-headline-lg-mobile text-headline-lg-mobile text-primary">تم إرسال طلبك بنجاح</h2>
+<p class="font-body-md text-body-md text-on-surface-variant max-w-[280px]">
+                في انتظار تأكيد محمد عبدالرحمن، سيتواصل معك قريباً لتأكيد الموعد.
+            </p>
+</section>
+<!-- Order Details Card -->
+<section class="bg-surface-container-lowest rounded-xl p-4 shadow-sm border border-surface-container">
+<div class="flex flex-col gap-4">
+<div class="flex justify-between items-center py-2 border-b border-surface-container-low">
+<div class="flex items-center gap-2 text-primary">
+<span class="material-symbols-outlined text-xl" data-icon="receipt_long">receipt_long</span>
+<span class="font-label-md text-label-md">رقم الطلب</span>
+</div>
+<span class="font-headline-sm text-headline-sm text-on-surface">HM-1042#</span>
+</div>
+<div class="flex justify-between items-center py-2 border-b border-surface-container-low">
+<div class="flex items-center gap-2 text-primary">
+<span class="material-symbols-outlined text-xl" data-icon="calendar_month">calendar_month</span>
+<span class="font-label-md text-label-md">الموعد</span>
+</div>
+<span class="font-headline-sm text-headline-sm text-on-surface">اليوم – 8:00 مساءً</span>
+</div>
+<div class="flex justify-between items-center py-2 border-b border-surface-container-low">
+<div class="flex items-center gap-2 text-primary">
+<span class="material-symbols-outlined text-xl" data-icon="credit_card">credit_card</span>
+<span class="font-label-md text-label-md">طريقة الدفع</span>
+</div>
+<span class="font-headline-sm text-headline-sm text-on-surface">بعد تقديم الخدمة</span>
+</div>
+<div class="flex justify-between items-center py-2">
+<div class="flex items-center gap-2 text-primary">
+<span class="material-symbols-outlined text-xl" data-icon="schedule">schedule</span>
+<span class="font-label-md text-label-md">حالة الطلب</span>
+</div>
+<span class="font-headline-sm text-headline-sm text-[#F57C00]">قيد الانتظار</span>
+</div>
+</div>
+</section>
+<!-- Order Summary Card -->
+<section class="bg-surface-container-lowest rounded-xl p-4 shadow-sm border border-surface-container">
+<div class="flex items-center gap-2 text-primary mb-4 border-b border-surface-container-low pb-2">
+<span class="material-symbols-outlined text-xl" data-icon="assignment">assignment</span>
+<span class="font-headline-sm text-headline-sm">ملخص الطلب</span>
+</div>
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 bg-surface-container-highest rounded-full flex items-center justify-center text-primary">
+<span class="material-symbols-outlined" data-icon="vaccines">vaccines</span>
+</div>
+<div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface">سحب عينات منزلية</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">مريض واحد • 3 فحوصات</p>
+</div>
+</div>
+<div class="text-left border-r border-surface-container-low pr-4">
+<span class="font-label-md text-label-md text-on-surface-variant block">الإجمالي</span>
+<span class="font-headline-md text-headline-md text-primary block">15,000</span>
+<span class="font-label-md text-label-md text-on-surface-variant">ج.س</span>
+</div>
+</div>
+</section>
+<!-- Visual Status Tracker -->
+<section class="bg-surface-container rounded-xl p-6 shadow-sm relative overflow-hidden">
+<div class="flex items-center gap-2 text-primary mb-6 justify-center">
+<span class="font-headline-sm text-headline-sm">ماذا يحدث الآن؟</span>
+<div class="w-8 h-8 bg-white rounded-full flex items-center justify-center shadow-sm absolute top-4 left-4">
+<span class="material-symbols-outlined text-[#FBC02D] text-lg" data-icon="notifications_active">notifications_active</span>
+</div>
+</div>
+<div class="flex justify-between items-start relative z-10">
+<!-- Connecting Line Base -->
+<div class="absolute top-6 left-8 right-8 h-0.5 bg-outline-variant/30 -z-10 border-t border-dashed"></div>
+<!-- Step 1 (Completed) -->
+<div class="flex flex-col items-center gap-2 flex-1 relative">
+<div class="w-12 h-12 rounded-full bg-primary flex items-center justify-center text-on-primary shadow-sm z-10 border-4 border-surface-container">
+<span class="material-symbols-outlined text-xl" data-icon="check">check</span>
+</div>
+<div class="text-center">
+<span class="font-label-md text-label-md font-bold text-on-surface block">جارِ تأكيد الطلب</span>
+<span class="text-[10px] text-on-surface-variant block leading-tight mt-1">من مقدم الخدمة</span>
+</div>
+</div>
+<!-- Step 2 (Active/In Progress) -->
+<div class="flex flex-col items-center gap-2 flex-1 relative">
+<div class="w-12 h-12 rounded-full bg-surface-container-highest flex items-center justify-center text-primary shadow-sm z-10 border-4 border-surface-container">
+<span class="material-symbols-outlined text-xl" data-icon="support_agent">support_agent</span>
+</div>
+<div class="text-center">
+<span class="font-label-md text-label-md text-on-surface-variant block">تواصل معك مقدم</span>
+<span class="text-[10px] text-on-surface-variant block leading-tight mt-1">الخدمة للتأكيد</span>
+</div>
+</div>
+<!-- Step 3 (Pending) -->
+<div class="flex flex-col items-center gap-2 flex-1 relative">
+<div class="w-12 h-12 rounded-full bg-surface-container-highest flex items-center justify-center text-outline shadow-sm z-10 border-4 border-surface-container">
+<span class="material-symbols-outlined text-xl" data-icon="home_work">home_work</span>
+</div>
+<div class="text-center">
+<span class="font-label-md text-label-md text-outline block">سيتم تنفيذ الخدمة</span>
+<span class="text-[10px] text-outline block leading-tight mt-1">في الموعد المحدد</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Actions -->
+<section class="flex flex-col gap-4 mt-4">
+<button class="w-full h-14 bg-primary text-on-primary rounded-xl font-headline-sm text-headline-sm hover:bg-on-primary-fixed-variant transition-colors flex items-center justify-center">
+                متابعة الطلب
+            </button>
+<button class="w-full h-14 bg-transparent border border-primary text-primary rounded-xl font-headline-sm text-headline-sm hover:bg-surface-container-low transition-colors flex items-center justify-center">
+                العودة للرئيسية
+            </button>
+</section>
+</main>
+<!-- Suppressed BottomNavBar because this is a Transactional/Success splash screen context -->
+</body></html>

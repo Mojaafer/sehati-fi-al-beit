@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+
+<html dir="rtl" lang="ar"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Sehati Fi Al-Beit - Document Upload</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700&amp;family=Public+Sans:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "on-tertiary-fixed": "#321300",
+                      "on-background": "#1a1c1a",
+                      "tertiary-fixed": "#ffdbc8",
+                      "secondary-fixed": "#c6ecc8",
+                      "surface-container": "#efeeeb",
+                      "tertiary-fixed-dim": "#ffb68a",
+                      "surface-container-high": "#e9e8e5",
+                      "secondary-container": "#c3e9c5",
+                      "primary-container": "#0d7c84",
+                      "surface-variant": "#e3e2e0",
+                      "surface-container-highest": "#e3e2e0",
+                      "surface-container-lowest": "#ffffff",
+                      "on-primary-fixed": "#002022",
+                      "on-primary-container": "#d9fcff",
+                      "surface-bright": "#faf9f6",
+                      "secondary": "#45664a",
+                      "on-secondary": "#ffffff",
+                      "on-primary": "#ffffff",
+                      "on-primary-fixed-variant": "#004f54",
+                      "surface-dim": "#dbdad7",
+                      "surface-container-low": "#f4f3f1",
+                      "inverse-primary": "#7cd4dd",
+                      "on-error": "#ffffff",
+                      "tertiary": "#84481f",
+                      "error-container": "#ffdad6",
+                      "surface-tint": "#006970",
+                      "on-surface": "#1a1c1a",
+                      "on-tertiary-container": "#fff3ed",
+                      "primary-fixed": "#98f1f9",
+                      "on-error-container": "#93000a",
+                      "tertiary-container": "#a16034",
+                      "primary-fixed-dim": "#7cd4dd",
+                      "outline-variant": "#bdc9ca",
+                      "on-secondary-container": "#496a4e",
+                      "on-secondary-fixed-variant": "#2d4e33",
+                      "error": "#ba1a1a",
+                      "on-secondary-fixed": "#01210b",
+                      "background": "#faf9f6",
+                      "primary": "#006168",
+                      "inverse-on-surface": "#f2f1ee",
+                      "secondary-fixed-dim": "#abd0ad",
+                      "on-surface-variant": "#3e494a",
+                      "on-tertiary-fixed-variant": "#6f380f",
+                      "outline": "#6e797a",
+                      "inverse-surface": "#2f312f",
+                      "on-tertiary": "#ffffff",
+                      "surface": "#faf9f6"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "xs": "4px",
+                      "unit": "4px",
+                      "gutter": "24px",
+                      "margin-desktop": "64px",
+                      "xl": "48px",
+                      "max-width": "1280px",
+                      "margin-mobile": "16px",
+                      "sm": "8px",
+                      "lg": "24px",
+                      "md": "16px"
+              },
+              "fontFamily": {
+                      "headline-xl": [
+                              "Manrope"
+                      ],
+                      "label-sm": [
+                              "Public Sans"
+                      ],
+                      "headline-lg-mobile": [
+                              "Manrope"
+                      ],
+                      "headline-md": [
+                              "Manrope"
+                      ],
+                      "body-lg": [
+                              "Public Sans"
+                      ],
+                      "label-md": [
+                              "Public Sans"
+                      ],
+                      "body-md": [
+                              "Public Sans"
+                      ],
+                      "headline-lg": [
+                              "Manrope"
+                      ]
+              },
+              "fontSize": {
+                      "headline-xl": [
+                              "40px",
+                              {
+                                      "lineHeight": "48px",
+                                      "letterSpacing": "-0.02em",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "label-sm": [
+                              "12px",
+                              {
+                                      "lineHeight": "16px",
+                                      "fontWeight": "500"
+                              }
+                      ],
+                      "headline-lg-mobile": [
+                              "28px",
+                              {
+                                      "lineHeight": "36px",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "headline-md": [
+                              "24px",
+                              {
+                                      "lineHeight": "32px",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "body-lg": [
+                              "18px",
+                              {
+                                      "lineHeight": "28px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "label-md": [
+                              "14px",
+                              {
+                                      "lineHeight": "20px",
+                                      "letterSpacing": "0.01em",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "body-md": [
+                              "16px",
+                              {
+                                      "lineHeight": "24px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "headline-lg": [
+                              "32px",
+                              {
+                                      "lineHeight": "40px",
+                                      "letterSpacing": "-0.01em",
+                                      "fontWeight": "600"
+                              }
+                      ]
+              }
+      },
+          },
+        }
+    </script>
+</head>
+<body class="bg-background text-on-background font-body-md min-h-screen">
+<!-- Top App Bar (Linear/Transactional Intent - Suppressed regular nav, using simplified header) -->
+<header class="bg-surface-bright border-b border-surface-variant flex justify-between items-center w-full px-margin-mobile md:px-margin-desktop py-sm shadow-sm">
+<div class="flex items-center gap-md">
+<!-- Brand Name styled as heavy anchor per rules -->
+<h1 class="font-headline-md text-headline-md font-bold text-primary">Sehati Fi Al-Beit</h1>
+</div>
+<button class="text-on-surface-variant hover:bg-surface-container transition-colors duration-200 p-2 rounded-full flex items-center justify-center">
+<span class="material-symbols-outlined" data-icon="close">close</span>
+</button>
+</header>
+<main class="max-w-[1280px] mx-auto px-margin-mobile md:px-margin-desktop py-xl">
+<!-- Progress Indicator & Header Section -->
+<div class="mb-xl text-center md:text-right max-w-2xl mx-auto">
+<div class="flex items-center justify-center md:justify-start gap-4 mb-lg">
+<!-- Step 1 Complete -->
+<div class="flex items-center">
+<div class="w-8 h-8 rounded-full bg-secondary-container text-on-secondary-container flex items-center justify-center">
+<span class="material-symbols-outlined text-sm" data-icon="check">check</span>
+</div>
+<div class="h-1 w-12 bg-secondary-container mx-2"></div>
+</div>
+<!-- Step 2 Active -->
+<div class="flex items-center">
+<div class="w-8 h-8 rounded-full bg-tertiary text-on-tertiary flex items-center justify-center font-bold">
+                         2
+                     </div>
+<div class="h-1 w-12 bg-surface-variant mx-2"></div>
+</div>
+<!-- Step 3 Incomplete -->
+<div class="flex items-center">
+<div class="w-8 h-8 rounded-full bg-surface-variant text-on-surface-variant flex items-center justify-center font-bold">
+                         3
+                     </div>
+</div>
+</div>
+<p class="font-label-md text-label-md text-on-surface-variant mb-2">الخطوة 2 من 3: المعلومات المهنية</p>
+<h2 class="font-headline-lg-mobile md:font-headline-lg text-headline-lg-mobile md:text-headline-lg text-primary mb-md">رفع المستندات</h2>
+<p class="font-body-md text-body-md text-on-surface">يرجى رفع صور عالية الجودة للمستندات التالية لغرض التحقق.</p>
+</div>
+<!-- Document Upload Grid -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-lg max-w-5xl mx-auto">
+<!-- Card 1: National ID / Passport -->
+<div class="bg-surface-container-lowest rounded-xl p-lg shadow-[0_4px_6px_-1px_rgba(13,124,132,0.08)] border border-surface-variant flex flex-col items-center text-center gap-md">
+<div class="w-16 h-16 rounded-full bg-primary-container text-on-primary-container flex items-center justify-center mb-sm">
+<span class="material-symbols-outlined text-3xl" data-icon="badge">badge</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-on-surface">الهوية الوطنية / الجواز</h3>
+<p class="font-body-md text-body-md text-on-surface-variant mb-md flex-grow">صورة واضحة للوجهين.</p>
+<button class="w-full bg-surface-variant text-on-surface-variant hover:bg-surface-container transition-colors py-2 px-4 rounded-lg flex items-center justify-center gap-2 font-label-md text-label-md border border-outline-variant">
+<span class="material-symbols-outlined text-sm" data-icon="upload">upload</span>
+                    رفع الملف
+                </button>
+</div>
+<!-- Card 2: Academic Certificate -->
+<div class="bg-surface-container-lowest rounded-xl p-lg shadow-[0_4px_6px_-1px_rgba(13,124,132,0.08)] border border-surface-variant flex flex-col items-center text-center gap-md">
+<div class="w-16 h-16 rounded-full bg-primary-container text-on-primary-container flex items-center justify-center mb-sm">
+<span class="material-symbols-outlined text-3xl" data-icon="school">school</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-on-surface">الشهادة الأكاديمية</h3>
+<p class="font-body-md text-body-md text-on-surface-variant mb-md flex-grow">(بكالوريوس / دبلوم)</p>
+<button class="w-full bg-surface-variant text-on-surface-variant hover:bg-surface-container transition-colors py-2 px-4 rounded-lg flex items-center justify-center gap-2 font-label-md text-label-md border border-outline-variant">
+<span class="material-symbols-outlined text-sm" data-icon="upload">upload</span>
+                    رفع الملف
+                </button>
+</div>
+<!-- Card 3: Professional Registration -->
+<div class="bg-surface-container-lowest rounded-xl p-lg shadow-[0_4px_6px_-1px_rgba(13,124,132,0.08)] border border-surface-variant flex flex-col items-center text-center gap-md">
+<div class="w-16 h-16 rounded-full bg-primary-container text-on-primary-container flex items-center justify-center mb-sm">
+<span class="material-symbols-outlined text-3xl" data-icon="card_membership">card_membership</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-on-surface">التسجيل المهني / بطاقة النقابة</h3>
+<p class="font-body-md text-body-md text-on-surface-variant mb-md flex-grow">يجب أن تكون سارية المفعول.</p>
+<button class="w-full bg-surface-variant text-on-surface-variant hover:bg-surface-container transition-colors py-2 px-4 rounded-lg flex items-center justify-center gap-2 font-label-md text-label-md border border-outline-variant">
+<span class="material-symbols-outlined text-sm" data-icon="upload">upload</span>
+                    رفع الملف
+                </button>
+</div>
+</div>
+<!-- Action Area -->
+<div class="mt-xl flex justify-center md:justify-end max-w-5xl mx-auto">
+<button class="bg-primary text-on-primary hover:bg-on-primary-fixed-variant transition-colors py-3 px-8 rounded-full font-label-md text-label-md shadow-[0_2px_4px_rgba(0,97,104,0.2)] flex items-center gap-2">
+                متابعة إلى معلومات الدفع
+                <span class="material-symbols-outlined text-sm" data-icon="arrow_back" style="transform: scaleX(-1);">arrow_back</span>
+</button>
+</div>
+</main>
+</body></html>

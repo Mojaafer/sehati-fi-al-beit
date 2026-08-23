@@ -1,0 +1,205 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    function signedIn() {
+      return request.auth != null;
+    }
+
+    // A guest session cannot be signed back into, so anything an admin has to review later — and
+    // return a decision on — must belong to a permanent account: phone, Google or email.
+    function hasPermanentAccount() {
+      return signedIn() && request.auth.token.firebase.sign_in_provider != 'anonymous';
+    }
+
+    function isAdmin() {
+      return signedIn()
+        && exists(/databases/$(database)/documents/users/$(request.auth.uid))
+        && get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role == 'ADMIN';
+    }
+
+    // A user reads and writes only their own profile. Role is admin-controlled:
+    // clients may never grant themselves PROVIDER or ADMIN.
+    match /users/{uid} {
+      allow read: if signedIn() && (request.auth.uid == uid || isAdmin());
+      allow create: if signedIn() && request.auth.uid == uid
+                    && request.resource.data.role == 'PATIENT';
+      allow update: if isAdmin()
+                    || (signedIn() && request.auth.uid == uid
+                        && request.resource.data.role == resource.data.role);
+      allow delete: if false;
+
+      // Notifications are written by whoever changes an order's status,
+      // but only the owner (or an admin) may read them.
+      match /notifications/{notificationId} {
+        allow read: if signedIn() && (request.auth.uid == uid || isAdmin());
+        allow create: if signedIn();
+        allow update: if signedIn() && request.auth.uid == uid;
+        allow delete: if signedIn() && (request.auth.uid == uid || isAdmin());
+      }
+    }
+
+    match /providers/{providerId} {
+      // A patient rates a provider they do not own, so the rating transaction needs its own
+      // narrow opening. Bounding it to one extra review of 1-5 stars keeps a client from
+      // rewriting the average outright; without Cloud Functions this is as tight as it gets.
+      function onlyRatingAggregateChanged() {
+        return request.resource.data.diff(resource.data).affectedKeys()
+                 .hasOnly(['ratingSum', 'ratingCount', 'rating', 'reviewsCount'])
+          && request.resource.data.ratingCount == resource.data.ratingCount + 1
+          && request.resource.data.ratingSum >= resource.data.ratingSum + 1
+          && request.resource.data.ratingSum <= resource.data.ratingSum + 5;
+      }
+
+      allow read: if signedIn();
+      // Self-registration must land in PENDING_REVIEW; only an admin activates.
+      allow create: if hasPermanentAccount()
+                    && request.resource.data.ownerUid == request.auth.uid
+                    && request.resource.data.status == 'PENDING_REVIEW';
+      allow update: if isAdmin()
+                    || (signedIn() && resource.data.ownerUid == request.auth.uid
+                        && request.resource.data.status == resource.data.status)
+                    || (signedIn() && onlyRatingAggregateChanged());
+      allow delete: if isAdmin();
+    }
+
+    match /orders/{orderId} {
+      function ownsProvider(providerId) {
+        return signedIn()
+          && providerId != ''
+          && exists(/databases/$(database)/documents/providers/$(providerId))
+          && get(/databases/$(database)/documents/providers/$(providerId)).data.ownerUid == request.auth.uid;
+      }
+
+      // What the order is worth, who it is for and who serves it are settled at booking.
+      // Every later write is a status change, so nothing may quietly restate the terms.
+      function termsUnchanged() {
+        return request.resource.data.patientUid == resource.data.patientUid
+          && request.resource.data.providerId == resource.data.providerId
+          && request.resource.data.priceSdg == resource.data.priceSdg;
+      }
+
+      // Money moves on status alone, so each party may only reach the statuses their own
+      // role earns. A patient hands in a receipt or backs out; confirming that the transfer
+      // arrived is the admin's call, and a provider who could confirm it would be paid
+      // without any money having landed. Listing the current status keeps writes that
+      // change other fields — the rating transaction setting isRated — working.
+      function statusAllowedFor(reachable) {
+        return request.resource.data.status in reachable.concat([resource.data.status]);
+      }
+
+      function patientTransitionAllowed() {
+        return (request.resource.data.status == resource.data.status)
+          || (request.resource.data.status == 'PAYMENT_UNDER_REVIEW'
+              && resource.data.status in ['ACCEPTED_BY_PROVIDER', 'PAYMENT_PENDING', 'REJECTED']
+              && request.resource.data.receiptImageUri is string
+              && request.resource.data.receiptImageUri != '')
+          || (request.resource.data.status == 'CANCELLED'
+              && resource.data.status in ['ORDER_SENT', 'ACCEPTED_BY_PROVIDER', 'PAYMENT_PENDING', 'PAYMENT_UNDER_REVIEW', 'REJECTED'])
+          || (request.resource.data.status == 'REFUND_REQUESTED'
+              && resource.data.status == 'PAYMENT_CONFIRMED');
+      }
+
+      function providerTransitionAllowed() {
+        return (request.resource.data.status == resource.data.status)
+          || (request.resource.data.status == 'ACCEPTED_BY_PROVIDER'
+              && resource.data.status == 'ORDER_SENT')
+          || (request.resource.data.status == 'COMPLETED'
+              && resource.data.status == 'PAYMENT_CONFIRMED')
+          || (request.resource.data.status == 'CANCELLED'
+              && resource.data.status == 'ORDER_SENT');
+      }
+
+      function adminTransitionAllowed() {
+        return (request.resource.data.status == resource.data.status)
+          || (request.resource.data.status in ['PAYMENT_CONFIRMED', 'REJECTED']
+              && resource.data.status == 'PAYMENT_UNDER_REVIEW')
+          // Resolving a refund request is admin-only in both directions: granting cancels the
+          // order (money goes back over Bankak outside the app), declining resumes the visit.
+          || (request.resource.data.status == 'CANCELLED'
+              && resource.data.status == 'REFUND_REQUESTED')
+          || (request.resource.data.status == 'PAYMENT_CONFIRMED'
+              && resource.data.status == 'REFUND_REQUESTED');
+      }
+
+      allow read: if isAdmin()
+                  || (signedIn() && resource.data.patientUid == request.auth.uid)
+                  || ownsProvider(resource.data.providerId);
+      allow create: if signedIn() && request.resource.data.patientUid == request.auth.uid;
+      allow update: if (isAdmin() && termsUnchanged() && adminTransitionAllowed())
+                    || (signedIn() && resource.data.patientUid == request.auth.uid
+                        && termsUnchanged()
+                        && patientTransitionAllowed())
+                    || (ownsProvider(resource.data.providerId)
+                        && termsUnchanged()
+                        && providerTransitionAllowed());
+      allow delete: if isAdmin();
+    }
+
+    // Admins are not discoverable: a user doc may only be read by its owner or by an admin, so a
+    // provider filing an application cannot look up an admin's uid to address a notification to.
+    // A shared inbox sidesteps that without publishing who the admins are — anyone signed in may
+    // drop a note in, only an admin may read it. The read flag is shared between admins, which is
+    // the intended behaviour: one of them handling an application clears it for the rest.
+    match /adminNotifications/{notificationId} {
+      allow read, update, delete: if isAdmin();
+      allow create: if signedIn();
+    }
+
+    // Document id must be the orderId: that makes a second rating an update,
+    // which is denied, so each order can only ever be rated once.
+    match /ratings/{orderId} {
+      allow read: if signedIn();
+      allow create: if signedIn()
+                    && request.resource.data.patientUid == request.auth.uid
+                    && request.resource.data.stars >= 1
+                    && request.resource.data.stars <= 5;
+      allow update, delete: if false;
+    }
+
+    // Receipts and provider documents live here as base64 because Cloud Storage needs a
+    // paid plan. Each image is a standalone document so listing orders stays cheap.
+    match /images/{imageId} {
+      allow read: if isAdmin()
+                  || (signedIn() && resource.data.ownerUid == request.auth.uid);
+      allow create: if signedIn()
+                    && request.resource.data.ownerUid == request.auth.uid
+                    && request.resource.data.data is string
+                    && request.resource.data.data.size() < 900000;
+      allow update: if false;
+      allow delete: if isAdmin();
+    }
+
+    // Provider earnings ledger. One entry per completed visit and the document id IS the order
+    // id, so a second accrual attempt would have to overwrite an existing doc — which only
+    // updates may do, and updates are admin-only. Recording what a visit owes its provider is
+    // the earning party's job (or an admin's); flipping it to PAID says money left the company
+    // account, so that flip belongs to an admin alone and may touch nothing else.
+    match /payouts/{payoutId} {
+      function ownsProviderOf(data) {
+        return data.providerId != ''
+          && exists(/databases/$(database)/documents/providers/$(data.providerId))
+          && get(/databases/$(database)/documents/providers/$(data.providerId)).data.ownerUid == request.auth.uid;
+      }
+
+      allow read: if isAdmin() || (signedIn() && ownsProviderOf(resource.data));
+      allow create: if signedIn()
+                    && payoutId == request.resource.data.orderId
+                    && request.resource.data.status == 'ACCRUED'
+                    && request.resource.data.amountSdg is number
+                    && request.resource.data.amountSdg > 0
+                    && ownsProviderOf(request.resource.data);
+      allow update: if isAdmin()
+                    && resource.data.status == 'ACCRUED'
+                    && request.resource.data.status == 'PAID'
+                    && request.resource.data.diff(resource.data).affectedKeys()
+                         .hasOnly(['status', 'paidAtTimestamp']);
+      allow delete: if false;
+    }
+
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}

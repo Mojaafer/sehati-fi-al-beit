@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Light-only: the Serene Health design has no dark variant, and DeviceDefault would
+         otherwise follow the system setting and flash a dark window behind the Compose UI. -->
+    <style name="Theme.MyApplication" parent="android:Theme.DeviceDefault.Light.NoActionBar">
+        <item name="android:windowBackground">@color/sehati_background</item>
+        <item name="android:statusBarColor">@color/sehati_primary</item>
+        <item name="android:navigationBarColor">@color/sehati_background</item>
+        <item name="android:windowLightStatusBar">false</item>
+        <item name="android:windowLightNavigationBar">true</item>
+    </style>
+</resources>

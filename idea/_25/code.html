@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+
+<html class="dark" dir="rtl" lang="ar"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>لوحة الإدارة - Sehati Fi Al-Beit</title>
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700&amp;family=Public+Sans:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Tailwind Config from Style Guidance -->
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "surface-container-low": "#f4f3f1",
+                        "on-error-container": "#93000a",
+                        "on-primary-fixed": "#002022",
+                        "on-primary": "#ffffff",
+                        "tertiary-container": "#a16034",
+                        "primary-container": "#0d7c84",
+                        "on-secondary": "#ffffff",
+                        "on-background": "#1a1c1a",
+                        "error-container": "#ffdad6",
+                        "tertiary-fixed": "#ffdbc8",
+                        "surface-container": "#efeeeb",
+                        "background": "#faf9f6",
+                        "surface-variant": "#e3e2e0",
+                        "on-secondary-fixed-variant": "#2d4e33",
+                        "on-secondary-container": "#496a4e",
+                        "on-primary-fixed-variant": "#004f54",
+                        "tertiary-fixed-dim": "#ffb68a",
+                        "inverse-surface": "#2f312f",
+                        "inverse-primary": "#7cd4dd",
+                        "secondary-container": "#c3e9c5",
+                        "primary": "#006168",
+                        "inverse-on-surface": "#f2f1ee",
+                        "on-tertiary-fixed": "#321300",
+                        "on-tertiary-container": "#fff3ed",
+                        "surface-dim": "#dbdad7",
+                        "secondary-fixed-dim": "#abd0ad",
+                        "tertiary": "#84481f",
+                        "surface-tint": "#006970",
+                        "on-surface-variant": "#3e494a",
+                        "on-secondary-fixed": "#01210b",
+                        "surface-bright": "#faf9f6",
+                        "outline": "#6e797a",
+                        "on-tertiary": "#ffffff",
+                        "surface-container-high": "#e9e8e5",
+                        "secondary-fixed": "#c6ecc8",
+                        "on-surface": "#1a1c1a",
+                        "surface-container-highest": "#e3e2e0",
+                        "outline-variant": "#bdc9ca",
+                        "surface-container-lowest": "#ffffff",
+                        "on-error": "#ffffff",
+                        "surface": "#faf9f6",
+                        "on-primary-container": "#d9fcff",
+                        "primary-fixed-dim": "#7cd4dd",
+                        "secondary": "#45664a",
+                        "on-tertiary-fixed-variant": "#6f380f",
+                        "error": "#ba1a1a",
+                        "primary-fixed": "#98f1f9"
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    spacing: {
+                        "sm": "8px",
+                        "margin-mobile": "16px",
+                        "margin-desktop": "64px",
+                        "unit": "4px",
+                        "max-width": "1280px",
+                        "xs": "4px",
+                        "xl": "48px",
+                        "gutter": "24px",
+                        "lg": "24px",
+                        "md": "16px"
+                    },
+                    fontFamily: {
+                        "body-lg": ["Public Sans"],
+                        "label-sm": ["Public Sans"],
+                        "headline-lg": ["Manrope"],
+                        "headline-md": ["Manrope"],
+                        "label-md": ["Public Sans"],
+                        "headline-xl": ["Manrope"],
+                        "body-md": ["Public Sans"],
+                        "headline-lg-mobile": ["Manrope"]
+                    },
+                    fontSize: {
+                        "body-lg": ["18px", { lineHeight: "28px", fontWeight: "400" }],
+                        "label-sm": ["12px", { lineHeight: "16px", fontWeight: "500" }],
+                        "headline-lg": ["32px", { lineHeight: "40px", letterSpacing: "-0.01em", fontWeight: "600" }],
+                        "headline-md": ["24px", { lineHeight: "32px", fontWeight: "600" }],
+                        "label-md": ["14px", { lineHeight: "20px", letterSpacing: "0.01em", fontWeight: "600" }],
+                        "headline-xl": ["40px", { lineHeight: "48px", letterSpacing: "-0.02em", fontWeight: "700" }],
+                        "body-md": ["16px", { lineHeight: "24px", fontWeight: "400" }],
+                        "headline-lg-mobile": ["28px", { lineHeight: "36px", fontWeight: "600" }]
+                    }
+                }
+            }
+        };
+    </script>
+<style>
+        /* Force light mode per instructions despite html class */
+        :root {
+            color-scheme: light;
+        }
+        body {
+            background-color: theme('colors.background');
+            color: theme('colors.on-background');
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .icon-fill {
+            font-variation-settings: 'FILL' 1;
+        }
+        /* Hide scrollbar for clean horizontal scrolls */
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+</head>
+<body class="antialiased min-h-screen flex flex-col relative pb-32">
+<!-- TopAppBar (From JSON) -->
+<header class="w-full top-0 sticky bg-surface dark:bg-surface-dim shadow-sm flex items-center justify-between px-margin-mobile md:px-margin-desktop h-16 z-40">
+<div class="flex items-center gap-4">
+<button class="text-primary dark:text-primary-fixed-dim hover:bg-surface-variant transition-colors active:scale-95 transition-transform p-2 rounded-full flex items-center justify-center">
+<span class="material-symbols-outlined" data-icon="menu">menu</span>
+</button>
+<span class="font-headline-md text-headline-md text-primary dark:text-primary-fixed-dim tracking-tight">Sehati Fi Al-Beit</span>
+</div>
+<div>
+<div class="w-8 h-8 rounded-full overflow-hidden border-2 border-surface-variant">
+<img alt="User profile avatar" class="w-full h-full object-cover" data-alt="A close up, professional headshot of an administrative user in a clean, modern medical office setting. The lighting is bright and warm, reflecting a competent and serene healthcare environment. The portrait is sharply focused against a softly blurred background." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBzpLKguJeWhe1X2IHjPcjZcwERbETyYAzUL55nYxxTy2a1vAqNpfXevd_Ry0Ns8VEFdJUwhd3otw61SlQJyZuMVJbgzYPTvHdn6B_aI_XYuNvMyBV-gUxQeNCfYuUvXBs7KbJt8jiCms_N5J_V_WVSDK64uDfPX3dSJ2ggYL35jqEu9_hQcZYT2XF3oFSl-Kke15zB_NNJhqICQVXL6spAuFVsTUYrhlATCV96MlQOjKwfQNjttAId6w"/>
+</div>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="flex-1 px-margin-mobile pt-lg flex flex-col gap-xl">
+<!-- Page Header -->
+<section>
+<h1 class="font-headline-lg-mobile text-headline-lg-mobile text-on-background">لوحة الإدارة</h1>
+<p class="font-body-md text-body-md text-on-surface-variant mt-sm">نظرة عامة على عمليات اليوم</p>
+</section>
+<!-- High-Level Stats (Bento Grid) -->
+<section class="grid grid-cols-2 gap-md">
+<!-- Revenue (Hero Stat) -->
+<div class="col-span-2 bg-primary-container rounded-xl p-lg flex flex-col justify-between relative overflow-hidden shadow-[0_4px_16px_rgba(13,124,132,0.08)]">
+<!-- Subtle decorative background pattern -->
+<div class="absolute inset-0 opacity-10 pointer-events-none" style="background-image: radial-gradient(circle at 2px 2px, theme('colors.primary') 1px, transparent 0); background-size: 16px 16px;"></div>
+<div class="flex items-start justify-between relative z-10">
+<div>
+<p class="font-label-md text-label-md text-on-primary-container/80 mb-xs">الإيرادات (اليوم)</p>
+<h2 class="font-headline-xl text-headline-xl text-on-primary-container">SAR 12,450</h2>
+</div>
+<div class="bg-surface-container-lowest/30 p-2 rounded-full backdrop-blur-sm">
+<span class="material-symbols-outlined text-on-primary-container icon-fill" data-icon="account_balance_wallet">account_balance_wallet</span>
+</div>
+</div>
+<div class="flex items-center gap-1 mt-md relative z-10">
+<span class="material-symbols-outlined text-sm text-secondary-container" data-icon="trending_up">trending_up</span>
+<span class="font-label-sm text-label-sm text-secondary-container">+14% عن الأمس</span>
+</div>
+</div>
+<!-- Total Orders -->
+<div class="bg-surface-container-low rounded-xl p-md border border-outline-variant/30 shadow-sm flex flex-col gap-sm">
+<div class="flex items-center justify-between">
+<div class="w-8 h-8 rounded-full bg-secondary-container text-on-secondary-container flex items-center justify-center">
+<span class="material-symbols-outlined text-sm" data-icon="shopping_bag">shopping_bag</span>
+</div>
+</div>
+<div>
+<h3 class="font-headline-lg-mobile text-headline-lg-mobile text-on-background">142</h3>
+<p class="font-label-md text-label-md text-on-surface-variant">الطلبات اليوم</p>
+</div>
+</div>
+<!-- Active Providers -->
+<div class="bg-surface-container-low rounded-xl p-md border border-outline-variant/30 shadow-sm flex flex-col gap-sm">
+<div class="flex items-center justify-between">
+<div class="w-8 h-8 rounded-full bg-tertiary-container text-on-tertiary-container flex items-center justify-center">
+<span class="material-symbols-outlined text-sm" data-icon="group">group</span>
+</div>
+</div>
+<div>
+<h3 class="font-headline-lg-mobile text-headline-lg-mobile text-on-background">58</h3>
+<p class="font-label-md text-label-md text-on-surface-variant">مزود نشط</p>
+</div>
+</div>
+</section>
+<!-- Pending Verifications (Horizontal Scroll) -->
+<section class="-mx-margin-mobile px-margin-mobile">
+<div class="flex items-center justify-between mb-md">
+<h2 class="font-headline-md text-headline-md text-on-background">التحققات المعلقة</h2>
+<button class="font-label-md text-label-md text-primary hover:text-primary-fixed-dim transition-colors">عرض الكل</button>
+</div>
+<div class="flex gap-md overflow-x-auto no-scrollbar pb-sm snap-x">
+<!-- Provider Card 1 -->
+<div class="min-w-[240px] bg-surface rounded-xl p-md border border-outline-variant/40 shadow-sm snap-start flex flex-col gap-md">
+<div class="flex items-center gap-3">
+<div class="w-12 h-12 rounded-full overflow-hidden bg-surface-container">
+<img alt="Provider photo" class="w-full h-full object-cover" data-alt="A portrait of a friendly female nurse wearing professional, soft teal medical scrubs. She is standing in a brightly lit, modern clinical hallway. The lighting highlights her approachable demeanor, aligning with a warm, human-centric healthcare aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuChEBKP6zFexlcO20PGSlUtLPdFHUpAVzwTBaD7EsnCTPtv5YQIZeoxqZEKdIZHDrMpahSgGW25dxNYd6J95GpWEAQl5Uaxx62Tpidsm9GZ-ATfqYXErJWTiTesyEzUSyGxIFF_xRkQGMGRabGEnKhTHpY6CfviHnPP5IPavA1vGvo03h8WmEjbzHcP5JE_33VQSoCDQKlJguJTYvK3yVCscE6qyB2bkXIcm-3X9G4T2CCbO0r6YpjmQw"/>
+</div>
+<div>
+<h4 class="font-label-md text-label-md text-on-background">مريم العتيبي</h4>
+<p class="font-label-sm text-label-sm text-on-surface-variant">تمريض منزلي</p>
+</div>
+</div>
+<button class="w-full bg-primary-container text-on-primary-container font-label-md text-label-md py-2 rounded-lg hover:bg-primary hover:text-on-primary transition-all active:scale-95 shadow-[0_2px_4px_rgba(13,124,132,0.1)]">
+                        مراجعة الملف
+                    </button>
+</div>
+<!-- Provider Card 2 -->
+<div class="min-w-[240px] bg-surface rounded-xl p-md border border-outline-variant/40 shadow-sm snap-start flex flex-col gap-md">
+<div class="flex items-center gap-3">
+<div class="w-12 h-12 rounded-full overflow-hidden bg-surface-container">
+<img alt="Provider photo" class="w-full h-full object-cover" data-alt="A portrait of a male physical therapist in a clean white coat over a light blue shirt. He has a reassuring smile. The background is a softly out-of-focus, modern rehabilitation room with natural sunlight streaming in, emphasizing a calm and healing environment." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBctq6OeNnXBCid-IrviGXLOmBCJvIxu8WbM53B0voKt1AcgxU_BvfNkYubKbyeXZpQuDTtguIlh0AyestiiGYn4mN1VWbQrZdlG3fr-GgiriR9sEaupFM2wMTbs8Imf_R_ejbhVoTr5ZWuq0zvv5Hw5qMCLsT5d5l3QUlUPyZHBoL7LZNPQ6FoCb7HnGT9NmiLmVEfRc_t9PSmckHvctVzLKfonINvvUm5HPYEa5YRkluAXqgAIOSMJw"/>
+</div>
+<div>
+<h4 class="font-label-md text-label-md text-on-background">د. خالد سالم</h4>
+<p class="font-label-sm text-label-sm text-on-surface-variant">علاج طبيعي</p>
+</div>
+</div>
+<button class="w-full bg-primary-container text-on-primary-container font-label-md text-label-md py-2 rounded-lg hover:bg-primary hover:text-on-primary transition-all active:scale-95 shadow-[0_2px_4px_rgba(13,124,132,0.1)]">
+                        مراجعة الملف
+                    </button>
+</div>
+</div>
+</section>
+<!-- Recent Orders Feed -->
+<section class="flex flex-col gap-md">
+<h2 class="font-headline-md text-headline-md text-on-background mb-xs">أحدث الطلبات</h2>
+<div class="bg-surface-container-lowest rounded-xl border border-outline-variant/30 overflow-hidden shadow-[0_4px_8px_rgba(13,124,132,0.03)]">
+<!-- Order Item 1 -->
+<div class="p-md border-b border-outline-variant/20 flex flex-col gap-2 hover:bg-surface-container-low/50 transition-colors">
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-label-sm text-on-surface-variant">طلب #ORD-9021</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">منذ 10 دقائق</span>
+</div>
+<div class="flex items-center justify-between">
+<div>
+<h4 class="font-label-md text-label-md text-on-background">جلسة علاج طبيعي</h4>
+<p class="font-body-md text-body-md text-on-surface-variant text-sm">المريض: عبدالله العمر</p>
+</div>
+<div class="bg-tertiary-container/20 text-tertiary-container px-3 py-1 rounded-full flex items-center gap-1">
+<span class="w-2 h-2 rounded-full bg-tertiary-container"></span>
+<span class="font-label-sm text-label-sm">قيد الانتظار</span>
+</div>
+</div>
+</div>
+<!-- Order Item 2 -->
+<div class="p-md border-b border-outline-variant/20 flex flex-col gap-2 hover:bg-surface-container-low/50 transition-colors">
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-label-sm text-on-surface-variant">طلب #ORD-9020</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">منذ 45 دقيقة</span>
+</div>
+<div class="flex items-center justify-between">
+<div>
+<h4 class="font-label-md text-label-md text-on-background">زيارة تمريض منزلي</h4>
+<p class="font-body-md text-body-md text-on-surface-variant text-sm">المريض: سارة الفهد</p>
+</div>
+<div class="bg-secondary-container/40 text-on-secondary-container px-3 py-1 rounded-full flex items-center gap-1">
+<span class="w-2 h-2 rounded-full bg-secondary"></span>
+<span class="font-label-sm text-label-sm">قيد التنفيذ</span>
+</div>
+</div>
+</div>
+<!-- Order Item 3 -->
+<div class="p-md flex flex-col gap-2 hover:bg-surface-container-low/50 transition-colors">
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-label-sm text-on-surface-variant">طلب #ORD-9019</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">منذ ساعتين</span>
+</div>
+<div class="flex items-center justify-between">
+<div>
+<h4 class="font-label-md text-label-md text-on-background">استشارة طبية عن بعد</h4>
+<p class="font-body-md text-body-md text-on-surface-variant text-sm">المريض: فهد الدوسري</p>
+</div>
+<div class="bg-surface-variant text-on-surface-variant px-3 py-1 rounded-full flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]" data-icon="check_circle">check_circle</span>
+<span class="font-label-sm text-label-sm">مكتمل</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- BottomNavBar (From JSON) -->
+<!-- Active intent: Home (Dashboard) -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center h-20 pb-safe px-4 bg-surface-container-lowest dark:bg-surface-container-low border-t border-outline-variant shadow-[0_-4px_6px_-1px_rgba(13,124,132,0.05)] rounded-t-xl">
+<!-- Home (Active) -->
+<button class="flex flex-col items-center justify-center bg-secondary-container text-on-secondary-container rounded-full px-4 py-1 active:scale-90 duration-200">
+<span class="material-symbols-outlined icon-fill" data-icon="home">home</span>
+<span class="font-label-sm text-label-sm mt-1">Home</span>
+</button>
+<!-- Bookings -->
+<button class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary transition-all active:scale-90 duration-200">
+<span class="material-symbols-outlined" data-icon="event_available">event_available</span>
+<span class="font-label-sm text-label-sm mt-1">Bookings</span>
+</button>
+<!-- Notifications -->
+<button class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary transition-all active:scale-90 duration-200 relative">
+<span class="absolute top-0 right-2 w-2 h-2 bg-error rounded-full"></span>
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+<span class="font-label-sm text-label-sm mt-1">Notifications</span>
+</button>
+<!-- Profile -->
+<button class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary transition-all active:scale-90 duration-200">
+<span class="material-symbols-outlined" data-icon="person">person</span>
+<span class="font-label-sm text-label-sm mt-1">Profile</span>
+</button>
+</nav>
+</body></html>

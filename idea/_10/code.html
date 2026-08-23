@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+
+<html dir="rtl" lang="ar"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<title>طريقة الدفع</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&amp;family=Public+Sans:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+  tailwind.config = {
+    darkMode: "class",
+    theme: {
+      extend: {
+        "colors": {
+                "surface-container-highest": "#e3e2e0",
+                "surface": "#faf9f6",
+                "secondary-container": "#c3e9c5",
+                "on-tertiary": "#ffffff",
+                "on-secondary": "#ffffff",
+                "on-tertiary-container": "#fff3ed",
+                "surface-dim": "#dbdad7",
+                "on-primary-fixed": "#002022",
+                "surface-tint": "#006970",
+                "primary-container": "#0d7c84",
+                "error": "#ba1a1a",
+                "primary": "#006168",
+                "surface-variant": "#e3e2e0",
+                "surface-container-lowest": "#ffffff",
+                "on-error": "#ffffff",
+                "tertiary-container": "#a16034",
+                "surface-container": "#efeeeb",
+                "on-error-container": "#93000a",
+                "on-background": "#1a1c1a",
+                "on-surface-variant": "#3e494a",
+                "on-secondary-fixed": "#01210b",
+                "tertiary-fixed": "#ffdbc8",
+                "outline": "#6e797a",
+                "on-secondary-fixed-variant": "#2d4e33",
+                "surface-bright": "#faf9f6",
+                "secondary": "#45664a",
+                "inverse-surface": "#2f312f",
+                "on-primary-container": "#d9fcff",
+                "secondary-fixed": "#c6ecc8",
+                "on-primary": "#ffffff",
+                "primary-fixed-dim": "#7cd4dd",
+                "outline-variant": "#bdc9ca",
+                "on-tertiary-fixed-variant": "#6f380f",
+                "surface-container-high": "#e9e8e5",
+                "background": "#faf9f6",
+                "error-container": "#ffdad6",
+                "surface-container-low": "#f4f3f1",
+                "on-surface": "#1a1c1a",
+                "on-primary-fixed-variant": "#004f54",
+                "inverse-on-surface": "#f2f1ee",
+                "secondary-fixed-dim": "#abd0ad",
+                "on-tertiary-fixed": "#321300",
+                "inverse-primary": "#7cd4dd",
+                "tertiary": "#84481f",
+                "on-secondary-container": "#496a4e",
+                "tertiary-fixed-dim": "#ffb68a",
+                "primary-fixed": "#98f1f9"
+        },
+        "borderRadius": {
+                "DEFAULT": "0.25rem",
+                "lg": "0.5rem",
+                "xl": "0.75rem",
+                "full": "9999px"
+        },
+        "spacing": {
+                "lg": "24px",
+                "unit": "4px",
+                "xl": "48px",
+                "sm": "8px",
+                "md": "16px",
+                "gutter": "24px",
+                "xs": "4px",
+                "margin-desktop": "64px",
+                "margin-mobile": "16px",
+                "max-width": "1280px"
+        },
+        "fontFamily": {
+                "headline-md": [
+                        "Manrope"
+                ],
+                "headline-xl": [
+                        "Manrope"
+                ],
+                "headline-lg": [
+                        "Manrope"
+                ],
+                "label-md": [
+                        "Public Sans"
+                ],
+                "label-sm": [
+                        "Public Sans"
+                ],
+                "body-md": [
+                        "Public Sans"
+                ],
+                "body-lg": [
+                        "Public Sans"
+                ],
+                "headline-lg-mobile": [
+                        "Manrope"
+                ]
+        },
+        "fontSize": {
+                "headline-md": [
+                        "24px",
+                        {
+                                "lineHeight": "32px",
+                                "fontWeight": "600"
+                        }
+                ],
+                "headline-xl": [
+                        "40px",
+                        {
+                                "lineHeight": "48px",
+                                "letterSpacing": "-0.02em",
+                                "fontWeight": "700"
+                        }
+                ],
+                "headline-lg": [
+                        "32px",
+                        {
+                                "lineHeight": "40px",
+                                "letterSpacing": "-0.01em",
+                                "fontWeight": "600"
+                        }
+                ],
+                "label-md": [
+                        "14px",
+                        {
+                                "lineHeight": "20px",
+                                "letterSpacing": "0.01em",
+                                "fontWeight": "600"
+                        }
+                ],
+                "label-sm": [
+                        "12px",
+                        {
+                                "lineHeight": "16px",
+                                "fontWeight": "500"
+                        }
+                ],
+                "body-md": [
+                        "16px",
+                        {
+                                "lineHeight": "24px",
+                                "fontWeight": "400"
+                        }
+                ],
+                "body-lg": [
+                        "18px",
+                        {
+                                "lineHeight": "28px",
+                                "fontWeight": "400"
+                        }
+                ],
+                "headline-lg-mobile": [
+                        "28px",
+                        {
+                                "lineHeight": "36px",
+                                "fontWeight": "600"
+                        }
+                ]
+        }
+},
+    },
+  }
+</script>
+<style>
+        body {
+            -webkit-tap-highlight-color: transparent;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .material-symbols-outlined.fill {
+            font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+</head>
+<body class="bg-background text-on-background font-body-lg antialiased min-h-screen flex flex-col">
+<!-- Header -->
+<header class="flex justify-between items-center w-full px-margin-mobile py-4 bg-surface z-10 sticky top-0">
+<div class="flex-1"></div>
+<h1 class="text-headline-md font-headline-md text-on-surface">طريقة الدفع</h1>
+<div class="flex-1 flex justify-end">
+<button aria-label="الرجوع" class="p-2 -mr-2 rounded-full hover:bg-surface-container-low transition-colors">
+<span class="material-symbols-outlined text-on-surface">arrow_forward</span>
+</button>
+</div>
+</header>
+<main class="flex-1 px-margin-mobile py-md flex flex-col gap-lg pb-32">
+<!-- Order Summary Card -->
+<section class="bg-surface-container-lowest rounded-xl p-4 shadow-[0px_4px_12px_rgba(0,0,0,0.05)] border border-surface-container-highest">
+<div class="flex justify-between items-center">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-full bg-primary-fixed flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-on-primary-fixed">science</span>
+</div>
+<div>
+<h2 class="text-body-md font-bold text-on-surface mb-1">سحب عينات منزلية</h2>
+<p class="text-label-sm font-label-sm text-on-surface-variant">مريض واحد • 3 فحوصات</p>
+</div>
+</div>
+<div class="text-left whitespace-nowrap">
+<span class="text-body-md font-bold text-on-surface">15,000 ج.س</span>
+</div>
+</div>
+</section>
+<!-- Payment Options -->
+<section>
+<div class="mb-md">
+<h2 class="text-headline-md font-headline-md text-on-surface mb-2">اختر طريقة الدفع</h2>
+<p class="text-body-md font-body-md text-on-surface-variant">اختر الوسيلة الأنسب لك لإتمام عملية الدفع بشكل آمن وسريع</p>
+</div>
+<div class="flex flex-col gap-sm" id="payment-options">
+<!-- Option 1: Bank Card -->
+<label class="relative flex items-center p-4 bg-surface-container-lowest border-2 border-primary rounded-xl cursor-pointer transition-all hover:bg-surface-container-low">
+<input checked="" class="peer sr-only" name="payment_method" type="radio" value="card"/>
+<div class="w-6 h-6 rounded-full border-2 border-primary flex items-center justify-center ml-4 shrink-0 peer-checked:border-primary">
+<div class="w-3 h-3 rounded-full bg-primary opacity-100 transition-opacity"></div>
+</div>
+<div class="flex-1 flex justify-between items-center">
+<div>
+<div class="flex items-center gap-2 mb-1">
+<span class="text-body-md font-bold text-on-surface">بطاقة بنكية</span>
+<span class="text-label-sm font-label-sm text-secondary bg-secondary-fixed-dim/20 px-2 py-0.5 rounded-full">موصى بها</span>
+</div>
+<p class="text-label-sm font-label-sm text-on-surface-variant">ادفع باستخدام بطاقتك البنكية فيزا أو ماستركارد</p>
+</div>
+<div class="w-12 h-12 rounded-lg bg-primary flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-on-primary">credit_card</span>
+</div>
+</div>
+</label>
+<!-- Option 2: Fawry -->
+<label class="relative flex items-center p-4 bg-surface-container-lowest border border-surface-container-highest rounded-xl cursor-pointer transition-all hover:bg-surface-container-low">
+<input class="peer sr-only" name="payment_method" type="radio" value="fawry"/>
+<div class="w-6 h-6 rounded-full border-2 border-outline-variant flex items-center justify-center ml-4 shrink-0 peer-checked:border-primary">
+<div class="w-3 h-3 rounded-full bg-primary opacity-0 transition-opacity peer-checked:opacity-100"></div>
+</div>
+<div class="flex-1 flex justify-between items-center">
+<div>
+<div class="text-body-md font-bold text-on-surface mb-1">فوري</div>
+<p class="text-label-sm font-label-sm text-on-surface-variant">ادفع عبر خدمة فوري</p>
+</div>
+<div class="w-12 h-12 rounded-lg bg-surface-container flex items-center justify-center shrink-0 text-primary font-bold">
+                             في
+                        </div>
+</div>
+</label>
+<!-- Option 3: Instapay -->
+<label class="relative flex items-center p-4 bg-surface-container-lowest border border-surface-container-highest rounded-xl cursor-pointer transition-all hover:bg-surface-container-low">
+<input class="peer sr-only" name="payment_method" type="radio" value="instapay"/>
+<div class="w-6 h-6 rounded-full border-2 border-outline-variant flex items-center justify-center ml-4 shrink-0 peer-checked:border-primary">
+<div class="w-3 h-3 rounded-full bg-primary opacity-0 transition-opacity peer-checked:opacity-100"></div>
+</div>
+<div class="flex-1 flex justify-between items-center">
+<div>
+<div class="text-body-md font-bold text-on-surface mb-1">إنستاباي</div>
+<p class="text-label-sm font-label-sm text-on-surface-variant">ادفع عبر تطبيق إنستاباي</p>
+</div>
+<div class="w-12 h-12 rounded-lg bg-surface-container flex items-center justify-center shrink-0 text-primary font-bold text-[10px] leading-tight text-center">
+                             INSTA<br/>PAY
+                        </div>
+</div>
+</label>
+<!-- Option 4: Bank Transfer -->
+<label class="relative flex items-center p-4 bg-surface-container-lowest border border-surface-container-highest rounded-xl cursor-pointer transition-all hover:bg-surface-container-low">
+<input class="peer sr-only" name="payment_method" type="radio" value="bank_transfer"/>
+<div class="w-6 h-6 rounded-full border-2 border-outline-variant flex items-center justify-center ml-4 shrink-0 peer-checked:border-primary">
+<div class="w-3 h-3 rounded-full bg-primary opacity-0 transition-opacity peer-checked:opacity-100"></div>
+</div>
+<div class="flex-1 flex justify-between items-center">
+<div>
+<div class="text-body-md font-bold text-on-surface mb-1">تحويل بنكي آخر</div>
+<p class="text-label-sm font-label-sm text-on-surface-variant">حوّل المبلغ من حسابك البنكي</p>
+</div>
+<div class="w-12 h-12 rounded-lg bg-surface-container flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-primary">account_balance</span>
+</div>
+</div>
+</label>
+</div>
+</section>
+</main>
+<!-- Bottom Footer -->
+<div class="fixed bottom-0 left-0 w-full bg-surface-container-lowest p-margin-mobile pb-safe shadow-[0px_-4px_16px_rgba(0,0,0,0.05)] rounded-t-2xl z-50">
+<div class="bg-surface p-4 rounded-xl mb-4 flex justify-between items-center border border-surface-container-highest">
+<span class="text-body-md font-body-md text-on-surface-variant">المبلغ المطلوب:</span>
+<span class="text-body-md font-bold text-on-surface">15,093 ج.س</span>
+</div>
+<button class="w-full h-14 bg-primary text-on-primary rounded-xl text-body-md font-bold flex items-center justify-center transition-transform active:scale-[0.98]">
+            متابعة للدفع
+        </button>
+</div>
+<script>
+        // Simple logic to handle radio button visual state changes
+        document.addEventListener('DOMContentLoaded', () => {
+            const labels = document.querySelectorAll('#payment-options label');
+            const radios = document.querySelectorAll('#payment-options input[type="radio"]');
+
+            function updateStyles() {
+                radios.forEach((radio, index) => {
+                    const label = labels[index];
+                    const innerCircle = label.querySelector('.w-3.h-3');
+                    const outerCircle = label.querySelector('.w-6.h-6');
+                    
+                    if (radio.checked) {
+                        label.classList.add('border-2', 'border-primary');
+                        label.classList.remove('border', 'border-surface-container-highest');
+                        outerCircle.classList.add('border-primary');
+                        outerCircle.classList.remove('border-outline-variant');
+                        innerCircle.classList.add('opacity-100');
+                        innerCircle.classList.remove('opacity-0');
+                    } else {
+                        label.classList.remove('border-2', 'border-primary');
+                        label.classList.add('border', 'border-surface-container-highest');
+                        outerCircle.classList.remove('border-primary');
+                        outerCircle.classList.add('border-outline-variant');
+                        innerCircle.classList.remove('opacity-100');
+                        innerCircle.classList.add('opacity-0');
+                    }
+                });
+            }
+
+            radios.forEach(radio => {
+                radio.addEventListener('change', updateStyles);
+            });
+        });
+    </script>
+</body></html>

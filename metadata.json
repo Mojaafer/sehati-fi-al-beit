@@ -1,0 +1,6 @@
+{
+  "name": "صحتي في البيت",
+  "description": "منصة خدمات الرعاية الصحية المنزلية في السودان - سحب عينات، تمريض منزلي، وعلاج طبيعي",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

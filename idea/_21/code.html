@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+
+<html dir="rtl" lang="ar"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>طلباتي - صحتي في البيت</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700&amp;family=Public+Sans:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-variant": "#e3e2e0",
+                        "on-secondary-container": "#496a4e",
+                        "error": "#ba1a1a",
+                        "surface-dim": "#dbdad7",
+                        "on-primary-fixed-variant": "#004f54",
+                        "on-primary-container": "#d9fcff",
+                        "surface-bright": "#faf9f6",
+                        "secondary": "#45664a",
+                        "on-background": "#1a1c1a",
+                        "secondary-fixed": "#c6ecc8",
+                        "error-container": "#ffdad6",
+                        "on-tertiary-fixed-variant": "#6f380f",
+                        "on-surface": "#1a1c1a",
+                        "primary": "#006168",
+                        "inverse-primary": "#7cd4dd",
+                        "secondary-fixed-dim": "#abd0ad",
+                        "on-primary": "#ffffff",
+                        "tertiary-fixed-dim": "#ffb68a",
+                        "outline": "#6e797a",
+                        "primary-fixed-dim": "#7cd4dd",
+                        "surface-container-lowest": "#ffffff",
+                        "tertiary-fixed": "#ffdbc8",
+                        "surface": "#faf9f6",
+                        "on-surface-variant": "#3e494a",
+                        "on-secondary": "#ffffff",
+                        "background": "#faf9f6",
+                        "surface-container-highest": "#e3e2e0",
+                        "secondary-container": "#c3e9c5",
+                        "outline-variant": "#bdc9ca",
+                        "surface-container-high": "#e9e8e5",
+                        "on-secondary-fixed-variant": "#2d4e33",
+                        "on-error": "#ffffff",
+                        "tertiary": "#84481f",
+                        "primary-fixed": "#98f1f9",
+                        "surface-tint": "#006970",
+                        "on-tertiary": "#ffffff",
+                        "inverse-on-surface": "#f2f1ee",
+                        "on-tertiary-container": "#fff3ed",
+                        "on-secondary-fixed": "#01210b",
+                        "primary-container": "#0d7c84",
+                        "inverse-surface": "#2f312f",
+                        "tertiary-container": "#a16034",
+                        "surface-container-low": "#f4f3f1",
+                        "on-tertiary-fixed": "#321300",
+                        "on-primary-fixed": "#002022",
+                        "surface-container": "#efeeeb",
+                        "on-error-container": "#93000a"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "xl": "48px",
+                        "max-width": "1280px",
+                        "unit": "4px",
+                        "margin-mobile": "16px",
+                        "xs": "4px",
+                        "md": "16px",
+                        "lg": "24px",
+                        "gutter": "24px",
+                        "margin-desktop": "64px",
+                        "sm": "8px"
+                    },
+                    "fontFamily": {
+                        "label-sm": ["Public Sans"],
+                        "headline-lg": ["Manrope"],
+                        "headline-lg-mobile": ["Manrope"],
+                        "body-md": ["Public Sans"],
+                        "label-md": ["Public Sans"],
+                        "headline-md": ["Manrope"],
+                        "headline-xl": ["Manrope"],
+                        "body-lg": ["Public Sans"]
+                    },
+                    "fontSize": {
+                        "label-sm": ["12px", { "lineHeight": "16px", "fontWeight": "500" }],
+                        "headline-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+                        "headline-lg-mobile": ["28px", { "lineHeight": "36px", "fontWeight": "600" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "label-md": ["14px", { "lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "600" }],
+                        "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                        "headline-xl": ["40px", { "lineHeight": "48px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body { font-family: 'Public Sans', sans-serif; background-color: #faf9f6; }
+        h1, h2, h3, h4, h5, h6, .headline { font-family: 'Manrope', sans-serif; }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-background antialiased pb-24 md:pb-0">
+<!-- TopAppBar -->
+<header class="hidden md:flex justify-between items-center w-full px-margin-mobile py-sm bg-surface dark:bg-background shadow-sm shadow-[0px_2px_4px_rgba(13,124,132,0.08)] bg-surface-container-low dark:bg-surface-container-low docked full-width top-0 z-40">
+<div class="flex items-center gap-4">
+<span class="text-headline-md-mobile font-headline-md-mobile font-bold text-primary dark:text-inverse-primary">صحتي في البيت</span>
+</div>
+<div class="flex items-center gap-4 text-on-surface-variant dark:text-on-surface-variant text-label-md font-label-md">
+<a class="hover:bg-surface-variant/50 dark:hover:bg-surface-variant/20 px-4 py-2 rounded-full transition-transform duration-150" href="#">الرئيسية</a>
+<a class="text-primary dark:text-inverse-primary bg-surface-variant/50 dark:hover:bg-surface-variant/20 px-4 py-2 rounded-full transition-transform duration-150 scale-95 font-bold" href="#">طلباتي</a>
+<a class="hover:bg-surface-variant/50 dark:hover:bg-surface-variant/20 px-4 py-2 rounded-full transition-transform duration-150" href="#">حسابي</a>
+</div>
+<div class="flex items-center gap-4">
+<button class="w-10 h-10 rounded-full flex items-center justify-center hover:bg-surface-variant/50 dark:hover:bg-surface-variant/20 text-primary dark:text-inverse-primary transition-transform duration-150">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+<div class="w-10 h-10 rounded-full overflow-hidden border-2 border-primary-container">
+<img alt="User profile picture" class="w-full h-full object-cover" data-alt="A close up portrait of a smiling Middle Eastern healthcare professional in a bright, modern setting with soft warm light. The image should feel empathetic, professional, and reassuring, using a color palette of soft whites, gentle teals, and warm skin tones." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBfDs50u0NpLYZeDocaEP_cR2xFjjFq3Y2BgB7QFnsQOLf_Mkh1r2VqjaSDEFBZcXYvqLw5tKrnl3cPenTB_NQiOfwLndH22AUMjVmWehHRMiAbXVVLTjDIZ68rB2Wk8qcanHsg2Q5FTwG4wHKD6s5IItBjp5FGn4c_793bYkdbOlTi3T4ODgWu6vb9SF1xa9SamDlZn_BV2-7kLh44t5CV2Fm7RIOxn0taCLyJXvR7jCiFUqLRahOTGQ"/>
+</div>
+</div>
+</header>
+<!-- Mobile Header (Simplified) -->
+<header class="md:hidden flex justify-between items-center w-full px-margin-mobile py-sm bg-surface shadow-sm z-40 sticky top-0">
+<span class="text-headline-md-mobile font-headline-md-mobile font-bold text-primary">طلباتي</span>
+<button class="w-10 h-10 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+</header>
+<!-- Main Content -->
+<main class="max-w-[1280px] mx-auto px-margin-mobile md:px-margin-desktop py-lg md:py-xl">
+<!-- Toggle Switch -->
+<div class="flex justify-center mb-xl">
+<div class="bg-surface-container-high rounded-full p-1 inline-flex shadow-inner">
+<button class="px-8 py-2 rounded-full text-label-md font-label-md bg-primary text-on-primary shadow-sm transition-all">الحالية</button>
+<button class="px-8 py-2 rounded-full text-label-md font-label-md text-on-surface-variant hover:text-primary transition-all">السابقة</button>
+</div>
+</div>
+<!-- Bookings Grid -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+<!-- Booking Card 1 (Pending) -->
+<article class="bg-surface rounded-xl p-lg shadow-[0px_4px_16px_rgba(13,124,132,0.04)] border border-outline-variant/30 hover:shadow-[0px_8px_24px_rgba(13,124,132,0.08)] transition-all duration-300 flex flex-col gap-4 relative overflow-hidden">
+<div class="absolute top-0 right-0 w-2 h-full bg-tertiary"></div>
+<div class="flex justify-between items-start">
+<div>
+<h3 class="text-headline-md-mobile font-headline-md-mobile text-on-surface mb-1">علاج طبيعي</h3>
+<p class="text-body-md font-body-md text-on-surface-variant flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-sm">person</span>
+                            د. أحمد سالم
+                        </p>
+</div>
+<span class="bg-tertiary-container/20 text-tertiary-container px-3 py-1 rounded-full text-label-sm font-label-sm flex items-center gap-1">
+<span class="material-symbols-outlined text-xs">pending_actions</span>
+                        قيد الانتظار
+                    </span>
+</div>
+<div class="bg-surface-container-low rounded-lg p-4 flex flex-col gap-2 mt-2">
+<div class="flex items-center gap-3 text-body-md font-body-md text-on-surface">
+<span class="material-symbols-outlined text-primary">calendar_month</span>
+<span>15 أكتوبر 2023</span>
+</div>
+<div class="flex items-center gap-3 text-body-md font-body-md text-on-surface">
+<span class="material-symbols-outlined text-primary">schedule</span>
+<span>10:00 صباحاً - 11:00 صباحاً</span>
+</div>
+</div>
+<div class="mt-auto pt-4 flex gap-3">
+<button class="flex-1 bg-primary text-on-primary py-2 rounded-lg text-label-md font-label-md hover:bg-primary-container transition-colors shadow-[0_2px_4px_rgba(13,124,132,0.2)]">التفاصيل</button>
+<button class="flex-1 bg-error-container text-error py-2 rounded-lg text-label-md font-label-md hover:bg-error/20 transition-colors">إلغاء</button>
+</div>
+</article>
+<!-- Booking Card 2 (Confirmed) -->
+<article class="bg-surface rounded-xl p-lg shadow-[0px_4px_16px_rgba(13,124,132,0.04)] border border-outline-variant/30 hover:shadow-[0px_8px_24px_rgba(13,124,132,0.08)] transition-all duration-300 flex flex-col gap-4 relative overflow-hidden">
+<div class="absolute top-0 right-0 w-2 h-full bg-secondary"></div>
+<div class="flex justify-between items-start">
+<div>
+<h3 class="text-headline-md-mobile font-headline-md-mobile text-on-surface mb-1">سحب عينات دم</h3>
+<p class="text-body-md font-body-md text-on-surface-variant flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-sm">person</span>
+                            ممرضة فاطمة علي
+                        </p>
+</div>
+<span class="bg-secondary-container text-on-secondary-container px-3 py-1 rounded-full text-label-sm font-label-sm flex items-center gap-1">
+<span class="material-symbols-outlined text-xs">check_circle</span>
+                        مؤكد
+                    </span>
+</div>
+<div class="bg-surface-container-low rounded-lg p-4 flex flex-col gap-2 mt-2">
+<div class="flex items-center gap-3 text-body-md font-body-md text-on-surface">
+<span class="material-symbols-outlined text-primary">calendar_month</span>
+<span>18 أكتوبر 2023</span>
+</div>
+<div class="flex items-center gap-3 text-body-md font-body-md text-on-surface">
+<span class="material-symbols-outlined text-primary">schedule</span>
+<span>04:30 مساءً - 05:00 مساءً</span>
+</div>
+</div>
+<div class="mt-auto pt-4 flex gap-3">
+<button class="flex-1 bg-surface-container-high text-on-surface py-2 rounded-lg text-label-md font-label-md hover:bg-surface-variant transition-colors border border-outline-variant/50">تغيير الموعد</button>
+</div>
+</article>
+</div>
+</main>
+<!-- BottomNavBar -->
+<nav class="md:hidden fixed bottom-0 left-0 w-full flex justify-around items-center bg-surface dark:bg-surface-container-lowest px-2 pb-4 pt-2 z-50 rounded-t-xl border-t border-outline-variant/30 dark:border-outline-variant/10 shadow-[0_-4px_12px_rgba(13,124,132,0.06)]">
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-on-surface-variant py-1 hover:text-primary dark:hover:text-primary-fixed w-20" href="#">
+<span class="material-symbols-outlined mb-1" data-icon="home">home</span>
+<span class="text-label-sm font-label-sm">الرئيسية</span>
+</a>
+<a class="flex flex-col items-center justify-center bg-secondary-container dark:bg-on-secondary-container text-on-secondary-container dark:text-on-primary-container rounded-full px-6 py-1 scale-90 transition-all duration-200" href="#">
+<span class="material-symbols-outlined mb-1" data-icon="event_note" data-weight="fill" style="font-variation-settings: 'FILL' 1;">event_note</span>
+<span class="text-label-sm font-label-sm font-bold">طلباتي</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-on-surface-variant py-1 hover:text-primary dark:hover:text-primary-fixed w-20" href="#">
+<span class="material-symbols-outlined mb-1" data-icon="person">person</span>
+<span class="text-label-sm font-label-sm">حسابي</span>
+</a>
+</nav>
+</body></html>

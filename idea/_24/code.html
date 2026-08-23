@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+
+<html dir="rtl" lang="ar"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>تقييم الخدمة - Sehati Fi Al-Beit</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@600;700&amp;family=Public+Sans:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-container-low": "#f4f3f1",
+                        "on-error-container": "#93000a",
+                        "on-primary-fixed": "#002022",
+                        "on-primary": "#ffffff",
+                        "tertiary-container": "#a16034",
+                        "primary-container": "#0d7c84",
+                        "on-secondary": "#ffffff",
+                        "on-background": "#1a1c1a",
+                        "error-container": "#ffdad6",
+                        "tertiary-fixed": "#ffdbc8",
+                        "surface-container": "#efeeeb",
+                        "background": "#faf9f6",
+                        "surface-variant": "#e3e2e0",
+                        "on-secondary-fixed-variant": "#2d4e33",
+                        "on-secondary-container": "#496a4e",
+                        "on-primary-fixed-variant": "#004f54",
+                        "tertiary-fixed-dim": "#ffb68a",
+                        "inverse-surface": "#2f312f",
+                        "inverse-primary": "#7cd4dd",
+                        "secondary-container": "#c3e9c5",
+                        "primary": "#006168",
+                        "inverse-on-surface": "#f2f1ee",
+                        "on-tertiary-fixed": "#321300",
+                        "on-tertiary-container": "#fff3ed",
+                        "surface-dim": "#dbdad7",
+                        "secondary-fixed-dim": "#abd0ad",
+                        "tertiary": "#84481f",
+                        "surface-tint": "#006970",
+                        "on-surface-variant": "#3e494a",
+                        "on-secondary-fixed": "#01210b",
+                        "surface-bright": "#faf9f6",
+                        "outline": "#6e797a",
+                        "on-tertiary": "#ffffff",
+                        "surface-container-high": "#e9e8e5",
+                        "secondary-fixed": "#c6ecc8",
+                        "on-surface": "#1a1c1a",
+                        "surface-container-highest": "#e3e2e0",
+                        "outline-variant": "#bdc9ca",
+                        "surface-container-lowest": "#ffffff",
+                        "on-error": "#ffffff",
+                        "surface": "#faf9f6",
+                        "on-primary-container": "#d9fcff",
+                        "primary-fixed-dim": "#7cd4dd",
+                        "secondary": "#45664a",
+                        "on-tertiary-fixed-variant": "#6f380f",
+                        "error": "#ba1a1a",
+                        "primary-fixed": "#98f1f9"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "sm": "8px",
+                        "margin-mobile": "16px",
+                        "margin-desktop": "64px",
+                        "unit": "4px",
+                        "max-width": "1280px",
+                        "xs": "4px",
+                        "xl": "48px",
+                        "gutter": "24px",
+                        "lg": "24px",
+                        "md": "16px"
+                    },
+                    "fontFamily": {
+                        "body-lg": ["Public Sans"],
+                        "label-sm": ["Public Sans"],
+                        "headline-lg": ["Manrope"],
+                        "headline-md": ["Manrope"],
+                        "label-md": ["Public Sans"],
+                        "headline-xl": ["Manrope"],
+                        "body-md": ["Public Sans"],
+                        "headline-lg-mobile": ["Manrope"]
+                    },
+                    "fontSize": {
+                        "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }],
+                        "label-sm": ["12px", { "lineHeight": "16px", "fontWeight": "500" }],
+                        "headline-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+                        "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                        "label-md": ["14px", { "lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "600" }],
+                        "headline-xl": ["40px", { "lineHeight": "48px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "headline-lg-mobile": ["28px", { "lineHeight": "36px", "fontWeight": "600" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body { font-family: 'Public Sans', sans-serif; }
+        h1, h2, h3, .brand-font { font-family: 'Manrope', sans-serif; }
+        .star-rating .material-symbols-outlined { font-variation-settings: 'FILL' 0; cursor: pointer; transition: color 0.2s; }
+        .star-rating .material-symbols-outlined.active { font-variation-settings: 'FILL' 1; color: #a16034; }
+    </style>
+</head>
+<body class="bg-surface text-on-surface min-h-screen flex flex-col">
+<!-- TopAppBar -->
+<header class="bg-surface shadow-sm w-full top-0 sticky z-40">
+<div class="flex items-center justify-between px-margin-mobile md:px-margin-desktop h-16 w-full">
+<button class="text-on-surface-variant hover:bg-surface-variant p-2 rounded-full transition-colors active:scale-95">
+<span class="material-symbols-outlined">close</span>
+</button>
+<div class="font-headline-md text-headline-md text-primary font-bold">
+                تقييم الخدمة
+            </div>
+<div class="w-10"></div> <!-- Spacer for balance -->
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="flex-grow flex flex-col items-center justify-center p-margin-mobile md:p-margin-desktop pb-24">
+<div class="w-full max-w-2xl bg-surface-container-lowest rounded-xl shadow-[0_4px_16px_rgba(13,124,132,0.08)] p-8 md:p-12 border border-surface-variant">
+<!-- Header Section -->
+<div class="text-center mb-10">
+<div class="w-20 h-20 bg-secondary-container rounded-full flex items-center justify-center mx-auto mb-6">
+<span class="material-symbols-outlined text-4xl text-on-secondary-container" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</div>
+<h2 class="font-headline-lg text-headline-lg-mobile md:text-headline-lg text-primary mb-2">شكراً لثقتكم بنا</h2>
+<p class="font-body-lg text-body-lg text-on-surface-variant">كيف كانت تجربتك مع جلسة العلاج الطبيعي اليوم؟ رأيك يهمنا لتحسين خدماتنا.</p>
+</div>
+<!-- Star Rating Widget -->
+<div class="flex flex-col items-center mb-10">
+<p class="font-label-md text-label-md text-on-surface-variant mb-4">التقييم العام</p>
+<div class="flex gap-2 star-rating" dir="ltr">
+<span class="material-symbols-outlined text-4xl text-outline-variant hover:text-tertiary-container" data-value="1">star</span>
+<span class="material-symbols-outlined text-4xl text-outline-variant hover:text-tertiary-container" data-value="2">star</span>
+<span class="material-symbols-outlined text-4xl text-outline-variant hover:text-tertiary-container" data-value="3">star</span>
+<span class="material-symbols-outlined text-4xl text-outline-variant hover:text-tertiary-container" data-value="4">star</span>
+<span class="material-symbols-outlined text-4xl text-outline-variant hover:text-tertiary-container" data-value="5">star</span>
+</div>
+</div>
+<!-- Specific Praise Toggles -->
+<div class="mb-10">
+<p class="font-label-md text-label-md text-on-surface-variant mb-4">ما الذي أعجبك بشكل خاص؟</p>
+<div class="flex flex-wrap gap-3">
+<label class="cursor-pointer">
+<input class="peer sr-only" type="checkbox"/>
+<div class="px-4 py-2 rounded-full border border-outline-variant text-on-surface-variant font-body-md text-body-md peer-checked:bg-primary-container peer-checked:text-on-primary-container peer-checked:border-primary-container transition-all">
+                            الالتزام بالوقت
+                        </div>
+</label>
+<label class="cursor-pointer">
+<input class="peer sr-only" type="checkbox"/>
+<div class="px-4 py-2 rounded-full border border-outline-variant text-on-surface-variant font-body-md text-body-md peer-checked:bg-primary-container peer-checked:text-on-primary-container peer-checked:border-primary-container transition-all">
+                            الاحترافية
+                        </div>
+</label>
+<label class="cursor-pointer">
+<input class="peer sr-only" type="checkbox"/>
+<div class="px-4 py-2 rounded-full border border-outline-variant text-on-surface-variant font-body-md text-body-md peer-checked:bg-primary-container peer-checked:text-on-primary-container peer-checked:border-primary-container transition-all">
+                            النظافة والتعقيم
+                        </div>
+</label>
+<label class="cursor-pointer">
+<input class="peer sr-only" type="checkbox"/>
+<div class="px-4 py-2 rounded-full border border-outline-variant text-on-surface-variant font-body-md text-body-md peer-checked:bg-primary-container peer-checked:text-on-primary-container peer-checked:border-primary-container transition-all">
+                            الرعاية والاهتمام
+                        </div>
+</label>
+</div>
+</div>
+<!-- Written Feedback -->
+<div class="mb-10">
+<label class="block font-label-md text-label-md text-on-surface-variant mb-2" for="feedback">ملاحظات إضافية (اختياري)</label>
+<textarea class="w-full rounded-lg border border-outline-variant bg-surface p-4 font-body-md text-body-md text-on-surface focus:border-primary focus:ring-1 focus:ring-primary transition-all resize-none" id="feedback" placeholder="شاركنا تفاصيل تجربتك..." rows="4"></textarea>
+</div>
+<!-- Submit Button -->
+<button class="w-full bg-primary text-on-primary py-4 rounded-lg font-label-md text-label-md font-bold hover:bg-on-primary-fixed-variant transition-colors shadow-[0_2px_4px_rgba(0,97,104,0.2)] active:scale-[0.98]">
+                إرسال التقييم
+            </button>
+</div>
+</main>
+<script>
+        const stars = document.querySelectorAll('.star-rating .material-symbols-outlined');
+        stars.forEach((star, index) => {
+            star.addEventListener('click', () => {
+                stars.forEach((s, i) => {
+                    if (i <= index) {
+                        s.classList.add('active');
+                        s.classList.remove('text-outline-variant');
+                    } else {
+                        s.classList.remove('active');
+                        s.classList.add('text-outline-variant');
+                    }
+                });
+            });
+        });
+    </script>
+</body></html>

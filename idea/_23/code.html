@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+
+<html dir="rtl" lang="ar"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>صحتي في البيت - الإشعارات</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700&amp;family=Public+Sans:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-variant": "#e3e2e0",
+                        "on-secondary-container": "#496a4e",
+                        "error": "#ba1a1a",
+                        "surface-dim": "#dbdad7",
+                        "on-primary-fixed-variant": "#004f54",
+                        "on-primary-container": "#d9fcff",
+                        "surface-bright": "#faf9f6",
+                        "secondary": "#45664a",
+                        "on-background": "#1a1c1a",
+                        "secondary-fixed": "#c6ecc8",
+                        "error-container": "#ffdad6",
+                        "on-tertiary-fixed-variant": "#6f380f",
+                        "on-surface": "#1a1c1a",
+                        "primary": "#006168",
+                        "inverse-primary": "#7cd4dd",
+                        "secondary-fixed-dim": "#abd0ad",
+                        "on-primary": "#ffffff",
+                        "tertiary-fixed-dim": "#ffb68a",
+                        "outline": "#6e797a",
+                        "primary-fixed-dim": "#7cd4dd",
+                        "surface-container-lowest": "#ffffff",
+                        "tertiary-fixed": "#ffdbc8",
+                        "surface": "#faf9f6",
+                        "on-surface-variant": "#3e494a",
+                        "on-secondary": "#ffffff",
+                        "background": "#faf9f6",
+                        "surface-container-highest": "#e3e2e0",
+                        "secondary-container": "#c3e9c5",
+                        "outline-variant": "#bdc9ca",
+                        "surface-container-high": "#e9e8e5",
+                        "on-secondary-fixed-variant": "#2d4e33",
+                        "on-error": "#ffffff",
+                        "tertiary": "#84481f",
+                        "primary-fixed": "#98f1f9",
+                        "surface-tint": "#006970",
+                        "on-tertiary": "#ffffff",
+                        "inverse-on-surface": "#f2f1ee",
+                        "on-tertiary-container": "#fff3ed",
+                        "on-secondary-fixed": "#01210b",
+                        "primary-container": "#0d7c84",
+                        "inverse-surface": "#2f312f",
+                        "tertiary-container": "#a16034",
+                        "surface-container-low": "#f4f3f1",
+                        "on-tertiary-fixed": "#321300",
+                        "on-primary-fixed": "#002022",
+                        "surface-container": "#efeeeb",
+                        "on-error-container": "#93000a"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "xl": "48px",
+                        "max-width": "1280px",
+                        "unit": "4px",
+                        "margin-mobile": "16px",
+                        "xs": "4px",
+                        "md": "16px",
+                        "lg": "24px",
+                        "gutter": "24px",
+                        "margin-desktop": "64px",
+                        "sm": "8px"
+                    },
+                    "fontFamily": {
+                        "label-sm": ["Public Sans"],
+                        "headline-lg": ["Manrope"],
+                        "headline-lg-mobile": ["Manrope"],
+                        "body-md": ["Public Sans"],
+                        "label-md": ["Public Sans"],
+                        "headline-md": ["Manrope"],
+                        "headline-xl": ["Manrope"],
+                        "body-lg": ["Public Sans"]
+                    },
+                    "fontSize": {
+                        "label-sm": ["12px", { "lineHeight": "16px", "fontWeight": "500" }],
+                        "headline-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+                        "headline-lg-mobile": ["28px", { "lineHeight": "36px", "fontWeight": "600" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "label-md": ["14px", { "lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "600" }],
+                        "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                        "headline-xl": ["40px", { "lineHeight": "48px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }]
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-background text-on-background font-body-md min-h-screen flex flex-col relative pb-24 md:pb-0 pt-20">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-40 bg-surface dark:bg-background shadow-[0px_2px_4px_rgba(13,124,132,0.08)] bg-surface-container-low dark:bg-surface-container-low shadow-sm">
+<div class="flex justify-between items-center w-full px-margin-mobile py-sm max-w-max-width mx-auto">
+<div class="flex items-center gap-3">
+<button class="text-on-surface-variant hover:bg-surface-variant/50 p-2 rounded-full transition-colors">
+<span class="material-symbols-outlined">arrow_forward</span>
+</button>
+<h1 class="text-headline-md-mobile font-headline-md-mobile font-bold text-primary dark:text-inverse-primary">
+                    الإشعارات
+                </h1>
+</div>
+<!-- Contextual action for notifications -->
+<button class="text-on-surface-variant text-label-sm font-label-sm hover:text-primary transition-colors">
+                تحديد الكل كمقروء
+            </button>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="flex-grow w-full max-w-max-width mx-auto px-margin-mobile md:px-margin-desktop py-lg space-y-md">
+<!-- Notifications List Container -->
+<div class="space-y-4">
+<!-- Notification Item 1: Confirmed Booking -->
+<div class="group relative bg-surface-container-low rounded-xl p-md flex gap-4 items-start shadow-sm hover:shadow-[0px_4px_8px_rgba(13,124,132,0.12)] transition-shadow duration-200 cursor-pointer border border-transparent hover:border-outline-variant/30">
+<!-- Unread indicator dot -->
+<div class="absolute top-6 right-3 w-2 h-2 bg-primary rounded-full"></div>
+<div class="flex-shrink-0 w-12 h-12 bg-secondary-container text-on-secondary-container rounded-full flex items-center justify-center">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</div>
+<div class="flex-grow">
+<div class="flex justify-between items-baseline mb-1">
+<h3 class="text-label-md font-label-md text-on-surface font-semibold">تم تأكيد حجزك</h3>
+<span class="text-label-sm font-label-sm text-on-surface-variant">الآن</span>
+</div>
+<p class="text-body-md font-body-md text-on-surface-variant line-clamp-2">
+                        تم تأكيد موعدك مع د. أحمد (علاج طبيعي) يوم الخميس الساعة 10:00 صباحاً.
+                    </p>
+</div>
+</div>
+<!-- Notification Item 2: Provider on the way -->
+<div class="group relative bg-surface-container-low rounded-xl p-md flex gap-4 items-start shadow-sm hover:shadow-[0px_4px_8px_rgba(13,124,132,0.12)] transition-shadow duration-200 cursor-pointer border border-transparent hover:border-outline-variant/30">
+<div class="flex-shrink-0 w-12 h-12 bg-primary-container text-on-primary-container rounded-full flex items-center justify-center">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">local_shipping</span>
+</div>
+<div class="flex-grow">
+<div class="flex justify-between items-baseline mb-1">
+<h3 class="text-label-md font-label-md text-on-surface font-semibold">مقدم الرعاية في الطريق</h3>
+<span class="text-label-sm font-label-sm text-on-surface-variant">منذ 15 دقيقة</span>
+</div>
+<p class="text-body-md font-body-md text-on-surface-variant line-clamp-2">
+                        الممرضة فاطمة في طريقها إليك لإجراء الفحوصات المخبرية. الوقت المتوقع للوصول: 10 دقائق.
+                    </p>
+</div>
+</div>
+<!-- Notification Item 3: New Offer -->
+<div class="group relative bg-surface-container-lowest rounded-xl p-md flex gap-4 items-start shadow-sm hover:shadow-[0px_4px_8px_rgba(13,124,132,0.12)] transition-shadow duration-200 cursor-pointer border border-outline-variant/20 hover:border-outline-variant/50">
+<div class="flex-shrink-0 w-12 h-12 bg-tertiary-container text-on-tertiary-container rounded-full flex items-center justify-center">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">local_offer</span>
+</div>
+<div class="flex-grow">
+<div class="flex justify-between items-baseline mb-1">
+<h3 class="text-label-md font-label-md text-on-surface">عرض جديد متاح</h3>
+<span class="text-label-sm font-label-sm text-on-surface-variant">أمس</span>
+</div>
+<p class="text-body-md font-body-md text-on-surface-variant line-clamp-2">
+                        استفد من خصم 20% على باقات الرعاية المنزلية الشاملة. العرض سارٍ حتى نهاية الشهر.
+                    </p>
+</div>
+</div>
+<!-- Notification Item 4: System Update -->
+<div class="group relative bg-surface-container-lowest rounded-xl p-md flex gap-4 items-start shadow-sm hover:shadow-[0px_4px_8px_rgba(13,124,132,0.12)] transition-shadow duration-200 cursor-pointer border border-outline-variant/20 hover:border-outline-variant/50">
+<div class="flex-shrink-0 w-12 h-12 bg-surface-variant text-on-surface-variant rounded-full flex items-center justify-center">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">info</span>
+</div>
+<div class="flex-grow">
+<div class="flex justify-between items-baseline mb-1">
+<h3 class="text-label-md font-label-md text-on-surface">تحديث في السياسات</h3>
+<span class="text-label-sm font-label-sm text-on-surface-variant">الاثنين</span>
+</div>
+<p class="text-body-md font-body-md text-on-surface-variant line-clamp-2">
+                        قمنا بتحديث سياسة الخصوصية الخاصة بنا لتوفير حماية أفضل لبياناتك الطبية.
+                    </p>
+</div>
+</div>
+</div>
+</main>
+<!-- BottomNavBar (Hidden on desktop, shown on mobile) -->
+<!-- Suppressed on sub-pages with 'Back' action, but keeping here as per strict layout mandate, though semantically it's a sub-page.
+         Since user prompt asks for Notifications, and it's not a top-level destination in the provided JSON array ["الرئيسية", "طلباتي", "حسابي"],
+         I MUST suppress it according to logic rules. -->
+</body></html>

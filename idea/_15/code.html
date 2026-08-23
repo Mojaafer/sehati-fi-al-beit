@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+
+<html dir="rtl" lang="ar"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>تأكيد الحجز</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700&amp;family=Public+Sans:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+  tailwind.config = {
+    darkMode: "class",
+    theme: {
+      extend: {
+        "colors": {
+                "surface-container-highest": "#e3e2e0",
+                "surface": "#faf9f6",
+                "secondary-container": "#c3e9c5",
+                "on-tertiary": "#ffffff",
+                "on-secondary": "#ffffff",
+                "on-tertiary-container": "#fff3ed",
+                "surface-dim": "#dbdad7",
+                "on-primary-fixed": "#002022",
+                "surface-tint": "#006970",
+                "primary-container": "#0d7c84",
+                "error": "#ba1a1a",
+                "primary": "#006168",
+                "surface-variant": "#e3e2e0",
+                "surface-container-lowest": "#ffffff",
+                "on-error": "#ffffff",
+                "tertiary-container": "#a16034",
+                "surface-container": "#efeeeb",
+                "on-error-container": "#93000a",
+                "on-background": "#1a1c1a",
+                "on-surface-variant": "#3e494a",
+                "on-secondary-fixed": "#01210b",
+                "tertiary-fixed": "#ffdbc8",
+                "outline": "#6e797a",
+                "on-secondary-fixed-variant": "#2d4e33",
+                "surface-bright": "#faf9f6",
+                "secondary": "#45664a",
+                "inverse-surface": "#2f312f",
+                "on-primary-container": "#d9fcff",
+                "secondary-fixed": "#c6ecc8",
+                "on-primary": "#ffffff",
+                "primary-fixed-dim": "#7cd4dd",
+                "outline-variant": "#bdc9ca",
+                "on-tertiary-fixed-variant": "#6f380f",
+                "surface-container-high": "#e9e8e5",
+                "background": "#faf9f6",
+                "error-container": "#ffdad6",
+                "surface-container-low": "#f4f3f1",
+                "on-surface": "#1a1c1a",
+                "on-primary-fixed-variant": "#004f54",
+                "inverse-on-surface": "#f2f1ee",
+                "secondary-fixed-dim": "#abd0ad",
+                "on-tertiary-fixed": "#321300",
+                "inverse-primary": "#7cd4dd",
+                "tertiary": "#84481f",
+                "on-secondary-container": "#496a4e",
+                "tertiary-fixed-dim": "#ffb68a",
+                "primary-fixed": "#98f1f9"
+        },
+        "borderRadius": {
+                "DEFAULT": "0.25rem",
+                "lg": "0.5rem",
+                "xl": "0.75rem",
+                "full": "9999px"
+        },
+        "spacing": {
+                "lg": "24px",
+                "unit": "4px",
+                "xl": "48px",
+                "sm": "8px",
+                "md": "16px",
+                "gutter": "16px",
+                "xs": "4px",
+                "margin-desktop": "64px",
+                "margin-mobile": "16px",
+                "margin-page": "20px",
+                "stack-md": "16px",
+                "stack-sm": "8px",
+                "stack-lg": "24px",
+                "max-width": "1280px"
+        },
+        "fontFamily": {
+                "headline-md": [
+                        "Manrope", "Tajawal"
+                ],
+                "headline-xl": [
+                        "Manrope", "Tajawal"
+                ],
+                "headline-lg": [
+                        "Manrope", "Tajawal"
+                ],
+                "headline-sm": [
+                        "Manrope", "Tajawal"
+                ],
+                "label-md": [
+                        "Public Sans", "Tajawal"
+                ],
+                "label-sm": [
+                        "Public Sans", "Tajawal"
+                ],
+                "body-md": [
+                        "Public Sans", "Tajawal"
+                ],
+                "body-lg": [
+                        "Public Sans", "Tajawal"
+                ],
+                "headline-lg-mobile": [
+                        "Manrope", "Tajawal"
+                ]
+        },
+        "fontSize": {
+                "headline-md": [
+                        "24px",
+                        {
+                                "lineHeight": "32px",
+                                "fontWeight": "600"
+                        }
+                ],
+                "headline-xl": [
+                        "40px",
+                        {
+                                "lineHeight": "48px",
+                                "letterSpacing": "-0.02em",
+                                "fontWeight": "700"
+                        }
+                ],
+                "headline-lg": [
+                        "32px",
+                        {
+                                "lineHeight": "40px",
+                                "letterSpacing": "-0.01em",
+                                "fontWeight": "600"
+                        }
+                ],
+                "headline-sm": [
+                        "20px",
+                        {
+                                "lineHeight": "28px",
+                                "fontWeight": "600"
+                        }
+                ],
+                "label-md": [
+                        "14px",
+                        {
+                                "lineHeight": "20px",
+                                "letterSpacing": "0.01em",
+                                "fontWeight": "600"
+                        }
+                ],
+                "label-sm": [
+                        "12px",
+                        {
+                                "lineHeight": "16px",
+                                "fontWeight": "500"
+                        }
+                ],
+                "body-md": [
+                        "16px",
+                        {
+                                "lineHeight": "24px",
+                                "fontWeight": "400"
+                        }
+                ],
+                "body-lg": [
+                        "18px",
+                        {
+                                "lineHeight": "28px",
+                                "fontWeight": "400"
+                        }
+                ],
+                "headline-lg-mobile": [
+                        "28px",
+                        {
+                                "lineHeight": "36px",
+                                "fontWeight": "600"
+                        }
+                ]
+        }
+},
+    },
+  }
+</script>
+<style>
+        body {
+            font-family: 'Tajawal', 'Public Sans', sans-serif;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .material-symbols-outlined.filled {
+            font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+</head>
+<body class="bg-surface text-on-surface antialiased pb-32">
+<!-- Header -->
+<header class="flex items-center justify-between px-margin-page py-4 bg-surface sticky top-0 z-10 border-b border-surface-variant">
+<button class="text-on-surface hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-2xl" data-icon="arrow_forward">arrow_forward</span>
+</button>
+<h1 class="text-headline-sm font-headline-sm text-primary">تأكيد الحجز</h1>
+<div class="w-8"></div> <!-- Spacer for balance -->
+</header>
+<main class="px-margin-page py-stack-md flex flex-col gap-stack-lg max-w-2xl mx-auto">
+<!-- Summary Card -->
+<section class="bg-surface-container-lowest rounded-xl shadow-sm p-4 border border-surface-variant flex items-center justify-between">
+<div class="flex items-center gap-4">
+<div class="w-16 h-16 rounded-full overflow-hidden bg-surface-container-low shrink-0 border-2 border-primary-container/10">
+<img class="w-full h-full object-cover" data-alt="A professional headshot of a male doctor in a white lab coat, clean modern lighting, high quality portrait suitable for a healthcare app avatar, solid light background." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAF9vxHhod5uLtEhntKnr7LR2n22GkOOTrleIeZuNbLRkJ9vWDrKDPjuAKY6PzZqkninigmBv0r8S2fgQ6mQg4YD8W_jc5kUlXjHLts6903tPmfdjMwYarBjOWL1SAi-0QZM9D1f1yoq6fbUHA53FT4vjUM1bi33fmnSs2mDUz6l6j42BwXI9JlRX5Q_TGH2BMUaaPuIV4gKz3EuQpdVH6bDmTNAA4Hn4QnMXgM7qP07FSl3BfmErQ0lw"/>
+</div>
+<div>
+<div class="text-primary text-body-md font-body-md mb-1">سحب عينات</div>
+<h2 class="text-headline-sm font-headline-sm text-on-surface">محمد عبدالرحمن</h2>
+<div class="text-on-surface-variant text-label-md font-label-md">طبيب عام</div>
+</div>
+</div>
+<div class="text-left">
+<div class="text-headline-sm font-headline-sm text-on-surface">15,000</div>
+<div class="text-label-md font-label-md text-secondary bg-secondary-container px-2 py-1 rounded-full inline-block mt-1">ع.س</div>
+<div class="text-on-surface-variant text-label-md font-label-md mt-1">سعر الخدمة</div>
+</div>
+</section>
+<!-- Date Selection -->
+<section class="bg-surface-container-lowest rounded-xl shadow-sm p-4 border border-surface-variant">
+<h3 class="text-headline-sm font-headline-sm text-on-surface flex items-center gap-2 mb-4">
+<span class="material-symbols-outlined text-primary" data-icon="calendar_month">calendar_month</span>
+                اختر اليوم
+            </h3>
+<div class="flex gap-gutter overflow-x-auto pb-2 hide-scrollbar">
+<button class="flex-1 min-w-[80px] py-2 px-4 rounded-full border border-primary bg-primary-container text-on-primary-container text-body-md font-headline-sm transition-colors text-center whitespace-nowrap">
+                    اليوم
+                </button>
+<button class="flex-1 min-w-[80px] py-2 px-4 rounded-full border border-outline text-on-surface-variant hover:bg-surface-container-low text-body-md font-body-md transition-colors text-center whitespace-nowrap">
+                    غداً
+                </button>
+<button class="flex-1 min-w-[80px] py-2 px-4 rounded-full border border-outline text-on-surface-variant hover:bg-surface-container-low text-body-md font-body-md transition-colors text-center whitespace-nowrap">
+                    الخميس
+                </button>
+</div>
+</section>
+<!-- Time Selection -->
+<section class="bg-surface-container-lowest rounded-xl shadow-sm p-4 border border-surface-variant">
+<h3 class="text-headline-sm font-headline-sm text-on-surface flex items-center gap-2 mb-4">
+<span class="material-symbols-outlined text-primary" data-icon="schedule">schedule</span>
+                اختر الوقت
+            </h3>
+<div class="flex gap-gutter overflow-x-auto pb-2 hide-scrollbar" dir="ltr">
+<button class="flex-1 min-w-[80px] py-2 px-4 rounded-full border border-outline text-on-surface-variant hover:bg-surface-container-low text-body-md font-body-md transition-colors text-center whitespace-nowrap" dir="rtl">
+                    6:00 م
+                </button>
+<button class="flex-1 min-w-[80px] py-2 px-4 rounded-full border border-primary bg-primary-container text-on-primary-container text-body-md font-headline-sm transition-colors text-center whitespace-nowrap" dir="rtl">
+                    8:00 م
+                </button>
+<button class="flex-1 min-w-[80px] py-2 px-4 rounded-full border border-outline text-on-surface-variant hover:bg-surface-container-low text-body-md font-body-md transition-colors text-center whitespace-nowrap" dir="rtl">
+                    9:30 م
+                </button>
+</div>
+</section>
+<!-- Address Input -->
+<section class="bg-surface-container-lowest rounded-xl shadow-sm p-4 border border-surface-variant">
+<h3 class="text-headline-sm font-headline-sm text-on-surface flex items-center gap-2 mb-4">
+<span class="material-symbols-outlined text-error" data-icon="location_on" data-weight="fill">location_on</span>
+                عنوان الزيارة
+            </h3>
+<div class="relative">
+<input class="w-full bg-surface border border-outline-variant rounded-lg py-3 px-4 text-body-md font-body-md text-on-surface focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-shadow" readonly="" type="text" value="ود مدني - حي الدرجة غرب مدرسة الشفاء"/>
+</div>
+</section>
+<!-- Notes Input -->
+<section class="bg-surface-container-lowest rounded-xl shadow-sm p-4 border border-surface-variant">
+<h3 class="text-headline-sm font-headline-sm text-on-surface flex items-center gap-2 mb-4">
+<span class="material-symbols-outlined text-on-surface-variant" data-icon="notes">notes</span>
+                ملاحظات للحالة
+            </h3>
+<textarea class="w-full bg-surface border border-outline-variant rounded-lg py-3 px-4 text-body-md font-body-md text-on-surface placeholder:text-on-surface-variant/50 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-shadow resize-none" placeholder="مثال: المريض كبير في السن أو لديه صعوبة في الحركة" rows="3"></textarea>
+</section>
+</main>
+<!-- Bottom Action Bar (Transactional Context) -->
+<div class="fixed bottom-0 left-0 w-full bg-surface-container-lowest rounded-t-2xl shadow-[0_-4px_12px_rgba(0,0,0,0.05)] border-t border-surface-variant p-4 z-40 max-w-2xl mx-auto right-0">
+<div class="flex justify-between items-center mb-4">
+<span class="text-on-surface-variant text-body-md font-body-md">الإجمالي</span>
+<div class="flex items-center gap-1">
+<span class="text-headline-md font-headline-md text-on-surface">15,000</span>
+<span class="text-label-md font-label-md text-secondary">ع.س</span>
+</div>
+</div>
+<button class="w-full bg-primary text-on-primary py-4 rounded-xl text-headline-sm font-headline-sm hover:bg-primary/90 transition-colors active:scale-[0.98] flex items-center justify-center gap-2 shadow-sm">
+            تأكيد وارسال الطلب
+        </button>
+</div>
+<!-- Navigation is suppressed for transactional page -->
+</body></html>

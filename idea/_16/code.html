@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+
+<html dir="rtl" lang="ar"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>صحتي في البيت - الرئيسية</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&amp;family=Public+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+  tailwind.config = {
+    darkMode: "class",
+    theme: {
+      extend: {
+        "colors": {
+                "surface-container-highest": "#e3e2e0",
+                "surface": "#faf9f6",
+                "secondary-container": "#c3e9c5",
+                "on-tertiary": "#ffffff",
+                "on-secondary": "#ffffff",
+                "on-tertiary-container": "#fff3ed",
+                "surface-dim": "#dbdad7",
+                "on-primary-fixed": "#002022",
+                "surface-tint": "#006970",
+                "primary-container": "#0d7c84",
+                "error": "#ba1a1a",
+                "primary": "#006168",
+                "surface-variant": "#e3e2e0",
+                "surface-container-lowest": "#ffffff",
+                "on-error": "#ffffff",
+                "tertiary-container": "#a16034",
+                "surface-container": "#efeeeb",
+                "on-error-container": "#93000a",
+                "on-background": "#1a1c1a",
+                "on-surface-variant": "#3e494a",
+                "on-secondary-fixed": "#01210b",
+                "tertiary-fixed": "#ffdbc8",
+                "outline": "#6e797a",
+                "on-secondary-fixed-variant": "#2d4e33",
+                "surface-bright": "#faf9f6",
+                "secondary": "#45664a",
+                "inverse-surface": "#2f312f",
+                "on-primary-container": "#d9fcff",
+                "secondary-fixed": "#c6ecc8",
+                "on-primary": "#ffffff",
+                "primary-fixed-dim": "#7cd4dd",
+                "outline-variant": "#bdc9ca",
+                "on-tertiary-fixed-variant": "#6f380f",
+                "surface-container-high": "#e9e8e5",
+                "background": "#faf9f6",
+                "error-container": "#ffdad6",
+                "surface-container-low": "#f4f3f1",
+                "on-surface": "#1a1c1a",
+                "on-primary-fixed-variant": "#004f54",
+                "inverse-on-surface": "#f2f1ee",
+                "secondary-fixed-dim": "#abd0ad",
+                "on-tertiary-fixed": "#321300",
+                "inverse-primary": "#7cd4dd",
+                "tertiary": "#84481f",
+                "on-secondary-container": "#496a4e",
+                "tertiary-fixed-dim": "#ffb68a",
+                "primary-fixed": "#98f1f9"
+        },
+        "borderRadius": {
+                "DEFAULT": "0.25rem",
+                "lg": "0.5rem",
+                "xl": "0.75rem",
+                "full": "9999px"
+        },
+        "spacing": {
+                "lg": "24px",
+                "unit": "4px",
+                "xl": "48px",
+                "sm": "8px",
+                "md": "16px",
+                "gutter": "24px",
+                "xs": "4px",
+                "margin-desktop": "64px",
+                "margin-mobile": "16px",
+                "max-width": "1280px"
+        },
+        "fontFamily": {
+                "headline-md": [
+                        "Manrope"
+                ],
+                "headline-xl": [
+                        "Manrope"
+                ],
+                "headline-lg": [
+                        "Manrope"
+                ],
+                "label-md": [
+                        "Public Sans"
+                ],
+                "label-sm": [
+                        "Public Sans"
+                ],
+                "body-md": [
+                        "Public Sans"
+                ],
+                "body-lg": [
+                        "Public Sans"
+                ],
+                "headline-lg-mobile": [
+                        "Manrope"
+                ]
+        },
+        "fontSize": {
+                "headline-md": [
+                        "24px",
+                        {
+                                "lineHeight": "32px",
+                                "fontWeight": "600"
+                        }
+                ],
+                "headline-xl": [
+                        "40px",
+                        {
+                                "lineHeight": "48px",
+                                "letterSpacing": "-0.02em",
+                                "fontWeight": "700"
+                        }
+                ],
+                "headline-lg": [
+                        "32px",
+                        {
+                                "lineHeight": "40px",
+                                "letterSpacing": "-0.01em",
+                                "fontWeight": "600"
+                        }
+                ],
+                "label-md": [
+                        "14px",
+                        {
+                                "lineHeight": "20px",
+                                "letterSpacing": "0.01em",
+                                "fontWeight": "600"
+                        }
+                ],
+                "label-sm": [
+                        "12px",
+                        {
+                                "lineHeight": "16px",
+                                "fontWeight": "500"
+                        }
+                ],
+                "body-md": [
+                        "16px",
+                        {
+                                "lineHeight": "24px",
+                                "fontWeight": "400"
+                        }
+                ],
+                "body-lg": [
+                        "18px",
+                        {
+                                "lineHeight": "28px",
+                                "fontWeight": "400"
+                        }
+                ],
+                "headline-lg-mobile": [
+                        "28px",
+                        {
+                                "lineHeight": "36px",
+                                "fontWeight": "600"
+                        }
+                ]
+        }
+},
+    },
+  }
+</script>
+<style>
+        body { font-family: 'Public Sans', sans-serif; background-color: #faf9f6; }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+        .material-symbols-outlined.fill { font-variation-settings: 'FILL' 1; }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+</head>
+<body class="bg-surface text-on-surface pb-24 min-h-screen">
+<!-- Header Section -->
+<header class="px-margin-mobile py-4 pt-8">
+<div class="flex justify-between items-start">
+<div>
+<div class="flex items-center gap-1 text-on-surface-variant mb-1">
+<span class="material-symbols-outlined text-sm text-tertiary-container fill">light_mode</span>
+<span class="font-label-md text-label-md">مساء الخير</span>
+</div>
+<h1 class="font-headline-lg-mobile text-headline-lg-mobile text-on-surface">أحمد الرفاعي</h1>
+<div class="flex items-center gap-1 text-on-surface-variant mt-1">
+<span class="material-symbols-outlined text-sm text-error fill">location_on</span>
+<span class="font-body-md text-body-md">ود مدني</span>
+</div>
+</div>
+<div class="relative">
+<button class="w-10 h-10 flex items-center justify-center rounded-full bg-surface-container hover:bg-surface-container-high transition-colors">
+<span class="material-symbols-outlined text-tertiary-container fill text-2xl">notifications</span>
+</button>
+<div class="absolute top-2 right-2 w-2.5 h-2.5 bg-error rounded-full border-2 border-surface"></div>
+</div>
+</div>
+<!-- Search Bar -->
+<div class="mt-6 relative">
+<input class="w-full bg-surface-container-lowest border border-outline-variant rounded-xl py-3 pl-12 pr-4 font-body-md text-body-md focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary shadow-sm" placeholder="ابحث عن خدمة أو مقدم خدمة..." type="text"/>
+<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-outline">search</span>
+</div>
+</header>
+<main class="px-margin-mobile pb-safe flex flex-col gap-lg">
+<!-- Urgent CTA Banner -->
+<section>
+<div class="bg-primary rounded-xl p-6 relative overflow-hidden shadow-md flex items-center justify-between">
+<div class="relative z-10 text-on-primary">
+<h2 class="font-headline-md text-headline-md mb-2">محتاج خدمة عاجلة؟</h2>
+<p class="font-body-md text-body-md text-inverse-primary mb-4 opacity-90">خدمة أقرب مقدم خدمة متاح الآن</p>
+<button class="flex items-center gap-2 font-body-lg text-body-lg hover:opacity-80 transition-opacity">
+                        طلب سريع
+                        <span class="material-symbols-outlined rtl:rotate-180">arrow_forward</span>
+</button>
+</div>
+<div class="relative z-10 w-24 h-24 flex-shrink-0">
+<img class="w-full h-full object-contain drop-shadow-lg" data-alt="A highly detailed 3D rendering of a modern white ambulance with red and blue accents, isolated on a clean background, soft lighting, professional medical aesthetic, conveying urgency and reliability, 8k resolution, photorealistic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuA4blSuqCyDXdB3JAieSfuJb2YduXrW44lmPWJw41nVq9XgGL5FczVYOZcy31f-vN5NrqZWmwpStccrnbCZSFV4IZddoi6fNa2gBkWj0l_TPcnE6oLxc-s6qxwW7Ow0n3tf03FTQTvaXwPaRDwPGvOodUT2hK8CJpFGnnjx7EdVJsMeOuUE8nCqiw2GZEP9ZYI5pZ0vcNosMn6Y3vrQ-c3PseNwyYjRRG4KwerlbLk5vPn1bA5djbg05g"/>
+</div>
+<!-- Decorative background elements -->
+<div class="absolute -right-8 -top-8 w-32 h-32 bg-primary-fixed opacity-10 rounded-full blur-2xl"></div>
+<div class="absolute -left-12 -bottom-12 w-48 h-48 bg-secondary-fixed opacity-10 rounded-full blur-3xl"></div>
+</div>
+</section>
+<!-- Main Services Grid -->
+<section>
+<div class="flex justify-between items-center mb-md">
+<h2 class="font-headline-md text-headline-md text-on-surface">الخدمات الصحية</h2>
+<a class="font-label-md text-label-md text-primary hover:underline" href="#">عرض الكل</a>
+</div>
+<div class="grid grid-cols-2 gap-gutter">
+<!-- Service Card 1 -->
+<button class="bg-surface-container-lowest p-4 rounded-xl shadow-sm border border-transparent hover:border-primary transition-all group flex flex-col items-center text-center gap-2">
+<div class="w-14 h-14 bg-surface-container rounded-full flex items-center justify-center mb-1 group-hover:bg-primary-fixed transition-colors">
+<span class="material-symbols-outlined text-3xl text-primary">syringe</span>
+</div>
+<h3 class="font-body-lg text-body-lg text-on-surface">سحب عينات</h3>
+<p class="font-label-md text-label-md text-on-surface-variant opacity-80">تحاليل طبية بدون مغادرة</p>
+<span class="font-label-md text-label-md text-secondary mt-1">من 12,000 ج.س</span>
+</button>
+<!-- Service Card 2 -->
+<button class="bg-surface-container-lowest p-4 rounded-xl shadow-sm border border-transparent hover:border-primary transition-all group flex flex-col items-center text-center gap-2">
+<div class="w-14 h-14 bg-surface-container rounded-full flex items-center justify-center mb-1 group-hover:bg-primary-fixed transition-colors">
+<span class="material-symbols-outlined text-3xl text-primary">stethoscope</span>
+</div>
+<h3 class="font-body-lg text-body-lg text-on-surface">تمريض منزلي</h3>
+<p class="font-label-md text-label-md text-on-surface-variant opacity-80">رعاية طبية وحقن وعناية</p>
+<span class="font-label-md text-label-md text-secondary mt-1">من 15,000 ج.س</span>
+</button>
+<!-- Service Card 3 -->
+<button class="bg-surface-container-lowest p-4 rounded-xl shadow-sm border border-transparent hover:border-primary transition-all group flex flex-col items-center text-center gap-2">
+<div class="w-14 h-14 bg-surface-container rounded-full flex items-center justify-center mb-1 group-hover:bg-primary-fixed transition-colors">
+<span class="material-symbols-outlined text-3xl text-primary">physical_therapy</span>
+</div>
+<h3 class="font-body-lg text-body-lg text-on-surface">علاج طبيعي</h3>
+<p class="font-label-md text-label-md text-on-surface-variant opacity-80">جلسات علاج وتأهيل في المنزل</p>
+<span class="font-label-md text-label-md text-secondary mt-1">من 25,000 ج.س</span>
+</button>
+<!-- Service Card 4 -->
+<button class="bg-surface-container-lowest p-4 rounded-xl shadow-sm border border-transparent hover:border-primary transition-all group flex flex-col items-center text-center gap-2">
+<div class="w-14 h-14 bg-surface-container rounded-full flex items-center justify-center mb-1 group-hover:bg-primary-fixed transition-colors">
+<span class="material-symbols-outlined text-3xl text-primary">person_check</span>
+</div>
+<h3 class="font-body-lg text-body-lg text-on-surface">زيارة طبيب</h3>
+<p class="font-label-md text-label-md text-on-surface-variant opacity-80">كشف واستشارة وإحالات</p>
+<span class="font-label-md text-label-md text-secondary mt-1">من 35,000 ج.س</span>
+</button>
+</div>
+</section>
+<!-- Near You Section -->
+<section>
+<div class="flex justify-between items-center mb-md">
+<h2 class="font-headline-md text-headline-md text-on-surface">متاحون الآن</h2>
+<a class="font-label-md text-label-md text-primary hover:underline" href="#">قريب منك</a>
+</div>
+<div class="bg-surface-container-lowest rounded-xl p-4 shadow-sm flex items-center gap-4">
+<div class="w-16 h-16 rounded-full bg-secondary-container text-on-secondary-container flex items-center justify-center font-headline-lg text-headline-lg flex-shrink-0">
+                    م ع
+                </div>
+<div class="flex-grow">
+<div class="flex justify-between items-start mb-1">
+<h3 class="font-body-lg text-body-lg text-on-surface">محمد عبدالرحمن</h3>
+<span class="bg-secondary-container text-on-secondary-container px-2 py-1 rounded-full font-label-md text-label-md flex items-center gap-1">
+                            متاح
+                        </span>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant mb-1">فني مختبر وسحب عينات</p>
+<div class="flex items-center gap-1 text-on-surface-variant">
+<span class="material-symbols-outlined text-sm text-tertiary-container fill">star</span>
+<span class="font-label-md text-label-md font-bold text-on-surface">4.9</span>
+<span class="font-label-md text-label-md">(18)</span>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Bottom Navigation Bar -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 pb-safe h-16 bg-surface-container-lowest dark:bg-surface-container-low border-t border-outline-variant dark:border-outline shadow-md rounded-t-xl hidden md:hidden flex">
+<a class="flex flex-col items-center justify-center text-primary dark:text-on-primary-container font-bold bg-secondary-container rounded-full px-4 py-1 hover:bg-surface-container-high scale-95 transition-transform duration-150" href="#">
+<span class="material-symbols-outlined text-2xl mb-1 fill">home</span>
+<span class="text-label-md font-label-md">الرئيسية</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline hover:bg-surface-container-high transition-colors px-4 py-1 rounded-lg" href="#">
+<span class="material-symbols-outlined text-2xl mb-1">list_alt</span>
+<span class="text-label-md font-label-md">طلباتي</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline hover:bg-surface-container-high transition-colors px-4 py-1 rounded-lg" href="#">
+<span class="material-symbols-outlined text-2xl mb-1">person</span>
+<span class="text-label-md font-label-md">حسابي</span>
+</a>
+</nav>
+<!-- Desktop Nav Placeholder (Hidden on Mobile) -->
+<nav class="hidden md:flex justify-between items-center w-full px-margin-desktop py-4 bg-surface dark:bg-surface fixed top-0 z-50 shadow-sm">
+<div class="text-body-lg font-body-lg font-bold text-primary dark:text-inverse-primary">صحتي في البيت</div>
+<div class="flex gap-6">
+<a class="text-primary font-bold hover:bg-surface-container-low px-3 py-2 rounded-lg" href="#">الرئيسية</a>
+<a class="text-on-surface-variant hover:bg-surface-container-low px-3 py-2 rounded-lg" href="#">طلباتي</a>
+<a class="text-on-surface-variant hover:bg-surface-container-low px-3 py-2 rounded-lg" href="#">حسابي</a>
+</div>
+<button class="material-symbols-outlined text-on-surface-variant">notifications</button>
+</nav>
+</body></html>

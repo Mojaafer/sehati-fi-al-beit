@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+
+<html dir="rtl" lang="ar"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>الملف الشخصي - صحتي في البيت</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700&amp;family=Public+Sans:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-variant": "#e3e2e0",
+                        "on-secondary-container": "#496a4e",
+                        "error": "#ba1a1a",
+                        "surface-dim": "#dbdad7",
+                        "on-primary-fixed-variant": "#004f54",
+                        "on-primary-container": "#d9fcff",
+                        "surface-bright": "#faf9f6",
+                        "secondary": "#45664a",
+                        "on-background": "#1a1c1a",
+                        "secondary-fixed": "#c6ecc8",
+                        "error-container": "#ffdad6",
+                        "on-tertiary-fixed-variant": "#6f380f",
+                        "on-surface": "#1a1c1a",
+                        "primary": "#006168",
+                        "inverse-primary": "#7cd4dd",
+                        "secondary-fixed-dim": "#abd0ad",
+                        "on-primary": "#ffffff",
+                        "tertiary-fixed-dim": "#ffb68a",
+                        "outline": "#6e797a",
+                        "primary-fixed-dim": "#7cd4dd",
+                        "surface-container-lowest": "#ffffff",
+                        "tertiary-fixed": "#ffdbc8",
+                        "surface": "#faf9f6",
+                        "on-surface-variant": "#3e494a",
+                        "on-secondary": "#ffffff",
+                        "background": "#faf9f6",
+                        "surface-container-highest": "#e3e2e0",
+                        "secondary-container": "#c3e9c5",
+                        "outline-variant": "#bdc9ca",
+                        "surface-container-high": "#e9e8e5",
+                        "on-secondary-fixed-variant": "#2d4e33",
+                        "on-error": "#ffffff",
+                        "tertiary": "#84481f",
+                        "primary-fixed": "#98f1f9",
+                        "surface-tint": "#006970",
+                        "on-tertiary": "#ffffff",
+                        "inverse-on-surface": "#f2f1ee",
+                        "on-tertiary-container": "#fff3ed",
+                        "on-secondary-fixed": "#01210b",
+                        "primary-container": "#0d7c84",
+                        "inverse-surface": "#2f312f",
+                        "tertiary-container": "#a16034",
+                        "surface-container-low": "#f4f3f1",
+                        "on-tertiary-fixed": "#321300",
+                        "on-primary-fixed": "#002022",
+                        "surface-container": "#efeeeb",
+                        "on-error-container": "#93000a"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "xl": "48px",
+                        "max-width": "1280px",
+                        "unit": "4px",
+                        "margin-mobile": "16px",
+                        "xs": "4px",
+                        "md": "16px",
+                        "lg": "24px",
+                        "gutter": "24px",
+                        "margin-desktop": "64px",
+                        "sm": "8px"
+                    },
+                    "fontFamily": {
+                        "label-sm": ["Public Sans"],
+                        "headline-lg": ["Manrope"],
+                        "headline-lg-mobile": ["Manrope"],
+                        "body-md": ["Public Sans"],
+                        "label-md": ["Public Sans"],
+                        "headline-md": ["Manrope"],
+                        "headline-xl": ["Manrope"],
+                        "body-lg": ["Public Sans"]
+                    },
+                    "fontSize": {
+                        "label-sm": ["12px", { "lineHeight": "16px", "fontWeight": "500" }],
+                        "headline-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+                        "headline-lg-mobile": ["28px", { "lineHeight": "36px", "fontWeight": "600" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "label-md": ["14px", { "lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "600" }],
+                        "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                        "headline-xl": ["40px", { "lineHeight": "48px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body { font-family: 'Public Sans', sans-serif; }
+        h1, h2, h3, h4, h5, h6 { font-family: 'Manrope', sans-serif; }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-background min-h-screen flex flex-col pb-24">
+<!-- TopAppBar -->
+<header class="docked full-width top-0 bg-surface shadow-sm z-50">
+<div class="flex justify-between items-center w-full px-margin-mobile py-sm">
+<div class="flex items-center gap-4">
+<img class="w-10 h-10 rounded-full object-cover" data-alt="A small, circular avatar portrait of a smiling middle-eastern man in his 30s. Warm lighting, professional yet approachable healthcare context. Soft teal background. High quality photography." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAYpY_MPigmyvLNdUpG6RwVDklZU835HPoWWU_GL9EMdf9eOFyP1wjSDH7ifiVBBHNva1ipkr7e6uWhYudxzCarP7re5ttJWMMERSHKcaK6W2E1ZeX6-kyHV-DAws2BQU8fmvbSMU42tq27qSH1ESNQEv6YewEv_qCzECcS8eTmukYVHSHRj-fIEDTfo7oHVlw1aYLT_jx8m-7Fgiev3p8wIXupwIsDy8cpHjRU2XJhSrNDZg_TIR2Jxg"/>
+<h1 class="text-headline-md-mobile font-headline-md-mobile font-bold text-primary">صحتي في البيت</h1>
+</div>
+<button class="text-primary hover:bg-surface-variant/50 p-2 rounded-full transition-transform duration-150 active:scale-95">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">notifications</span>
+</button>
+</div>
+</header>
+<!-- Main Content -->
+<main class="flex-grow px-margin-mobile py-lg max-w-max-width mx-auto w-full flex flex-col gap-lg">
+<!-- Profile Header Card -->
+<section class="bg-surface-container-lowest rounded-xl p-lg shadow-[0px_2px_4px_rgba(13,124,132,0.08)] flex flex-col items-center gap-md relative overflow-hidden">
+<!-- Decorative background element -->
+<div class="absolute top-0 left-0 w-full h-24 bg-primary-container/20 rounded-t-xl -z-10"></div>
+<div class="relative">
+<img class="w-24 h-24 rounded-full object-cover border-4 border-surface-container-lowest shadow-sm z-10" data-alt="A medium, circular portrait of a smiling middle-eastern man in his 30s. Warm lighting, professional yet approachable healthcare context. Soft teal background. High quality photography." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBmaeP_kXxTbMl01Q13INMRpAGY8uw58FO825yoVOezwDMiyYMCTpL7otHdbR27_C6DDj1Kc3VZRqkAg9AAXMok8cP-0Hb8HtLrqG9QQWOlwAEDbr3HQygIWQQWU-RH95wXnGFQMOIqmIKz0YR9O_rap1C3vzv4BqZZW-WO4X53JaIYnczdF0BX6tRXBki9nXmtqs9g1fw1OfCbECO5puycvCfDJgV4OI-Ap3MwOyHPQ4vhmiFtPLu1gQ"/>
+<button class="absolute bottom-0 left-0 bg-primary text-on-primary p-2 rounded-full shadow-sm hover:bg-surface-tint transition-colors">
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">edit</span>
+</button>
+</div>
+<div class="text-center">
+<h2 class="text-headline-md font-headline-md text-on-surface">أحمد عبدالله</h2>
+<p class="text-body-md font-body-md text-on-surface-variant">ahmed.abdullah@example.com</p>
+<p class="text-label-md font-label-md text-primary mt-1">+966 50 123 4567</p>
+</div>
+</section>
+<!-- Menu List -->
+<section class="flex flex-col gap-sm">
+<h3 class="text-label-md font-label-md text-on-surface-variant px-md py-sm">إعدادات الحساب</h3>
+<div class="bg-surface-container-lowest rounded-xl shadow-[0px_2px_4px_rgba(13,124,132,0.08)] overflow-hidden">
+<!-- Personal Info -->
+<button class="w-full flex items-center justify-between p-md hover:bg-surface-variant/50 transition-colors border-b border-surface-variant/30">
+<div class="flex items-center gap-4">
+<div class="bg-secondary-container text-on-secondary-container p-2 rounded-full flex items-center justify-center">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">person</span>
+</div>
+<span class="text-body-md font-body-md text-on-surface">المعلومات الشخصية</span>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant">chevron_left</span>
+</button>
+<!-- Saved Addresses -->
+<button class="w-full flex items-center justify-between p-md hover:bg-surface-variant/50 transition-colors border-b border-surface-variant/30">
+<div class="flex items-center gap-4">
+<div class="bg-secondary-container text-on-secondary-container p-2 rounded-full flex items-center justify-center">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">location_on</span>
+</div>
+<span class="text-body-md font-body-md text-on-surface">العناوين المحفوظة</span>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant">chevron_left</span>
+</button>
+<!-- Payment Methods -->
+<button class="w-full flex items-center justify-between p-md hover:bg-surface-variant/50 transition-colors">
+<div class="flex items-center gap-4">
+<div class="bg-secondary-container text-on-secondary-container p-2 rounded-full flex items-center justify-center">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">credit_card</span>
+</div>
+<span class="text-body-md font-body-md text-on-surface">طرق الدفع</span>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant">chevron_left</span>
+</button>
+</div>
+<h3 class="text-label-md font-label-md text-on-surface-variant px-md py-sm mt-md">الصحة والدعم</h3>
+<div class="bg-surface-container-lowest rounded-xl shadow-[0px_2px_4px_rgba(13,124,132,0.08)] overflow-hidden">
+<!-- Medical History -->
+<button class="w-full flex items-center justify-between p-md hover:bg-surface-variant/50 transition-colors border-b border-surface-variant/30">
+<div class="flex items-center gap-4">
+<div class="bg-primary-container text-on-primary-container p-2 rounded-full flex items-center justify-center">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">medical_information</span>
+</div>
+<span class="text-body-md font-body-md text-on-surface">السجل الطبي</span>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant">chevron_left</span>
+</button>
+<!-- Support -->
+<button class="w-full flex items-center justify-between p-md hover:bg-surface-variant/50 transition-colors">
+<div class="flex items-center gap-4">
+<div class="bg-primary-container text-on-primary-container p-2 rounded-full flex items-center justify-center">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">help</span>
+</div>
+<span class="text-body-md font-body-md text-on-surface">الدعم والمساعدة</span>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant">chevron_left</span>
+</button>
+</div>
+<button class="w-full flex items-center justify-center gap-2 p-md mt-lg text-error hover:bg-error-container/50 rounded-xl transition-colors">
+<span class="material-symbols-outlined">logout</span>
+<span class="text-label-md font-label-md">تسجيل الخروج</span>
+</button>
+</section>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 left-0 w-full flex justify-around items-center bg-surface px-2 pb-4 pt-2 shadow-[0_-4px_12px_rgba(13,124,132,0.06)] z-50 rounded-t-xl">
+<!-- Home (Inactive) -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant py-1 hover:text-primary transition-all duration-200" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">home</span>
+<span class="text-label-sm font-label-sm mt-1">الرئيسية</span>
+</a>
+<!-- Orders (Inactive) -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant py-1 hover:text-primary transition-all duration-200" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">event_note</span>
+<span class="text-label-sm font-label-sm mt-1">طلباتي</span>
+</a>
+<!-- Profile (Active) -->
+<a class="flex flex-col items-center justify-center bg-secondary-container text-on-secondary-container rounded-full px-6 py-1 scale-90 transition-all duration-200" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">person</span>
+<span class="text-label-sm font-label-sm mt-1">حسابي</span>
+</a>
+</nav>
+</body></html>

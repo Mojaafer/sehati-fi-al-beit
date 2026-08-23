@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+
+<html dir="rtl" lang="ar"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>لوحة مقدم الخدمة - صحتي في البيت</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "tertiary-container": "#6e3900",
+                      "on-primary-container": "#85bce2",
+                      "on-primary-fixed-variant": "#004c6d",
+                      "surface-container-low": "#f0f3ff",
+                      "on-background": "#151c27",
+                      "on-tertiary-fixed": "#2f1500",
+                      "background": "#f9f9ff",
+                      "secondary-fixed": "#7af7e1",
+                      "secondary": "#006b5e",
+                      "primary-container": "#004c6d",
+                      "surface-container-highest": "#dce2f3",
+                      "on-surface-variant": "#41484d",
+                      "on-tertiary-container": "#fba050",
+                      "primary": "#00344d",
+                      "surface-bright": "#f9f9ff",
+                      "surface-container": "#e7eefe",
+                      "on-primary": "#ffffff",
+                      "on-surface": "#151c27",
+                      "primary-fixed": "#c7e7ff",
+                      "on-secondary-fixed": "#00201b",
+                      "surface-tint": "#286486",
+                      "on-secondary": "#ffffff",
+                      "inverse-primary": "#96cdf4",
+                      "tertiary": "#4d2600",
+                      "tertiary-fixed-dim": "#ffb77d",
+                      "surface": "#f9f9ff",
+                      "on-primary-fixed": "#001e2e",
+                      "error": "#ba1a1a",
+                      "on-secondary-container": "#007164",
+                      "surface-dim": "#d3daea",
+                      "outline": "#71787e",
+                      "surface-container-lowest": "#ffffff",
+                      "surface-container-high": "#e2e8f8",
+                      "on-secondary-fixed-variant": "#005046",
+                      "inverse-on-surface": "#ebf1ff",
+                      "inverse-surface": "#2a313d",
+                      "on-error-container": "#93000a",
+                      "secondary-container": "#7af7e1",
+                      "on-error": "#ffffff",
+                      "primary-fixed-dim": "#96cdf4",
+                      "on-tertiary": "#ffffff",
+                      "tertiary-fixed": "#ffdcc3",
+                      "error-container": "#ffdad6",
+                      "secondary-fixed-dim": "#5bdac6",
+                      "on-tertiary-fixed-variant": "#6e3900",
+                      "surface-variant": "#dce2f3",
+                      "outline-variant": "#c0c7ce"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "stack-md": "16px",
+                      "stack-sm": "8px",
+                      "gutter": "16px",
+                      "margin-page": "20px",
+                      "stack-lg": "24px"
+              },
+              "fontFamily": {
+                      "headline-md": ["Tajawal"],
+                      "headline-lg": ["Tajawal"],
+                      "headline-lg-mobile": ["Tajawal"],
+                      "headline-sm": ["Tajawal"],
+                      "body-lg": ["Tajawal"],
+                      "label-md": ["Tajawal"],
+                      "body-md": ["Tajawal"]
+              },
+              "fontSize": {
+                      "headline-md": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                      "headline-lg": ["28px", {"lineHeight": "36px", "fontWeight": "700"}],
+                      "headline-lg-mobile": ["24px", {"lineHeight": "32px", "fontWeight": "700"}],
+                      "headline-sm": ["16px", {"lineHeight": "24px", "fontWeight": "600"}],
+                      "body-lg": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                      "label-md": ["12px", {"lineHeight": "16px", "fontWeight": "500"}],
+                      "body-md": ["14px", {"lineHeight": "20px", "fontWeight": "400"}]
+              }
+            }
+          }
+        }
+    </script>
+<style>
+        body { font-family: 'Tajawal', sans-serif; }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-surface text-on-surface pb-24">
+<!-- Top App Bar -->
+<header class="bg-surface docked full-width top-0 flat no shadows flex justify-between items-center w-full px-margin-page py-4 z-40 sticky">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-on-surface-variant cursor-pointer text-2xl" onclick="window.history.back()">arrow_forward</span>
+<h1 class="text-headline-md font-headline-md text-on-surface font-bold">لوحة مقدم الخدمة</h1>
+</div>
+</header>
+<main class="px-margin-page max-w-3xl mx-auto space-y-stack-lg mt-4">
+<!-- Profile & Status Card -->
+<div class="bg-surface-container-lowest rounded-xl shadow-md overflow-hidden relative">
+<!-- Header Section -->
+<div class="bg-primary p-6 flex items-center justify-between text-on-primary">
+<div>
+<p class="text-label-md font-label-md opacity-80 mb-1">لوحة مقدم الخدمة</p>
+<h2 class="text-headline-lg-mobile font-headline-lg-mobile font-bold">محمد عبدالرحمن</h2>
+</div>
+<div class="w-16 h-16 rounded-full bg-secondary-container text-on-secondary-container flex items-center justify-center text-headline-md font-headline-md font-bold">
+                    م ع
+                </div>
+</div>
+<!-- Content Section -->
+<div class="p-6">
+<!-- Status Toggle -->
+<div class="flex items-center justify-between mb-6 pb-6 border-b border-outline-variant">
+<div>
+<h3 class="text-headline-sm font-headline-sm font-bold text-on-surface mb-1">حالة العمل</h3>
+<p class="text-body-md font-body-md text-secondary">متاح للعمل ويستقبل الطلبات</p>
+</div>
+<!-- Toggle Switch -->
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" type="checkbox" value=""/>
+<div class="w-14 h-7 bg-outline-variant peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-6 after:w-6 after:transition-all peer-checked:bg-secondary"></div>
+</label>
+</div>
+<!-- Stats Grid -->
+<div class="grid grid-cols-3 gap-gutter">
+<div class="border border-outline-variant rounded-lg p-4 text-center">
+<span class="block text-headline-lg-mobile font-headline-lg-mobile font-bold text-primary mb-1">3</span>
+<span class="text-label-md font-label-md text-on-surface-variant">طلبات اليوم</span>
+</div>
+<div class="border border-outline-variant rounded-lg p-4 text-center">
+<span class="block text-headline-lg-mobile font-headline-lg-mobile font-bold text-primary mb-1">42,000</span>
+<span class="text-label-md font-label-md text-on-surface-variant">دخل اليوم</span>
+</div>
+<div class="border border-outline-variant rounded-lg p-4 text-center">
+<span class="block text-headline-lg-mobile font-headline-lg-mobile font-bold text-primary mb-1">4.9</span>
+<span class="text-label-md font-label-md text-on-surface-variant">التقييم</span>
+</div>
+</div>
+</div>
+</div>
+<!-- New Request Card -->
+<section>
+<h2 class="text-headline-sm font-headline-sm font-bold text-on-surface mb-stack-md">طلب قريب منك</h2>
+<div class="bg-surface-container-lowest rounded-xl shadow-md p-6 relative">
+<!-- Highlight Indicator -->
+<div class="absolute right-0 top-0 bottom-0 w-1 bg-secondary rounded-r-xl"></div>
+<div class="flex justify-between items-start mb-6">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-full bg-surface-container flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-2xl">vaccines</span>
+</div>
+<div>
+<h3 class="text-headline-sm font-headline-sm font-bold text-on-surface">سحب عينات منزلية</h3>
+<p class="text-body-md font-body-md text-on-surface-variant mt-1">مريض واحد • 3 فحوصات</p>
+</div>
+</div>
+<div class="text-left">
+<span class="block text-headline-sm font-headline-sm font-bold text-primary">15,000</span>
+<span class="text-label-md font-label-md text-on-surface-variant">ج.س</span>
+</div>
+</div>
+<div class="space-y-3 mb-6">
+<div class="flex items-center gap-3 text-body-md font-body-md text-on-surface">
+<span class="material-symbols-outlined text-outline text-lg">location_on</span>
+<span class="w-20 text-on-surface-variant">المنطقة</span>
+<span class="font-medium">حي الدرجة غرب</span>
+</div>
+<div class="flex items-center gap-3 text-body-md font-body-md text-on-surface">
+<span class="material-symbols-outlined text-outline text-lg">schedule</span>
+<span class="w-20 text-on-surface-variant">الوقت</span>
+<span class="font-medium" dir="ltr">8:00 - 9:00 PM</span>
+</div>
+<div class="flex items-center gap-3 text-body-md font-body-md text-on-surface">
+<span class="material-symbols-outlined text-outline text-lg">medical_services</span>
+<span class="w-20 text-on-surface-variant">النوع</span>
+<span class="font-medium">سحب عينات</span>
+</div>
+</div>
+<div class="flex gap-gutter">
+<button class="flex-1 bg-primary text-on-primary h-12 rounded-lg font-headline-sm text-headline-sm font-bold hover:bg-opacity-90 transition-colors">
+                        قبول الطلب
+                    </button>
+<button class="flex-1 border border-primary text-primary h-12 rounded-lg font-headline-sm text-headline-sm font-bold hover:bg-primary hover:bg-opacity-5 transition-colors">
+                        رفض
+                    </button>
+</div>
+</div>
+</section>
+<!-- Schedule Section -->
+<section>
+<div class="flex justify-between items-end mb-stack-md">
+<h2 class="text-headline-sm font-headline-sm font-bold text-on-surface">جدول اليوم</h2>
+<span class="text-body-md font-body-md text-primary">3 زيارات</span>
+</div>
+<div class="bg-surface-container-lowest rounded-xl shadow-md overflow-hidden">
+<!-- Completed Item -->
+<div class="flex justify-between items-center p-4 border-b border-outline-variant last:border-0 hover:bg-surface-container-low transition-colors">
+<div class="flex flex-col">
+<span class="text-headline-sm font-headline-sm font-bold text-on-surface">حالة غسيلية</span>
+<span class="text-body-md font-body-md text-on-surface-variant">حي النخيل - وحدة</span>
+</div>
+<div class="flex items-center gap-4">
+<span class="text-body-md font-body-md font-bold text-primary" dir="ltr">6:00 PM</span>
+<span class="px-3 py-1 rounded-full bg-secondary-container text-on-secondary-container text-label-md font-label-md">تمت</span>
+</div>
+</div>
+<!-- Upcoming Item -->
+<div class="flex justify-between items-center p-4 border-b border-outline-variant last:border-0 hover:bg-surface-container-low transition-colors bg-surface-container-low border-l-4 border-l-secondary">
+<div class="flex flex-col">
+<span class="text-headline-sm font-headline-sm font-bold text-on-surface">سحب عينات</span>
+<span class="text-body-md font-body-md text-on-surface-variant">حي الدرجة</span>
+</div>
+<div class="flex items-center gap-4">
+<span class="text-body-md font-body-md font-bold text-primary" dir="ltr">8:00 PM</span>
+<span class="px-3 py-1 rounded-full bg-primary-container text-on-primary-container text-label-md font-label-md">قادمة</span>
+</div>
+</div>
+<!-- Scheduled Item -->
+<div class="flex justify-between items-center p-4 border-b border-outline-variant last:border-0 hover:bg-surface-container-low transition-colors opacity-70">
+<div class="flex flex-col">
+<span class="text-headline-sm font-headline-sm font-bold text-on-surface">سحب عينات منزلية</span>
+<span class="text-body-md font-body-md text-on-surface-variant">حي الشفاء</span>
+</div>
+<div class="flex items-center gap-4">
+<span class="text-body-md font-body-md font-bold text-primary" dir="ltr">10:30 PM</span>
+<span class="px-3 py-1 rounded-full bg-surface-variant text-on-surface-variant text-label-md font-label-md">مجدولة</span>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Bottom Nav Bar (From JSON Context) -->
+<nav class="bg-surface-container-lowest border-t border-outline-variant shadow-md fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 pb-safe h-16 md:hidden">
+<div class="flex flex-col items-center justify-center text-primary font-bold bg-secondary-container rounded-full px-4 py-1 hover:bg-surface-container-high cursor-pointer transition-transform duration-150 active:scale-95">
+<span class="material-symbols-outlined mb-1" style="font-variation-settings: 'FILL' 1;">home</span>
+<span class="text-label-md font-label-md">الرئيسية</span>
+</div>
+<div class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-container-high cursor-pointer p-2 rounded-lg">
+<span class="material-symbols-outlined mb-1">list_alt</span>
+<span class="text-label-md font-label-md">طلباتي</span>
+</div>
+<div class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-container-high cursor-pointer p-2 rounded-lg">
+<span class="material-symbols-outlined mb-1">person</span>
+<span class="text-label-md font-label-md">حسابي</span>
+</div>
+</nav>
+</body></html>
