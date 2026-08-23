@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "641051629131",
+    "project_id": "sehati-home-care",
+    "storage_bucket": "sehati-home-care.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:641051629131:android:a4ad69f06d3f3b9ecf1fce",
+        "android_client_info": {
+          "package_name": "com.aistudio.sehatihomecare.sd"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "641051629131-6cibbtgsnbpbngsm9ql1tj48c01k7lk5.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.aistudio.sehatihomecare.sd",
+            "certificate_hash": "4a24f8ad2653a28142378d7714dc7e880d303340"
+          }
+        },
+        {
+          "client_id": "641051629131-io7okp88a9jicadp8kfu9jqa5eaffc80.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD9djyPa--sOT8ntmXBXBGL8zbW8C6JR1U"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "641051629131-io7okp88a9jicadp8kfu9jqa5eaffc80.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
