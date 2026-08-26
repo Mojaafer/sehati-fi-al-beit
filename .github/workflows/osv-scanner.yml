@@ -1,8 +1,15 @@
 name: Dependency Vulnerability Scan
 
+# Reports advisories as a Code Scanning SARIF upload instead of failing the build.
+# A red X on every push would train us to ignore it, and most findings here are
+# transitive dev-only packages we cannot patch directly. Review findings under
+# Security -> Code scanning; Dependabot handles the actual version bumps.
+
 on:
   push:
+    branches: [master]
   pull_request:
+    branches: [master]
   workflow_dispatch:
   schedule:
     - cron: "17 3 * * 1"
@@ -11,12 +18,28 @@ permissions:
   contents: read
 
 jobs:
-  osv:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - uses: google/osv-scanner-action/osv-scanner-action@v2.0.2
-        with:
-          scan-args: |-
-            --recursive
-            ./
+  scan-pr:
+    if: github.event_name == 'pull_request'
+    permissions:
+      actions: read
+      contents: read
+      security-events: write
+    uses: google/osv-scanner-action/.github/workflows/osv-scanner-reusable.yml@v2.0.2
+    with:
+      scan-args: |-
+        --recursive
+        ./
+      fail-on-vuln: false
+
+  scan:
+    if: github.event_name != 'pull_request'
+    permissions:
+      actions: read
+      contents: read
+      security-events: write
+    uses: google/osv-scanner-action/.github/workflows/osv-scanner-reusable.yml@v2.0.2
+    with:
+      scan-args: |-
+        --recursive
+        ./
+      fail-on-vuln: false
