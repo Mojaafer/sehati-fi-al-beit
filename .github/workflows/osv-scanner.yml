@@ -1,9 +1,19 @@
 name: Dependency Vulnerability Scan
 
-# Reports advisories as a Code Scanning SARIF upload instead of failing the build.
-# A red X on every push would train us to ignore it, and most findings here are
-# transitive dev-only packages we cannot patch directly. Review findings under
-# Security -> Code scanning; Dependabot handles the actual version bumps.
+# Reports advisories in the job log without failing the build.
+#
+# Two constraints shape this file:
+#  1. SARIF upload to Security -> Code scanning needs GitHub Advanced Security,
+#     which is not purchased for this private repo (the API returns 422). So the
+#     upstream reusable workflow cannot be used here.
+#  2. The lockfile carries transitive dev-only advisories we cannot patch
+#     directly (image-size via vinext, esbuild via drizzle-kit), so failing on
+#     findings would make red the permanent steady state and train us to ignore
+#     it.
+#
+# Dependabot alerts (Security -> Dependabot) are the actionable channel; this
+# scan is a second opinion and will also cover Gradle if a lockfile is ever
+# added there.
 
 on:
   push:
@@ -18,28 +28,14 @@ permissions:
   contents: read
 
 jobs:
-  scan-pr:
-    if: github.event_name == 'pull_request'
-    permissions:
-      actions: read
-      contents: read
-      security-events: write
-    uses: google/osv-scanner-action/.github/workflows/osv-scanner-reusable.yml@v2.0.2
-    with:
-      scan-args: |-
-        --recursive
-        ./
-      fail-on-vuln: false
-
-  scan:
-    if: github.event_name != 'pull_request'
-    permissions:
-      actions: read
-      contents: read
-      security-events: write
-    uses: google/osv-scanner-action/.github/workflows/osv-scanner-reusable.yml@v2.0.2
-    with:
-      scan-args: |-
-        --recursive
-        ./
-      fail-on-vuln: false
+  osv:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Scan dependencies with OSV
+        continue-on-error: true
+        uses: google/osv-scanner-action/osv-scanner-action@v2.0.2
+        with:
+          scan-args: |-
+            --recursive
+            ./
