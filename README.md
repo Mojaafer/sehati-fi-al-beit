@@ -20,9 +20,8 @@ Full setup, build, and architecture notes: [`android/README.md`](android/README.
 and [`AGENTS.md`](AGENTS.md). Quick start:
 
 ```powershell
-cd android
 $env:JAVA_HOME = "$env:USERPROFILE\jdk-17.0.13+11"   # JDK 17 required
-& "$env:USERPROFILE\.gradle\wrapper\dists\gradle-8.14-all\c2qonpi39x1mddn7hk5gh9iqj\gradle-8.14\bin\gradle.bat" testDebugUnitTest assembleDebug -PuseSupabase=true
+.\android\gradlew.bat -p android testDebugUnitTest assembleDebug -PuseSupabase=true
 ```
 
 - `-PuseSupabase=true` routes the data layer through Supabase PostgREST with

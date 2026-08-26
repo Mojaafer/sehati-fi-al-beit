@@ -44,10 +44,16 @@ runtime until the steps below are done.
 
 ### 2. Run
 
-```bash
-./gradlew assembleDebug
-./gradlew testDebugUnitTest
+Run from this `android/` directory using the committed Gradle wrapper (Gradle 8.14,
+JDK 17):
+
+```powershell
+$env:JAVA_HOME = "$env:USERPROFILE\jdk-17.0.13+11"
+.\gradlew.bat testDebugUnitTest assembleDebug -PuseSupabase=true
 ```
+
+`-PuseSupabase=true` routes the data layer through Supabase PostgREST (server-side
+`transition_order` RPC + RLS). Omit it to build against Firestore instead.
 
 Then run the app from Android Studio. Passwordless email links should be opened on
 the same device; if opened elsewhere, the app asks for the same email again.

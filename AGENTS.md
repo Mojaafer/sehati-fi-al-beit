@@ -15,15 +15,15 @@ Monorepo with two projects:
 
 ## Android build & test commands
 
-There is **no Gradle wrapper** and `gradle` is not on PATH — use the unpacked
-distribution directly (Gradle 8.14). Run from the `android/` directory:
+Use the committed Gradle wrapper (Gradle 8.14). Run from the repo root:
 
 ```powershell
 $env:JAVA_HOME = "$env:USERPROFILE\jdk-17.0.13+11"
-& "$env:USERPROFILE\.gradle\wrapper\dists\gradle-8.14-all\c2qonpi39x1mddn7hk5gh9iqj\gradle-8.14\bin\gradle.bat" testDebugUnitTest assembleDebug -PuseSupabase=true
+.\android\gradlew.bat -p android testDebugUnitTest assembleDebug -PuseSupabase=true
 ```
 
 - JDK 17 required; this machine has no `java` on PATH — set `JAVA_HOME` as above.
+- Add `--no-daemon` on this 8 GB laptop if a daemon is already resident.
 - Debug APK output: `android\app\build\outputs\apk\debug\app-debug.apk`.
 - `-PuseSupabase=true` sets `BuildConfig.USE_SUPABASE=true`; without it the app uses
   Firestore. Always smoke-test the Supabase variant after data-layer changes.
