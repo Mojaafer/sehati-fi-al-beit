@@ -1,34 +1,48 @@
+# IDE / tooling
 *.iml
-.gradle
-.kotlin
-/local.properties
-/.idea/caches
-/.idea/libraries
-/.idea/modules.xml
-/.idea/workspace.xml
-/.idea/navEditor.xml
-/.idea/assetWizardSettings.xml
-.DS_Store
-/build
-/app/build
-/captures
-.externalNativeBuild
-.cxx
+.idea/
+.claude/settings.local.json
+
+# Gradle & Kotlin build caches (any depth — root and android/)
+.gradle/
+.kotlin/
+build/
+captures/
+.externalNativeBuild/
+.cxx/
+
+# Local config
 local.properties
 .env
-# google-services.json and debug.keystore are COMMITTED on purpose so a collaborator can
-# clone, build and sign in immediately: this repo must stay PRIVATE. The Firebase key is a
-# client identifier, not a secret — access is enforced by firestore.rules, and the API key
-# should be restricted (package name + SHA-1) in Google Cloud console. Never make this repo
-# public without purging these from history first.
+.env.local
 
-# Build outputs and local-only artifacts
+# Android build outputs
 *.apk
 *.aab
+*.jks
+*.keystore
+!debug.keystore
+
+# Logs & OS
 *.log
-__pycache__/
-.claude/settings.local.json
+.DS_Store
+
+# Firebase / test artifacts
 .firebase/
+__pycache__/
+
+# Design verification artifacts (per android/AGENTS.md)
 .shots/
 .verify/
 shot_drawer.png
+
+# google-services.json and android/debug.keystore are COMMITTED on purpose so a
+# collaborator can clone, build and sign in immediately: this repo must stay
+# PRIVATE. The Firebase key is a client identifier, not a secret — access is
+# enforced by firestore.rules / Supabase RLS, and the API key should be
+# restricted (package name + SHA-1) in Google Cloud console. Never make this
+# repo public without purging these from history first.
+
+# Scratch files
+prompt.txt
+implementation_plan.md

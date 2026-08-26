@@ -1,103 +1,46 @@
 # صحتي في البيت — Sehati Fi Al-Beit
 
-Arabic (RTL) home-healthcare booking app for Sudan. Patients book nursing, lab-draw,
-physiotherapy and doctor visits at home; providers accept and complete jobs; an admin
-verifies bank-transfer receipts and approves provider applications.
+Home-healthcare booking platform for Sudan. Patients book nursing, lab-draw,
+physiotherapy and doctor visits at home; providers accept and complete jobs; an
+admin verifies bank-transfer receipts and approves provider applications.
 
-Android · Kotlin · Jetpack Compose (Material 3) · Firebase Auth + Firestore.
+This repository is a monorepo with two projects:
 
-## Setup
+| Folder | Project | Stack |
+|---|---|---|
+| [`android/`](android/) | Arabic (RTL) mobile app — booking, order lifecycle, payments review, notifications | Kotlin · Jetpack Compose (Material 3) · Firebase Auth + FCM · Firestore **or** Supabase PostgREST |
+| [`website/`](website/) | Bilingual website | Next.js · Node/npm |
 
-**Prerequisites:** Android Studio, JDK 17.
+Each folder has its own README and toolchain — do not mix the Android Gradle
+build with the website's npm tooling.
 
-The app will build without Firebase configured, but sign-in and all data will fail at
-runtime until the steps below are done.
+## Android app
 
-### 1. Firebase console
-
-1. Create a Firebase project, then add an **Android** app with package name
-   **`com.aistudio.sehatihomecare.sd`** (this is the `applicationId` — *not* the
-   `com.example` namespace).
-2. Download `google-services.json` and place it in `app/`.
-   It is gitignored; keep it out of public repos.
-3. Register your signing certificates for Google sign-in:
-   ```bash
-   ./gradlew signingReport
-   ```
-   Copy the debug **SHA-1** and **SHA-256** into the Firebase Android app settings.
-4. **Authentication → Sign-in method:** enable **Email/Password**, turn on
-   **Email link (passwordless sign-in)**, and enable **Google** and **Anonymous**.
-5. In **Authentication → Settings → Authorized domains**, ensure
-   `sehati-home-care.firebaseapp.com` is present. Email sign-in links return to
-   `https://sehati-home-care.firebaseapp.com/__/auth/links` and are opened by the app.
-6. Create a **Firestore** database. Pick the region closest to your users
-   (`europe-west1` is the nearest option to Sudan) — it can never be changed afterwards:
-   ```bash
-   firebase firestore:databases:create "(default)" --location europe-west1
-   ```
-   Create it *before* your first deploy, or the CLI will silently create it in `nam5`.
-7. Publish the security rules and indexes from this repo:
-   ```bash
-   firebase deploy --only firestore
-   ```
-   Or paste `firestore.rules` into the console by hand.
-
-### 2. Run
-
-```bash
-./gradlew assembleDebug
-./gradlew testDebugUnitTest
-```
-
-Then run the app from Android Studio. Passwordless email links should be opened on
-the same device; if opened elsewhere, the app asks for the same email again.
-
-### Lightweight local emulator
-
-This workspace includes a small API 30 Google APIs emulator configured for low-resource laptops.
-Its SDK image and AVD data live on `D:` to avoid consuming the limited space on `C:`:
+Full setup, build, and architecture notes: [`android/README.md`](android/README.md)
+and [`AGENTS.md`](AGENTS.md). Quick start:
 
 ```powershell
-.\run-lite-emulator.ps1
-.\install-debug-apk.ps1
+cd android
+$env:JAVA_HOME = "$env:USERPROFILE\jdk-17.0.13+11"   # JDK 17 required
+& "$env:USERPROFILE\.gradle\wrapper\dists\gradle-8.14-all\c2qonpi39x1mddn7hk5gh9iqj\gradle-8.14\bin\gradle.bat" testDebugUnitTest assembleDebug -PuseSupabase=true
 ```
 
-The emulator uses Windows Hypervisor Platform, 2 CPU cores, and approximately 2 GB RAM.
-Keep Android Studio closed while it is running on an 8 GB laptop.
+- `-PuseSupabase=true` routes the data layer through Supabase PostgREST with
+  server-side enforcement (`transition_order` RPC + RLS); without it the app uses
+  Firestore. Always smoke-test both after data-layer changes.
+- `google-services.json` and the shared debug keystore are committed on purpose so
+  collaborators can clone and run immediately — **this repo must stay private**.
+- Supabase migrations live in `android/supabase/migrations/` and are immutable once
+  pushed; add a new timestamped file for every schema change.
 
-## Roles
+## Website
 
-Role comes from `users/{uid}.role` and is one of `PATIENT` (default), `PROVIDER`, `ADMIN`.
-Clients cannot change their own role — the rules block it. To get an admin, edit the
-role field directly in the Firestore console.
+See [`website/README.md`](website/README.md) and
+[`website/DEPLOYMENT.md`](website/DEPLOYMENT.md).
 
-In debug builds a role-switcher header is shown so all three graphs can be exercised on
-one device; it is compiled out of release builds.
+## CI
 
-Provider sign-up writes a `PENDING_REVIEW` provider document and stores `providerId` on
-the user doc. An admin approving the application flips the provider to `ACTIVE` and sets
-that user's role to `PROVIDER`.
-
-## Firestore data
-
-| Path | Purpose |
-| --- | --- |
-| `users/{uid}` | email, name, address, role, providerId |
-| `users/{uid}/notifications/{id}` | in-app inbox, written by whoever changes an order |
-| `providers/{id}` | profile, price, status, `ratingSum`/`ratingCount`, document URLs |
-| `orders/{id}` | booking, status, payment details, `receiptUrl`, `isRated` |
-| `ratings/{orderId}` | one rating per order — the document id enforces it |
-| `images/{id}` | base64 receipt and provider-document images |
-
-Ratings are aggregated onto the provider in a client-side transaction, so no Cloud
-Functions (and therefore no Blaze plan) are needed. Offline support comes from
-Firestore's built-in persistence.
-
-## Images
-
-Cloud Storage needs the Blaze plan, so images live in Firestore instead: each one is
-downscaled and JPEG-compressed on device, then written to `images/{id}` as a base64
-string. Order and provider documents store only the image id, which keeps list queries
-small. `FirestoreImageRepository.MAX_BYTES` guards the 1 MiB per-document limit.
-
-Images are chosen with `PickVisualMedia`, which needs no storage permission.
+- **Dependabot** — weekly dependency checks for Gradle (`android/`), Python tools,
+  and npm (`website/`).
+- **OSV vulnerability scan** — runs on every push/PR plus weekly
+  (`.github/workflows/osv-scanner.yml`).
