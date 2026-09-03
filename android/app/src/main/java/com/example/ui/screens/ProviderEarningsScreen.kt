@@ -40,6 +40,7 @@ import com.example.data.model.PayoutEntity
 import com.example.data.model.PayoutStatus
 import com.example.data.repository.ProviderEarnings
 import com.example.ui.components.EmptyState
+import com.example.ui.components.BrandedHeader
 import com.example.ui.components.SkeletonCard
 
 /**
@@ -62,57 +63,38 @@ fun ProviderEarningsScreen(
             .fillMaxSize()
             .background(MaterialTheme.colorScheme.background)
     ) {
-        Box(
-            modifier = Modifier
-                .fillMaxWidth()
-                .background(MaterialTheme.colorScheme.primary)
-                .padding(20.dp)
+        BrandedHeader(
+            title = "أرباحي ومستحقاتي",
+            onBack = onBack,
+            backTestTag = "btn_back_earnings"
         ) {
-            Column {
-                Row(verticalAlignment = Alignment.CenterVertically) {
-                    IconButton(onClick = onBack, modifier = Modifier.testTag("btn_back_earnings")) {
-                        Icon(
-                            Icons.AutoMirrored.Filled.ArrowBack,
-                            contentDescription = "رجوع",
-                            tint = MaterialTheme.colorScheme.onPrimary
-                        )
-                    }
-                    Text(
-                        text = "أرباحي ومستحقاتي",
-                        style = MaterialTheme.typography.titleLarge,
-                        fontWeight = FontWeight.Bold,
-                        color = MaterialTheme.colorScheme.onPrimary
-                    )
-                }
+            Spacer(modifier = Modifier.height(14.dp))
 
-                Spacer(modifier = Modifier.height(14.dp))
+            Text(
+                text = "مستحق لك الآن",
+                style = MaterialTheme.typography.labelMedium,
+                color = MaterialTheme.colorScheme.onPrimary.copy(alpha = 0.85f)
+            )
+            Text(
+                text = "${earnings.accruedSdg.toInt()} ج.س",
+                style = MaterialTheme.typography.headlineLarge,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.colorScheme.onPrimary
+            )
 
-                Text(
-                    text = "مستحق لك الآن",
-                    style = MaterialTheme.typography.labelMedium,
-                    color = MaterialTheme.colorScheme.onPrimary.copy(alpha = 0.85f)
+            Spacer(modifier = Modifier.height(10.dp))
+
+            Row(horizontalArrangement = Arrangement.spacedBy(10.dp)) {
+                EarningsChip(
+                    label = "زيارات بانتظار الصرف",
+                    value = "${earnings.accruedCount}",
+                    modifier = Modifier.weight(1f)
                 )
-                Text(
-                    text = "${earnings.accruedSdg.toInt()} ج.س",
-                    style = MaterialTheme.typography.headlineLarge,
-                    fontWeight = FontWeight.Bold,
-                    color = MaterialTheme.colorScheme.onPrimary
+                EarningsChip(
+                    label = "تم صرفه سابقاً",
+                    value = "${earnings.paidSdg.toInt()} ج.س",
+                    modifier = Modifier.weight(1f)
                 )
-
-                Spacer(modifier = Modifier.height(10.dp))
-
-                Row(horizontalArrangement = Arrangement.spacedBy(10.dp)) {
-                    EarningsChip(
-                        label = "زيارات بانتظار الصرف",
-                        value = "${earnings.accruedCount}",
-                        modifier = Modifier.weight(1f)
-                    )
-                    EarningsChip(
-                        label = "تم صرفه سابقاً",
-                        value = "${earnings.paidSdg.toInt()} ج.س",
-                        modifier = Modifier.weight(1f)
-                    )
-                }
             }
         }
 

@@ -41,6 +41,7 @@ import com.example.data.model.PayoutEntity
 import com.example.data.model.PayoutStatus
 import com.example.data.repository.AdminFinanceSummary
 import com.example.ui.components.EmptyState
+import com.example.ui.components.BrandedHeader
 import com.example.ui.components.SkeletonCard
 
 /**
@@ -67,44 +68,25 @@ fun AdminFinanceScreen(
             .fillMaxSize()
             .background(MaterialTheme.colorScheme.background)
     ) {
-        Box(
-            modifier = Modifier
-                .fillMaxWidth()
-                .background(MaterialTheme.colorScheme.primary)
-                .padding(20.dp)
+        BrandedHeader(
+            title = "الحسابات والمستحقات",
+            onBack = onBack,
+            backTestTag = "btn_back_finance"
         ) {
-            Column {
-                Row(verticalAlignment = Alignment.CenterVertically) {
-                    IconButton(onClick = onBack, modifier = Modifier.testTag("btn_back_finance")) {
-                        Icon(
-                            Icons.AutoMirrored.Filled.ArrowBack,
-                            contentDescription = "رجوع",
-                            tint = MaterialTheme.colorScheme.onPrimary
-                        )
-                    }
-                    Text(
-                        text = "الحسابات والمستحقات",
-                        style = MaterialTheme.typography.titleLarge,
-                        fontWeight = FontWeight.Bold,
-                        color = MaterialTheme.colorScheme.onPrimary
-                    )
-                }
+            Spacer(modifier = Modifier.height(14.dp))
 
-                Spacer(modifier = Modifier.height(14.dp))
+            FinanceSummaryGrid(summary)
 
-                FinanceSummaryGrid(summary)
-
-                // The number the whole business leans on: do patients who finished one visit
-                // come back? Hidden until there is data, because an invented zero is worse.
-                repeatRate?.let { rate ->
-                    Spacer(modifier = Modifier.height(10.dp))
-                    Text(
-                        text = "نسبة المرضى المتكررين: ${(rate * 100).toInt()}%",
-                        style = MaterialTheme.typography.labelMedium,
-                        fontWeight = FontWeight.Bold,
-                        color = MaterialTheme.colorScheme.onPrimary
-                    )
-                }
+            // The number the whole business leans on: do patients who finished one visit
+            // come back? Hidden until there is data, because an invented zero is worse.
+            repeatRate?.let { rate ->
+                Spacer(modifier = Modifier.height(10.dp))
+                Text(
+                    text = "نسبة المرضى المتكررين: ${(rate * 100).toInt()}%",
+                    style = MaterialTheme.typography.labelMedium,
+                    fontWeight = FontWeight.Bold,
+                    color = MaterialTheme.colorScheme.onPrimary
+                )
             }
         }
 

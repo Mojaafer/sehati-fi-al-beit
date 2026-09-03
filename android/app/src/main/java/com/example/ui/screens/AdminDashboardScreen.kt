@@ -61,6 +61,7 @@ import com.example.data.model.OrderEntity
 import com.example.data.model.OrderStatus
 import com.example.data.model.ProviderEntity
 import com.example.ui.components.AnimatedListItem
+import com.example.ui.components.BrandedHeader
 import com.example.ui.components.CancelOrderDialog
 import com.example.ui.components.EmptyState
 import com.example.ui.components.ImageViewerDialog
@@ -117,77 +118,61 @@ fun AdminDashboardScreen(
             .background(MaterialTheme.colorScheme.background)
     ) {
         // Header
-        Box(
-            modifier = Modifier
-                .fillMaxWidth()
-                .background(MaterialTheme.colorScheme.primary)
-                .padding(20.dp)
+        BrandedHeader(
+            title = "التحصيل والمدفوعات 🏦",
+            titleStyle = MaterialTheme.typography.headlineSmall,
+            subtitle = "مطابقة إشعارات التحويل البنكي مع الحساب وإصدار الاعتمادات"
         ) {
-            Column {
+            Spacer(modifier = Modifier.height(16.dp))
+
+            // Stats Summary Bar
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.spacedBy(8.dp)
+            ) {
+                AdminStatChip(
+                    title = "جديدة للمراجعة",
+                    value = "${orders.count { it.status == OrderStatus.PAYMENT_UNDER_REVIEW }} إشعار",
+                    bgColor = StatusColors.warning.container,
+                    textColor = StatusColors.warning.content,
+                    modifier = Modifier.weight(1f)
+                )
+
+                AdminStatChip(
+                    title = "مؤكد اليوم",
+                    value = "${orders.filter { it.status == OrderStatus.PAYMENT_CONFIRMED }.sumOf { it.priceSdg }.toInt()} ج.س",
+                    bgColor = StatusColors.success.container,
+                    textColor = StatusColors.success.content,
+                    modifier = Modifier.weight(1f)
+                )
+            }
+
+            Spacer(modifier = Modifier.height(12.dp))
+
+            // The finance ledger is where the business is actually run from, so it gets a
+            // permanent door from the collection dashboard rather than a buried menu item.
+            Row(
+                verticalAlignment = Alignment.CenterVertically,
+                modifier = Modifier
+                    .clip(RoundedCornerShape(10.dp))
+                    .background(MaterialTheme.colorScheme.onPrimary.copy(alpha = 0.14f))
+                    .clickable(onClick = onOpenFinance)
+                    .padding(horizontal = 12.dp, vertical = 8.dp)
+                    .testTag("btn_open_finance")
+            ) {
+                Icon(
+                    Icons.Default.AccountBalanceWallet,
+                    contentDescription = null,
+                    tint = MaterialTheme.colorScheme.onPrimary,
+                    modifier = Modifier.size(16.dp)
+                )
+                Spacer(modifier = Modifier.width(6.dp))
                 Text(
-                    text = "التحصيل والمدفوعات 🏦",
-                    style = MaterialTheme.typography.headlineSmall,
+                    text = "الحسابات والمستحقات",
+                    style = MaterialTheme.typography.bodySmall,
                     fontWeight = FontWeight.Bold,
                     color = MaterialTheme.colorScheme.onPrimary
                 )
-                Text(
-                    text = "مطابقة إشعارات التحويل البنكي مع الحساب وإصدار الاعتمادات",
-                    style = MaterialTheme.typography.labelMedium,
-                    color = MaterialTheme.colorScheme.onPrimary.copy(alpha = 0.8f),
-                    modifier = Modifier.padding(top = 2.dp)
-                )
-
-                Spacer(modifier = Modifier.height(16.dp))
-
-                // Stats Summary Bar
-                Row(
-                    modifier = Modifier.fillMaxWidth(),
-                    horizontalArrangement = Arrangement.spacedBy(8.dp)
-                ) {
-                    AdminStatChip(
-                        title = "جديدة للمراجعة",
-                        value = "${orders.count { it.status == OrderStatus.PAYMENT_UNDER_REVIEW }} إشعار",
-                        bgColor = StatusColors.warning.container,
-                        textColor = StatusColors.warning.content,
-                        modifier = Modifier.weight(1f)
-                    )
-
-                    AdminStatChip(
-                        title = "مؤكد اليوم",
-                        value = "${orders.filter { it.status == OrderStatus.PAYMENT_CONFIRMED }.sumOf { it.priceSdg }.toInt()} ج.س",
-                        bgColor = StatusColors.success.container,
-                        textColor = StatusColors.success.content,
-                        modifier = Modifier.weight(1f)
-                    )
-                }
-
-                Spacer(modifier = Modifier.height(12.dp))
-
-                // The finance ledger is where the business is actually run from, so it gets a
-                // permanent door from the collection dashboard rather than a buried menu item.
-                Row(
-                    verticalAlignment = Alignment.CenterVertically,
-                    modifier = Modifier
-                        .clip(RoundedCornerShape(10.dp))
-                        .background(MaterialTheme.colorScheme.onPrimary.copy(alpha = 0.14f))
-                        .clickable(onClick = onOpenFinance)
-                        .padding(horizontal = 12.dp, vertical = 8.dp)
-                        .testTag("btn_open_finance")
-                ) {
-                    Icon(
-                        Icons.Default.AccountBalanceWallet,
-                        contentDescription = null,
-                        tint = MaterialTheme.colorScheme.onPrimary,
-                        modifier = Modifier.size(16.dp)
-                    )
-                    Spacer(modifier = Modifier.width(6.dp))
-                    Text(
-                        text = "الحسابات والمستحقات",
-                        style = MaterialTheme.typography.bodySmall,
-                        fontWeight = FontWeight.Bold,
-                        color = MaterialTheme.colorScheme.onPrimary
-                    )
-                }
             }
         }
 

@@ -25,3 +25,15 @@ data class NotificationEntity(
         const val SCOPE_ADMIN = "ADMIN"
     }
 }
+
+/**
+ * The inbox categories. Stored on the wire as plain strings ([NotificationEntity.type]),
+ * so this enum only exists to stop call sites hand-typing the literals — adding a new
+ * category means adding it here, not editing every builder.
+ */
+enum class NotificationType(val wireValue: String) {
+    ORDER("ORDER"),
+    PAYMENT("PAYMENT"),
+    PROVIDER("PROVIDER"),
+    SYSTEM("SYSTEM")
+}

@@ -4,6 +4,7 @@ import android.net.Uri
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.data.model.NotificationEntity
+import com.example.data.model.NotificationType
 import com.example.data.model.OrderEntity
 import com.example.data.model.OrderFees
 import com.example.data.model.OrderStatus
@@ -399,7 +400,7 @@ class SehatiViewModel @JvmOverloads constructor(
                 )
                 notifyProvider(
                     order = savedOrder,
-                    type = "ORDER",
+                    type = NotificationType.ORDER,
                     title = "طلب جديد",
                     body = "${newOrder.patientName} طلب ${newOrder.serviceTitle} في ${newOrder.areaLocation}" +
                         " يوم $date الساعة $time."
@@ -485,7 +486,7 @@ class SehatiViewModel @JvmOverloads constructor(
             )
             notifyPatient(
                 order = updated,
-                type = "PAYMENT",
+                type = NotificationType.PAYMENT,
                 title = "تم اعتماد الدفع",
                 body = "تم تأكيد دفعتك للطلب #${updated?.orderNumber}، سيتواصل معك مقدم الخدمة قبل الزيارة."
             )
@@ -508,7 +509,7 @@ class SehatiViewModel @JvmOverloads constructor(
             )
             notifyPatient(
                 order = updated,
-                type = "PAYMENT",
+                type = NotificationType.PAYMENT,
                 title = "إشعار التحويل يحتاج توضيح",
                 body = "لم نتمكن من مطابقة إشعار التحويل للطلب #${updated?.orderNumber}، يرجى إعادة رفع الصورة."
             )
@@ -529,7 +530,7 @@ class SehatiViewModel @JvmOverloads constructor(
             )
             notifyPatient(
                 order = updated,
-                type = "PROVIDER",
+                type = NotificationType.PROVIDER,
                 title = "تم قبول طلبك",
                 body = "${updated?.providerName} قبل طلبك #${updated?.orderNumber} وسيصل في الموعد المحدد."
             )
@@ -565,7 +566,7 @@ class SehatiViewModel @JvmOverloads constructor(
             )
             notifyPatient(
                 order = updated,
-                type = "ORDER",
+                type = NotificationType.ORDER,
                 title = "تمت الزيارة",
                 body = "تم إكمال زيارة الطلب #${updated?.orderNumber}، شاركنا تقييمك للخدمة."
             )
@@ -596,7 +597,7 @@ class SehatiViewModel @JvmOverloads constructor(
             )
             notifyProvider(
                 order = updated,
-                type = "ORDER",
+                type = NotificationType.ORDER,
                 title = "ألغى المريض الطلب",
                 body = "تم إلغاء الطلب #${order.orderNumber}" +
                     if (reason.isNotBlank()) " — السبب: $reason" else ""
@@ -622,7 +623,7 @@ class SehatiViewModel @JvmOverloads constructor(
             val why = if (reason.isNotBlank()) " — السبب: $reason" else ""
             notifyPatient(
                 order = repository.getOrderById(orderId),
-                type = "ORDER",
+                type = NotificationType.ORDER,
                 title = "اعتذر مقدم الخدمة",
                 body = "لم يتمكن ${order.providerName} من تنفيذ الطلب #${order.orderNumber}$why" +
                     "، يمكنك اختيار مقدم خدمة آخر."
@@ -684,14 +685,14 @@ class SehatiViewModel @JvmOverloads constructor(
                     current.cancelReason.ifBlank { "قبول طلب استرجاع المريض" })
                 notifyProvider(
                     order = current,
-                    type = "ORDER",
+                    type = NotificationType.ORDER,
                     title = "إلغاء طلب مجدول",
                     body = "ألغيت الإدارة الطلب #${current.orderNumber} بعد قبول استرجاع المبلغ، " +
                         "ولن تُصرف مستحقاته."
                 )
                 notifyPatient(
                     order = current,
-                    type = "PAYMENT",
+                    type = NotificationType.PAYMENT,
                     title = "تم قبول طلب الاسترجاع",
                     body = "سيعاد مبلغ الطلب #${current.orderNumber} إلى حسابك عبر بنكك خلال 3 أيام عمل."
                 )
@@ -699,7 +700,7 @@ class SehatiViewModel @JvmOverloads constructor(
                 repository.updateOrderStatus(orderId, OrderStatus.PAYMENT_CONFIRMED)
                 notifyPatient(
                     order = current,
-                    type = "PAYMENT",
+                    type = NotificationType.PAYMENT,
                     title = "لم يُقبل طلب الاسترجاع",
                     body = "بعد المراجعة سيستمر الطلب #${current.orderNumber} كما هو، تواصل مع الدعم لتفاصيل أكثر."
                 )
@@ -752,7 +753,7 @@ class SehatiViewModel @JvmOverloads constructor(
      */
     private suspend fun notifyPatient(
         order: OrderEntity?,
-        type: String,
+        type: NotificationType,
         title: String,
         body: String
     ) {
@@ -762,7 +763,7 @@ class SehatiViewModel @JvmOverloads constructor(
         try {
             notifications.push(
                 patientUid,
-                NotificationEntity(type = type, title = title, body = body, orderId = order.id)
+                NotificationEntity(type = type.wireValue, title = title, body = body, orderId = order.id)
             )
         } catch (e: Exception) {
             android.util.Log.w("SehatiViewModel", "patient notification failed for order=${order.id}", e)
@@ -772,7 +773,7 @@ class SehatiViewModel @JvmOverloads constructor(
     /** Mirrors [notifyPatient] for the other side: the provider's inbox is keyed by their owner uid. */
     private suspend fun notifyProvider(
         order: OrderEntity?,
-        type: String,
+        type: NotificationType,
         title: String,
         body: String
     ) {
@@ -784,7 +785,7 @@ class SehatiViewModel @JvmOverloads constructor(
             if (ownerUid.isEmpty()) return
             notifications.push(
                 ownerUid,
-                NotificationEntity(type = type, title = title, body = body, orderId = order.id)
+                NotificationEntity(type = type.wireValue, title = title, body = body, orderId = order.id)
             )
         } catch (e: Exception) {
             android.util.Log.w("SehatiViewModel", "provider notification failed for order=${order.id}", e)
@@ -795,7 +796,7 @@ class SehatiViewModel @JvmOverloads constructor(
     private suspend fun notifyAdmins(orderId: String, title: String, body: String) {
         try {
             notifications.pushToAdmins(
-                NotificationEntity(type = "PAYMENT", title = title, body = body, orderId = orderId)
+                NotificationEntity(type = NotificationType.PAYMENT.wireValue, title = title, body = body, orderId = orderId)
             )
         } catch (e: Exception) {
             android.util.Log.w("SehatiViewModel", "admin notification failed for order=$orderId", e)
