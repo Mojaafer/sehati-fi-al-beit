@@ -13,11 +13,17 @@ export async function PATCH(request: Request, context: { params: Promise<{ id: s
   if (!(await hasAdminSession())) return Response.json({ error: "Unauthorized" }, { status: 401 });
   const id = idFrom((await context.params).id);
   if (!id) return Response.json({ error: "رقم الطبيب غير صحيح." }, { status: 400 });
-  const parsed = parseDoctorInput(await request.json());
-  if (!parsed.data) return Response.json({ error: parsed.error }, { status: 400 });
-  const [doctor] = await getDb().update(doctors).set(parsed.data).where(eq(doctors.id, id)).returning();
-  if (!doctor) return Response.json({ error: "الطبيب غير موجود." }, { status: 404 });
-  return Response.json({ doctor });
+  try {
+    const body = await request.json();
+    const parsed = parseDoctorInput(body);
+    if (!parsed.data) return Response.json({ error: parsed.error }, { status: 400 });
+    const [doctor] = await getDb().update(doctors).set(parsed.data).where(eq(doctors.id, id)).returning();
+    if (!doctor) return Response.json({ error: "الطبيب غير موجود." }, { status: 404 });
+    return Response.json({ doctor });
+  } catch (error) {
+    console.error("doctor update failed", error);
+    return Response.json({ error: "بيانات الطلب غير صحيحة." }, { status: 400 });
+  }
 }
 
 export async function DELETE(_request: Request, context: { params: Promise<{ id: string }> }) {

@@ -1,6 +1,11 @@
-import { ADMIN_SESSION_COOKIE } from "../../../admin-auth";
+import { cookies } from "next/headers";
+import { ADMIN_SESSION_COOKIE, revokeAdminSession } from "../../../admin-auth";
 
 export async function POST() {
+  const cookieStore = await cookies();
+  const token = cookieStore.get(ADMIN_SESSION_COOKIE)?.value;
+  await revokeAdminSession(token);
+
   return Response.json(
     { success: true },
     {

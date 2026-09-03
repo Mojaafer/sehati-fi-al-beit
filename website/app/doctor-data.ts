@@ -10,6 +10,37 @@ export const clinicDayValues = [
 
 export type ClinicDay = typeof clinicDayValues[number];
 
+export const dayOptions: Array<{ value: ClinicDay; label: string }> = [
+  { value: "sunday", label: "الأحد" },
+  { value: "monday", label: "الاثنين" },
+  { value: "tuesday", label: "الثلاثاء" },
+  { value: "wednesday", label: "الأربعاء" },
+  { value: "thursday", label: "الخميس" },
+  { value: "friday", label: "الجمعة" },
+  { value: "saturday", label: "السبت" },
+];
+
+export const dayLabels: Record<ClinicDay, string> = {
+  sunday: "الأحد",
+  monday: "الاثنين",
+  tuesday: "الثلاثاء",
+  wednesday: "الأربعاء",
+  thursday: "الخميس",
+  friday: "الجمعة",
+  saturday: "السبت",
+};
+
+export function parseDays(value: string): ClinicDay[] {
+  try {
+    const parsed = JSON.parse(value) as unknown;
+    return Array.isArray(parsed)
+      ? parsed.filter((day): day is ClinicDay => typeof day === "string" && clinicDayValues.includes(day as ClinicDay))
+      : [];
+  } catch {
+    return [];
+  }
+}
+
 export type DoctorInput = {
   fullName: string;
   specialty: string;
@@ -31,7 +62,7 @@ export type DoctorInput = {
   updatedAt: string;
 };
 
-function text(value: unknown, maxLength: number): string {
+export function text(value: unknown, maxLength: number): string {
   return typeof value === "string" ? value.trim().slice(0, maxLength) : "";
 }
 
@@ -94,7 +125,7 @@ export function parseDoctorInput(payload: unknown): { data?: DoctorInput; error?
 }
 
 export function isSudanesePhone(value: string): boolean {
-  return /^((09\d{8})|(\+2499\d{8})|(002499\d{8}))$/.test(value.replace(/[\s()-]/g, ""));
+  return /^((0[19]\d{8})|(\+249[19]\d{8})|(00249[19]\d{8}))$/.test(value.replace(/[\s()-]/g, ""));
 }
 
 export function makeCode(prefix: "BK" | "HM"): string {

@@ -38,15 +38,17 @@ android {
         "BANK_ACCOUNT_NAME",
         "\"${project.findProperty("sehatiBankAccountName") ?: "صحتي في البيت للخدمات الصحية"}\""
     )
+    val envSupabaseUrl = System.getenv("SUPABASE_URL") ?: (project.findProperty("supabaseUrl") as? String) ?: ""
+    val envSupabaseAnonKey = System.getenv("SUPABASE_ANON_KEY") ?: (project.findProperty("supabaseAnonKey") as? String) ?: ""
     buildConfigField(
         "String",
         "SUPABASE_URL",
-        "\"${project.findProperty("supabaseUrl") ?: "https://wolngyvenfyuaigjxajs.supabase.co"}\""
+        "\"$envSupabaseUrl\""
     )
     buildConfigField(
         "String",
         "SUPABASE_ANON_KEY",
-        "\"${project.findProperty("supabaseAnonKey") ?: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6IndvbG5neXZlbmZ5dWFpZ2p4YWpzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODc0ODMyNzQsImV4cCI6MjEwMzA1OTI3NH0.0OYLx4XOASh88gGCGVdHoozZVSPY1l-XH20kjyrDUn8"}\""
+        "\"$envSupabaseAnonKey\""
     )
     // Data-plane switch: false keeps the app on Firestore; assemble with
     // -PuseSupabase=true to route repositories through Supabase PostgREST.

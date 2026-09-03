@@ -27,7 +27,7 @@ export async function GET(
   return new Response(object, {
     headers: {
       "Content-Type": document.mimeType,
-      "Content-Disposition": `inline; filename*=UTF-8''${encodeURIComponent(document.fileName)}`,
+      "Content-Disposition": `attachment; filename*=UTF-8''${encodeURIComponent(document.fileName)}`,
       "Cache-Control": "private, no-store",
       "X-Content-Type-Options": "nosniff",
     },

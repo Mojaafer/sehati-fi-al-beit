@@ -7,7 +7,12 @@ import {
 import { getDb } from "../../../../db";
 import { adminSecurity } from "../../../../db/schema";
 
-const SECURITY_KEY = "admin-login";
+function getClientIp(request: Request): string {
+  const forwarded = request.headers.get("x-forwarded-for");
+  if (forwarded) return forwarded.split(",")[0].trim().slice(0, 45);
+  return (request.headers.get("cf-connecting-ip") || "unknown").slice(0, 45);
+}
+
 const MAX_ATTEMPTS = 5;
 const LOCKOUT_MINUTES = 15;
 
@@ -21,9 +26,12 @@ export async function POST(request: Request) {
     const username = typeof payload.username === "string" ? payload.username.trim().slice(0, 80) : "";
     const password = typeof payload.password === "string" ? payload.password.slice(0, 200) : "";
 
+    const clientIp = getClientIp(request);
+    const securityKey = `admin-login:${clientIp}`;
+
     const db = getDb();
     const security = await db.query.adminSecurity.findFirst({
-      where: (table, { eq }) => eq(table.key, SECURITY_KEY),
+      where: (table, { eq }) => eq(table.key, securityKey),
     });
     if (security?.lockedUntil && new Date(security.lockedUntil).getTime() > Date.now()) {
       return Response.json(
@@ -38,7 +46,7 @@ export async function POST(request: Request) {
         ? new Date(Date.now() + LOCKOUT_MINUTES * 60 * 1000).toISOString()
         : null;
       await db.insert(adminSecurity).values({
-        key: SECURITY_KEY,
+        key: securityKey,
         failedLoginAttempts: failedAttempts,
         lockedUntil,
         updatedAt: new Date().toISOString(),
@@ -53,7 +61,7 @@ export async function POST(request: Request) {
     }
 
     await db.insert(adminSecurity).values({
-      key: SECURITY_KEY,
+      key: securityKey,
       failedLoginAttempts: 0,
       lockedUntil: null,
       updatedAt: new Date().toISOString(),

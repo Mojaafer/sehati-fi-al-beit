@@ -18,7 +18,7 @@ export async function GET(_request: Request, context: { params: Promise<{ id: st
   if (!object) return Response.json({ error: "Stored receipt not found" }, { status: 404 });
   return new Response(object, { headers: {
     "Content-Type": booking.mimeType || "application/octet-stream",
-    "Content-Disposition": `inline; filename*=UTF-8''${encodeURIComponent(booking.fileName || "receipt")}`,
+    "Content-Disposition": `attachment; filename*=UTF-8''${encodeURIComponent(booking.fileName || "receipt")}`,
     "Cache-Control": "private, no-store",
     "X-Content-Type-Options": "nosniff",
   } });

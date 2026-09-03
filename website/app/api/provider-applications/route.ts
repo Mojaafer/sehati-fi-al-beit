@@ -33,12 +33,13 @@ export async function POST(request: Request) {
     if (city.length < 2) return jsonError("اختر المدينة.");
 
     const files: Array<{ documentType: typeof documentTypes[number]; file: File }> = [];
+    const allowedDocumentMimeTypes = new Set(["application/pdf", "image/jpeg", "image/png", "image/webp"]);
     for (const documentType of documentTypes) {
       const value = form.get(documentType);
       if (!(value instanceof File) || value.size === 0) continue;
       if (value.size > maxFileSize) return jsonError(`حجم الملف ${value.name} أكبر من 5 ميغابايت.`);
-      if (!(value.type === "application/pdf" || value.type.startsWith("image/"))) {
-        return jsonError("المستندات المقبولة هي PDF أو صور فقط.");
+      if (!allowedDocumentMimeTypes.has(value.type)) {
+        return jsonError("المستندات المقبولة هي PDF أو صور (JPG, PNG, WEBP) فقط.");
       }
       files.push({ documentType, file: value });
     }

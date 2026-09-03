@@ -2,23 +2,15 @@
 
 import Link from "next/link";
 import { FormEvent, useCallback, useEffect, useMemo, useState } from "react";
+import { clinicDayValues, dayLabels, parseDays, type ClinicDay } from "../doctor-data";
 import { Localized, useLanguage } from "../language";
 
-type ClinicDay = "sunday" | "monday" | "tuesday" | "wednesday" | "thursday" | "friday" | "saturday";
 type Doctor = {
   id: number; fullName: string; specialty: string; clinicLocation: string; city: string;
   bookingCost: number; currency: string; clinicDays: string; clinicStartTime: string;
   clinicEndTime: string; slotDurationMinutes: number; phone: string;
-  paymentInstructions: string; paymentInstructionsVisible: number;
+  paymentInstructions?: string | null; paymentInstructionsVisible?: number;
 };
-
-const dayValues: ClinicDay[] = ["sunday", "monday", "tuesday", "wednesday", "thursday", "friday", "saturday"];
-const dayLabels: Record<ClinicDay, string> = { sunday: "الأحد", monday: "الاثنين", tuesday: "الثلاثاء", wednesday: "الأربعاء", thursday: "الخميس", friday: "الجمعة", saturday: "السبت" };
-
-function parseDays(value: string): ClinicDay[] {
-  try { const parsed = JSON.parse(value) as unknown; return Array.isArray(parsed) ? parsed.filter((day): day is ClinicDay => typeof day === "string" && dayValues.includes(day as ClinicDay)) : []; }
-  catch { return []; }
-}
 
 function formatTime(value: string) {
   const [hours, minutes] = value.split(":").map(Number);
@@ -31,7 +23,7 @@ function dateOptions(doctor: Doctor) {
   const start = new Date(); start.setHours(12, 0, 0, 0);
   for (let offset = 0; offset <= 45; offset += 1) {
     const date = new Date(start); date.setDate(start.getDate() + offset);
-    if (!days.includes(dayValues[date.getDay()])) continue;
+    if (!days.includes(clinicDayValues[date.getDay()])) continue;
     result.push({
       value: `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, "0")}-${String(date.getDate()).padStart(2, "0")}`,
       label: date.toLocaleDateString("ar-SD", { weekday: "long", month: "long", day: "numeric" }),

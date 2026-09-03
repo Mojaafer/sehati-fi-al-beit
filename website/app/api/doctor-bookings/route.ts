@@ -1,23 +1,8 @@
 import { desc, eq } from "drizzle-orm";
 import { hasAdminSession } from "../../admin-auth";
-import { clinicDayValues, isSudanesePhone, makeCode, type ClinicDay } from "../../doctor-data";
+import { clinicDayValues, isSudanesePhone, makeCode, parseDays, text } from "../../doctor-data";
 import { getDb } from "../../../db";
 import { doctorBookings, doctors } from "../../../db/schema";
-
-function text(value: unknown, maxLength: number): string {
-  return typeof value === "string" ? value.trim().slice(0, maxLength) : "";
-}
-
-function parseDays(value: string): ClinicDay[] {
-  try {
-    const parsed = JSON.parse(value) as unknown;
-    return Array.isArray(parsed)
-      ? parsed.filter((day): day is ClinicDay => typeof day === "string" && clinicDayValues.includes(day as ClinicDay))
-      : [];
-  } catch {
-    return [];
-  }
-}
 
 export async function POST(request: Request) {
   try {

@@ -2,9 +2,9 @@
 
 import { FormEvent, useCallback, useEffect, useState } from "react";
 import AdminNav from "../admin-nav";
+import { dayOptions, parseDays, type ClinicDay } from "../../doctor-data";
 import { Localized, useLanguage } from "../../language";
 
-type ClinicDay = "sunday" | "monday" | "tuesday" | "wednesday" | "thursday" | "friday" | "saturday";
 type Doctor = {
   id: number;
   fullName: string;
@@ -31,13 +31,6 @@ type DoctorForm = Omit<Doctor, "id" | "clinicDays" | "supervisorName" | "supervi
   supervisorPhone: string;
 };
 
-const dayOptions: Array<{ value: ClinicDay; label: string }> = [
-  { value: "sunday", label: "الأحد" }, { value: "monday", label: "الاثنين" },
-  { value: "tuesday", label: "الثلاثاء" }, { value: "wednesday", label: "الأربعاء" },
-  { value: "thursday", label: "الخميس" }, { value: "friday", label: "الجمعة" },
-  { value: "saturday", label: "السبت" },
-];
-
 const emptyForm: DoctorForm = {
   fullName: "", specialty: "", clinicLocation: "", city: "ود مدني", bookingCost: 0,
   currency: "SDG", clinicDays: ["monday", "wednesday"], clinicStartTime: "10:00",
@@ -45,13 +38,6 @@ const emptyForm: DoctorForm = {
   supervisorPhone: "", paymentInstructions: "الدفع إلى حساب منصة صحتك بعد إرسال طلب الحجز.",
   paymentInstructionsVisible: 1, status: "active",
 };
-
-function parseDays(value: string): ClinicDay[] {
-  try {
-    const parsed = JSON.parse(value) as unknown;
-    return Array.isArray(parsed) ? parsed.filter((day): day is ClinicDay => dayOptions.some((item) => item.value === day)) : [];
-  } catch { return []; }
-}
 
 function toForm(doctor: Doctor): DoctorForm {
   return {

@@ -1,6 +1,6 @@
 import { desc } from "drizzle-orm";
 import { hasAdminSession } from "../../admin-auth";
-import { isSudanesePhone, makeCode } from "../../doctor-data";
+import { isSudanesePhone, makeCode, text } from "../../doctor-data";
 import { getDb } from "../../../db";
 import { adminNotifications, serviceRequests } from "../../../db/schema";
 
@@ -10,10 +10,6 @@ const serviceLabels: Record<string, string> = {
   nurse: "تمريض منزلي",
   physio: "علاج طبيعي",
 };
-
-function text(value: unknown, maxLength: number): string {
-  return typeof value === "string" ? value.trim().slice(0, maxLength) : "";
-}
 
 export async function POST(request: Request) {
   try {

@@ -1,5 +1,8 @@
+import { eq } from "drizzle-orm";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
+import { getDb } from "../db";
+import { adminSecurity } from "../db/schema";
 
 export const ADMIN_SESSION_COOKIE = "sehatak_admin_session";
 export const ADMIN_SESSION_MAX_AGE = 8 * 60 * 60;
@@ -25,10 +28,12 @@ function bytesToHex(bytes: ArrayBuffer): string {
 }
 
 function constantTimeEqual(left: string, right: string): boolean {
-  const length = Math.max(left.length, right.length);
-  let difference = left.length ^ right.length;
+  const leftBuf = encoder.encode(left);
+  const rightBuf = encoder.encode(right);
+  const length = Math.max(leftBuf.length, rightBuf.length);
+  let difference = leftBuf.length ^ rightBuf.length;
   for (let index = 0; index < length; index += 1) {
-    difference |= (left.charCodeAt(index) || 0) ^ (right.charCodeAt(index) || 0);
+    difference |= (leftBuf[index] ?? 0) ^ (rightBuf[index] ?? 0);
   }
   return difference === 0;
 }
@@ -61,9 +66,24 @@ export async function createAdminSessionValue(): Promise<string> {
   const { ADMIN_SESSION_SECRET } = runtimeEnv();
   if (!ADMIN_SESSION_SECRET) throw new Error("ADMIN_SESSION_SECRET is not configured");
 
+  const sessionId = crypto.randomUUID();
   const expiresAt = Date.now() + ADMIN_SESSION_MAX_AGE * 1000;
-  const payload = `v1.${expiresAt}`;
-  return `${payload}.${await sign(payload, ADMIN_SESSION_SECRET)}`;
+  const payload = `v2.${sessionId}.${expiresAt}`;
+  const signature = await sign(payload, ADMIN_SESSION_SECRET);
+
+  try {
+    const db = getDb();
+    await db.insert(adminSecurity).values({
+      key: `session:${sessionId}`,
+      failedLoginAttempts: 0,
+      lockedUntil: new Date(expiresAt).toISOString(),
+      updatedAt: new Date().toISOString(),
+    });
+  } catch (error) {
+    console.error("failed to persist admin session in db", error);
+  }
+
+  return `${payload}.${signature}`;
 }
 
 async function verifyAdminSessionValue(token: string | undefined): Promise<boolean> {
@@ -71,15 +91,42 @@ async function verifyAdminSessionValue(token: string | undefined): Promise<boole
   if (!token || !ADMIN_SESSION_SECRET) return false;
 
   const parts = token.split(".");
-  if (parts.length !== 3 || parts[0] !== "v1") return false;
+  if (parts.length === 4 && parts[0] === "v2") {
+    const sessionId = parts[1];
+    const expiresAt = Number(parts[2]);
+    if (!Number.isSafeInteger(expiresAt) || expiresAt <= Date.now()) return false;
+    if (expiresAt > Date.now() + ADMIN_SESSION_MAX_AGE * 1000) return false;
 
-  const expiresAt = Number(parts[1]);
-  if (!Number.isSafeInteger(expiresAt) || expiresAt <= Date.now()) return false;
-  if (expiresAt > Date.now() + ADMIN_SESSION_MAX_AGE * 1000) return false;
+    const payload = `${parts[0]}.${parts[1]}.${parts[2]}`;
+    const expectedSignature = await sign(payload, ADMIN_SESSION_SECRET);
+    if (!constantTimeEqual(parts[3], expectedSignature)) return false;
 
-  const payload = `${parts[0]}.${parts[1]}`;
-  const expectedSignature = await sign(payload, ADMIN_SESSION_SECRET);
-  return constantTimeEqual(parts[2], expectedSignature);
+    try {
+      const db = getDb();
+      const session = await db.query.adminSecurity.findFirst({
+        where: (table, { eq }) => eq(table.key, `session:${sessionId}`),
+      });
+      return Boolean(session && (!session.lockedUntil || new Date(session.lockedUntil).getTime() > Date.now()));
+    } catch {
+      return false;
+    }
+  }
+
+  return false;
+}
+
+export async function revokeAdminSession(token: string | undefined): Promise<void> {
+  if (!token) return;
+  const parts = token.split(".");
+  if (parts.length === 4 && parts[0] === "v2") {
+    const sessionId = parts[1];
+    try {
+      const db = getDb();
+      await db.delete(adminSecurity).where(eq(adminSecurity.key, `session:${sessionId}`));
+    } catch (error) {
+      console.error("failed to revoke admin session in db", error);
+    }
+  }
 }
 
 export async function hasAdminSession(): Promise<boolean> {
