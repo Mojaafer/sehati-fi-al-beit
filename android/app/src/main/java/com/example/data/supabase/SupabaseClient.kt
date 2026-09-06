@@ -1,5 +1,6 @@
 package com.example.data.supabase
 
+import com.example.BuildConfig
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import okhttp3.Interceptor
@@ -39,13 +40,18 @@ object SupabaseClient {
     }
 
     private val okHttpClient: OkHttpClient by lazy {
-        val logging = HttpLoggingInterceptor().apply {
-            level = HttpLoggingInterceptor.Level.NONE
-        }
-
         OkHttpClient.Builder()
             .addInterceptor(authInterceptor)
-            .addInterceptor(logging)
+            .apply {
+                // Release builds ship no logging at all. Debug builds log at BASIC — method, URL,
+                // status and timing — deliberately not HEADERS or BODY, which would print the
+                // bearer token and patient records into logcat.
+                if (BuildConfig.DEBUG) {
+                    addInterceptor(
+                        HttpLoggingInterceptor().apply { level = HttpLoggingInterceptor.Level.BASIC }
+                    )
+                }
+            }
             .connectTimeout(15, TimeUnit.SECONDS)
             .readTimeout(20, TimeUnit.SECONDS)
             .writeTimeout(20, TimeUnit.SECONDS)

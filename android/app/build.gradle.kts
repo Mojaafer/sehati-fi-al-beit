@@ -5,7 +5,6 @@ plugins {
   alias(libs.plugins.kotlin.android)
   alias(libs.plugins.kotlin.compose)
   // alias(libs.plugins.roborazzi)
-  // alias(libs.plugins.secrets)
   alias(libs.plugins.google.services)
   // Crash reporting. Uploads stay no-op until the console-side Crashlytics setup is done with
   // the real google-services.json, so builds without that file are unaffected.
@@ -67,20 +66,20 @@ android {
       keyAlias = System.getenv("KEY_ALIAS") ?: ""
       keyPassword = System.getenv("KEY_PASSWORD") ?: ""
     }
-    create("debugConfig") {
-      storeFile = file("${rootDir}/debug.keystore")
-      storePassword = "android"
-      keyAlias = "androiddebugkey"
-      keyPassword = "android"
-    }
+    // No "debugConfig" here: the debug build type below uses AGP's built-in "debug" config, which
+    // already points at the committed debug.keystore. A second block only duplicated its
+    // credentials without ever being referenced.
   }
 
   buildTypes {
     release {
       isCrunchPngs = false
-      isMinifyEnabled = false
+      // R8 shrinks and obfuscates. Everything that resolves a name at runtime — Firestore
+      // entities, the Moshi DTOs, the Retrofit interface — is pinned in proguard-rules.pro.
+      isMinifyEnabled = true
+      isShrinkResources = true
       proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
-       signingConfig = signingConfigs.getByName("release")
+      signingConfig = signingConfigs.getByName("release")
     }
     debug { signingConfig = signingConfigs.getByName("debug") }
   }
@@ -105,29 +104,14 @@ android {
   }
 }
 
-// Configure the Secrets Gradle Plugin to use .env and .env.example files
-// to match the convention used in Web projects.
-// secrets {
-//   propertiesFileName = ".env"
-//   defaultPropertiesFileName = ".env.example"
-//   ignoreList.add("FIREBASE_APPCHECK_DEBUG_TOKEN")
-// }
-//
 // Allows the project to build before google-services.json is added; Firebase
 // features will not work at runtime until the real file is in place.
 googleServices { missingGoogleServicesStrategy = MissingGoogleServicesStrategy.WARN }
 
-// Some unused dependencies are commented out below instead of being removed.
-// This makes it easy to add them back in the future if needed.
 dependencies {
   implementation(platform(libs.androidx.compose.bom))
   implementation(platform(libs.firebase.bom))
-  // implementation(libs.accompanist.permissions)
   implementation(libs.androidx.activity.compose)
-  // implementation(libs.androidx.camera.camera2)
-  // implementation(libs.androidx.camera.core)
-  // implementation(libs.androidx.camera.lifecycle)
-  // implementation(libs.androidx.camera.view)
   implementation(libs.androidx.compose.material.icons.core)
   implementation(libs.androidx.compose.material.icons.extended)
   implementation(libs.androidx.compose.material3)
@@ -138,7 +122,6 @@ dependencies {
   implementation(libs.androidx.credentials)
   implementation(libs.androidx.credentials.play.services)
   implementation(libs.googleid)
-  // implementation(libs.androidx.datastore.preferences)
   implementation(libs.androidx.lifecycle.runtime.compose)
   implementation(libs.androidx.lifecycle.runtime.ktx)
   implementation(libs.androidx.lifecycle.viewmodel.compose)
@@ -156,7 +139,6 @@ dependencies {
   implementation(libs.logging.interceptor)
   implementation(libs.moshi.kotlin)
   implementation(libs.okhttp)
-  // implementation(libs.play.services.location)
   implementation(libs.retrofit)
   testImplementation(libs.androidx.compose.ui.test.junit4)
   testImplementation(libs.androidx.core)

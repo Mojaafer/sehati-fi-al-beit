@@ -141,12 +141,25 @@ def cmd_allow_sms_regions(token, args):
 
 
 """Phone number -> (fixed OTP, role, display name). Sudanese subscriber numbers only:
-SudanPhoneNumber.normalize accepts +249 followed by a 9-digit number starting 1 or 9."""
+SudanPhoneNumber.normalize accepts +249 followed by a 9-digit number starting 1 or 9.
 
-TEST_ROLE_ACCOUNTS = [
+The codes below are committed, so anyone with repo access can sign in as any role — acceptable
+only because this repo is private for exactly that class of reason (see google-services.json and
+debug.keystore). To use codes that are not in git, export them before running:
+
+    SEHATI_TEST_OTP_ADMIN=… SEHATI_TEST_OTP_PROVIDER=… python fb_admin.py seed-test-roles
+
+Whatever is exported wins, and `seed-test-roles` re-registers the numbers with the new codes."""
+
+_DEFAULT_TEST_ROLE_ACCOUNTS = [
     ("+249911000001", "110001", "PATIENT", "مريض تجريبي"),
     ("+249911000002", "110002", "PROVIDER", "مقدم خدمة تجريبي"),
     ("+249911000003", "110003", "ADMIN", "مدير تجريبي"),
+]
+
+TEST_ROLE_ACCOUNTS = [
+    (phone, os.environ.get("SEHATI_TEST_OTP_%s" % role, default_code), role, name)
+    for phone, default_code, role, name in _DEFAULT_TEST_ROLE_ACCOUNTS
 ]
 
 

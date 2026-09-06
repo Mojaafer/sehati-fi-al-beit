@@ -32,12 +32,19 @@ export default function AdminServiceRequestsClient() {
 
   const load = useCallback(async () => {
     setLoading(true);
-    const response = await fetch("/api/service-requests", { cache: "no-store" });
-    if (response.status === 401) return window.location.assign("/admin/login");
-    const data = await response.json() as { requests?: ServiceRequest[]; error?: string };
-    if (!response.ok) setError(data.error || "تعذر تحميل الطلبات.");
-    else setRequests(data.requests || []);
-    setLoading(false);
+    try {
+      const response = await fetch("/api/service-requests", { cache: "no-store" });
+      if (response.status === 401) return window.location.assign("/admin/login");
+      const data = await response.json() as { requests?: ServiceRequest[]; error?: string };
+      if (!response.ok) setError(data.error || "تعذر تحميل الطلبات.");
+      else setRequests(data.requests || []);
+    } catch {
+      // A dropped connection, or a 500 answering with HTML instead of JSON, used to reject here
+      // and leave the screen stuck on its spinner for good.
+      setError("تعذر تحميل الطلبات.");
+    } finally {
+      setLoading(false);
+    }
   }, []);
 
   useEffect(() => { const id = window.setTimeout(() => void load(), 0); return () => window.clearTimeout(id); }, [load]);
@@ -45,11 +52,17 @@ export default function AdminServiceRequestsClient() {
   async function remove(id: number) {
     if (!window.confirm("هل تريد حذف طلب الخدمة نهائياً؟")) return;
     setDeletingId(id); setError(""); setNotice("");
-    const response = await fetch(`/api/service-requests/${id}`, { method: "DELETE" });
-    const data = await response.json() as { error?: string };
-    if (!response.ok) setError(data.error || "تعذر حذف الطلب.");
-    else { setNotice("تم حذف طلب الخدمة."); await load(); }
-    setDeletingId(null);
+    try {
+      const response = await fetch(`/api/service-requests/${id}`, { method: "DELETE" });
+      if (response.status === 401) return window.location.assign("/admin/login");
+      const data = await response.json() as { error?: string };
+      if (!response.ok) setError(data.error || "تعذر حذف الطلب.");
+      else { setNotice("تم حذف طلب الخدمة."); await load(); }
+    } catch {
+      setError("تعذر حذف الطلب.");
+    } finally {
+      setDeletingId(null);
+    }
   }
 
   return <><AdminNav /><Localized><main className="admin-page" dir={direction}>

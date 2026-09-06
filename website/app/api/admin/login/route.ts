@@ -1,3 +1,4 @@
+import { lt } from "drizzle-orm";
 import {
   ADMIN_SESSION_COOKIE,
   ADMIN_SESSION_MAX_AGE,
@@ -6,15 +7,24 @@ import {
 } from "../../../admin-auth";
 import { getDb } from "../../../../db";
 import { adminSecurity } from "../../../../db/schema";
+import { clientRateLimitKey } from "../../../../lib/rate-limit";
 
-function getClientIp(request: Request): string {
-  const forwarded = request.headers.get("x-forwarded-for");
-  if (forwarded) return forwarded.split(",")[0].trim().slice(0, 45);
-  return (request.headers.get("cf-connecting-ip") || "unknown").slice(0, 45);
+/**
+ * The lockout below is only as good as this key, so it must not be attacker-chosen. See
+ * `clientRateLimitKey` for why the edge header wins and why the *last* `x-forwarded-for` hop is
+ * the one that gets read.
+ *
+ * Requests that yield no usable address share a single bucket rather than getting a free pass,
+ * which also means a real admin behind Cloudflare can never be locked out by someone else.
+ */
+function getRateLimitKey(request: Request): string {
+  return `admin-login:${clientRateLimitKey(request)}`;
 }
 
 const MAX_ATTEMPTS = 5;
 const LOCKOUT_MINUTES = 15;
+/** A row is only meaningful for one lockout window; older ones would accumulate forever. */
+const ROW_RETENTION_HOURS = 24;
 
 export async function POST(request: Request) {
   try {
@@ -26,8 +36,7 @@ export async function POST(request: Request) {
     const username = typeof payload.username === "string" ? payload.username.trim().slice(0, 80) : "";
     const password = typeof payload.password === "string" ? payload.password.slice(0, 200) : "";
 
-    const clientIp = getClientIp(request);
-    const securityKey = `admin-login:${clientIp}`;
+    const securityKey = getRateLimitKey(request);
 
     const db = getDb();
     const security = await db.query.adminSecurity.findFirst({
@@ -69,6 +78,15 @@ export async function POST(request: Request) {
       target: adminSecurity.key,
       set: { failedLoginAttempts: 0, lockedUntil: null, updatedAt: new Date().toISOString() },
     });
+
+    // One row per source address adds up, and a row outlives its usefulness the moment its
+    // lockout window closes. Pruning on the (rare) successful login keeps this off the hot path.
+    try {
+      const cutoff = new Date(Date.now() - ROW_RETENTION_HOURS * 60 * 60 * 1000).toISOString();
+      await db.delete(adminSecurity).where(lt(adminSecurity.updatedAt, cutoff));
+    } catch (pruneError) {
+      console.error("admin_security prune failed", pruneError);
+    }
 
     const sessionValue = await createAdminSessionValue();
     return Response.json(

@@ -3,6 +3,8 @@ import { hasAdminSession } from "../../admin-auth";
 import { isSudanesePhone, makeCode, text } from "../../doctor-data";
 import { getDb } from "../../../db";
 import { adminNotifications, serviceRequests } from "../../../db/schema";
+import { pageParams, splitPage } from "../../../lib/pagination";
+import { checkRateLimit, tooManyRequests } from "../../../lib/rate-limit";
 
 const serviceTypes = new Set(["lab", "nurse", "physio"]);
 const serviceLabels: Record<string, string> = {
@@ -13,6 +15,11 @@ const serviceLabels: Record<string, string> = {
 
 export async function POST(request: Request) {
   try {
+    // Each accepted call writes a service request *and* an admin notification, so unthrottled
+    // abuse would bury the real requests in the admin inbox.
+    const limit = await checkRateLimit("service-request-create", request, 20, 3600);
+    if (!limit.allowed) return tooManyRequests(limit.retryAfterSeconds);
+
     const input = await request.json() as Record<string, unknown>;
     const serviceType = text(input.serviceType, 20);
     const patientName = text(input.patientName, 160);
@@ -62,8 +69,12 @@ export async function POST(request: Request) {
   }
 }
 
-export async function GET() {
+export async function GET(request: Request) {
   if (!(await hasAdminSession())) return Response.json({ error: "Unauthorized" }, { status: 401 });
-  const requests = await getDb().select().from(serviceRequests).orderBy(desc(serviceRequests.createdAt));
-  return Response.json({ requests }, { headers: { "Cache-Control": "no-store" } });
+  const page = pageParams(request);
+  const rows = await getDb().select().from(serviceRequests)
+    .orderBy(desc(serviceRequests.createdAt))
+    .limit(page.fetchLimit).offset(page.offset);
+  const { rows: requests, hasMore } = splitPage(rows, page, "service requests list");
+  return Response.json({ requests, hasMore }, { headers: { "Cache-Control": "no-store" } });
 }

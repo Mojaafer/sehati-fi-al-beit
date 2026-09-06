@@ -60,12 +60,19 @@ export default function AdminDoctorsClient() {
 
   const loadDoctors = useCallback(async () => {
     setLoading(true);
-    const response = await fetch("/api/admin/doctors", { cache: "no-store" });
-    if (response.status === 401) return window.location.assign("/admin/login");
-    const data = await response.json() as { doctors?: Doctor[]; error?: string };
-    if (!response.ok) setError(data.error || "تعذر تحميل الأطباء.");
-    else setDoctors(data.doctors || []);
-    setLoading(false);
+    try {
+      const response = await fetch("/api/admin/doctors", { cache: "no-store" });
+      if (response.status === 401) return window.location.assign("/admin/login");
+      const data = await response.json() as { doctors?: Doctor[]; error?: string };
+      if (!response.ok) setError(data.error || "تعذر تحميل الأطباء.");
+      else setDoctors(data.doctors || []);
+    } catch {
+      // A dropped connection, or a 500 that answers with an HTML error page rather than JSON,
+      // used to reject here and leave the screen stuck on its spinner for good.
+      setError("تعذر تحميل الأطباء.");
+    } finally {
+      setLoading(false);
+    }
   }, []);
 
   useEffect(() => {
@@ -92,36 +99,52 @@ export default function AdminDoctorsClient() {
   async function save(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     setSaving(true); setError(""); setNotice("");
-    const response = await fetch(selectedId ? `/api/admin/doctors/${selectedId}` : "/api/admin/doctors", {
-      method: selectedId ? "PATCH" : "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(form),
-    });
-    const data = await response.json() as { error?: string };
-    if (!response.ok) setError(data.error || "تعذر حفظ الطبيب.");
-    else {
-      if (!selectedId) { setSelectedId(null); setForm(emptyForm); }
-      setNotice(selectedId ? "تم تحديث بيانات الطبيب." : "تمت إضافة الطبيب إلى الدليل.");
-      await loadDoctors();
+    try {
+      const response = await fetch(selectedId ? `/api/admin/doctors/${selectedId}` : "/api/admin/doctors", {
+        method: selectedId ? "PATCH" : "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(form),
+      });
+      if (response.status === 401) return window.location.assign("/admin/login");
+      const data = await response.json() as { error?: string };
+      if (!response.ok) setError(data.error || "تعذر حفظ الطبيب.");
+      else {
+        if (!selectedId) { setSelectedId(null); setForm(emptyForm); }
+        setNotice(selectedId ? "تم تحديث بيانات الطبيب." : "تمت إضافة الطبيب إلى الدليل.");
+        await loadDoctors();
+      }
+    } catch {
+      setError("تعذر حفظ الطبيب.");
+    } finally {
+      setSaving(false);
     }
-    setSaving(false);
   }
 
   async function remove(doctor: Doctor) {
     if (!window.confirm(`هل تريد حذف ${doctor.fullName} نهائياً؟`)) return;
-    const response = await fetch(`/api/admin/doctors/${doctor.id}`, { method: "DELETE" });
-    const data = await response.json() as { error?: string };
-    if (!response.ok) setError(data.error || "تعذر حذف الطبيب.");
-    else { setNotice("تم حذف الطبيب."); startCreate(); await loadDoctors(); }
+    try {
+      const response = await fetch(`/api/admin/doctors/${doctor.id}`, { method: "DELETE" });
+      if (response.status === 401) return window.location.assign("/admin/login");
+      const data = await response.json() as { error?: string };
+      if (!response.ok) setError(data.error || "تعذر حذف الطبيب.");
+      else { setNotice("تم حذف الطبيب."); startCreate(); await loadDoctors(); }
+    } catch {
+      setError("تعذر حذف الطبيب.");
+    }
   }
 
   async function toggleVisibility(doctor: Doctor) {
     const next = { ...toForm(doctor), status: doctor.status === "active" ? "inactive" as const : "active" as const };
-    const response = await fetch(`/api/admin/doctors/${doctor.id}`, {
-      method: "PATCH", headers: { "Content-Type": "application/json" }, body: JSON.stringify(next),
-    });
-    if (response.ok) { setNotice(next.status === "active" ? "تم إظهار الطبيب للزوار." : "تم إخفاء الطبيب من الدليل."); await loadDoctors(); }
-    else { const data = await response.json() as { error?: string }; setError(data.error || "تعذر تغيير الظهور."); }
+    try {
+      const response = await fetch(`/api/admin/doctors/${doctor.id}`, {
+        method: "PATCH", headers: { "Content-Type": "application/json" }, body: JSON.stringify(next),
+      });
+      if (response.status === 401) return window.location.assign("/admin/login");
+      if (response.ok) { setNotice(next.status === "active" ? "تم إظهار الطبيب للزوار." : "تم إخفاء الطبيب من الدليل."); await loadDoctors(); }
+      else { const data = await response.json() as { error?: string }; setError(data.error || "تعذر تغيير الظهور."); }
+    } catch {
+      setError("تعذر تغيير الظهور.");
+    }
   }
 
   return <><AdminNav /><Localized><main className="admin-page" dir={direction}>

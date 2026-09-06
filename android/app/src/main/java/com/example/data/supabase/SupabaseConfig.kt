@@ -2,15 +2,29 @@ package com.example.data.supabase
 
 import com.example.BuildConfig
 
+/**
+ * Supabase connection settings, supplied at build time only.
+ *
+ * There is deliberately no fallback: a hardcoded default meant a build with no
+ * `SUPABASE_URL` / `SUPABASE_ANON_KEY` silently talked to the live project with a key
+ * committed to source. Failing loudly is the point — pass `-PsupabaseUrl=` /
+ * `-PsupabaseAnonKey=` or export the environment variables (see `android/.env.example`).
+ */
 object SupabaseConfig {
-    const val DEFAULT_URL = "https://wolngyvenfyuaigjxajs.supabase.co"
-    const val DEFAULT_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6IndvbG5neXZlbmZ5dWFpZ2p4YWpzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODc0ODMyNzQsImV4cCI6MjEwMzA1OTI3NH0.0OYLx4XOASh88gGCGVdHoozZVSPY1l-XH20kjyrDUn8"
 
     val url: String
-        get() = BuildConfig.SUPABASE_URL.ifEmpty { DEFAULT_URL }
+        get() = BuildConfig.SUPABASE_URL.ifEmpty { missing("SUPABASE_URL", "supabaseUrl") }
 
     val anonKey: String
-        get() = BuildConfig.SUPABASE_ANON_KEY.ifEmpty { DEFAULT_ANON_KEY }
+        get() = BuildConfig.SUPABASE_ANON_KEY.ifEmpty { missing("SUPABASE_ANON_KEY", "supabaseAnonKey") }
+
+    /** True when this build can reach Supabase at all; lets callers skip instead of throwing. */
+    val isConfigured: Boolean
+        get() = BuildConfig.SUPABASE_URL.isNotEmpty() && BuildConfig.SUPABASE_ANON_KEY.isNotEmpty()
+
+    private fun missing(envName: String, propertyName: String): Nothing = throw IllegalStateException(
+        "$envName is not set for this build. Pass -P$propertyName=... to Gradle or export $envName."
+    )
 
     private var userAuthToken: String? = null
 

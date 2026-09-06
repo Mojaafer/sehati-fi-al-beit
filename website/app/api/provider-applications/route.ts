@@ -1,7 +1,9 @@
-import { desc, eq } from "drizzle-orm";
+import { desc, eq, inArray } from "drizzle-orm";
 import { hasAdminSession } from "../../admin-auth";
 import { getDb } from "../../../db";
 import { providerApplications, providerDocuments } from "../../../db/schema";
+import { pageParams, splitPage } from "../../../lib/pagination";
+import { checkRateLimit, tooManyRequests } from "../../../lib/rate-limit";
 import { removePrivateFiles, uploadPrivateFile } from "../../../lib/storage";
 
 const professions = new Set(["doctor", "lab", "physio", "nurse"]);
@@ -21,6 +23,11 @@ function jsonError(message: string, status = 400) {
 
 export async function POST(request: Request) {
   try {
+    // Public, and every accepted call writes up to four 5 MB objects to storage. 10/hour is more
+    // than an applicant retrying a failed upload will ever need.
+    const limit = await checkRateLimit("provider-application-create", request, 10, 3600);
+    if (!limit.allowed) return tooManyRequests(limit.retryAfterSeconds);
+
     const form = await request.formData();
     const profession = field(form, "profession", 30);
     const fullName = field(form, "fullName", 160);
@@ -101,15 +108,25 @@ export async function POST(request: Request) {
   }
 }
 
-export async function GET() {
+export async function GET(request: Request) {
   if (!(await hasAdminSession())) return jsonError("يلزم تسجيل الدخول للإدارة.", 401);
 
   try {
     const db = getDb();
-    const applications = await db.select().from(providerApplications)
-      .orderBy(desc(providerApplications.createdAt), desc(providerApplications.id));
-    const documents = await db.select().from(providerDocuments)
-      .orderBy(desc(providerDocuments.id));
+    const page = pageParams(request);
+    const rows = await db.select().from(providerApplications)
+      .orderBy(desc(providerApplications.createdAt), desc(providerApplications.id))
+      .limit(page.fetchLimit).offset(page.offset);
+    const { rows: applications, hasMore } = splitPage(rows, page, "provider applications list");
+
+    // Only the documents belonging to the applications actually being returned. This used to pull
+    // every row in the table and filter in memory.
+    const applicationIds = applications.map((application) => application.id);
+    const documents = applicationIds.length === 0
+      ? []
+      : await db.select().from(providerDocuments)
+        .where(inArray(providerDocuments.applicationId, applicationIds))
+        .orderBy(desc(providerDocuments.id));
 
     return Response.json({
       applications: applications.map((application) => ({
@@ -127,6 +144,7 @@ export async function GET() {
             downloadUrl: `/api/provider-documents/${document.id}`,
           })),
       })),
+      hasMore,
     });
   } catch (error) {
     console.error("provider application list failed", error);

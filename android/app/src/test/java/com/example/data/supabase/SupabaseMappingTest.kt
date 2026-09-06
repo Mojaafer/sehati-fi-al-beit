@@ -6,7 +6,7 @@ import com.example.data.model.PayoutStatus
 import com.example.data.model.ProviderEntity
 import com.example.data.model.RatingEntity
 import org.junit.Assert.assertEquals
-import org.junit.Assert.assertNotNull
+import org.junit.Assert.assertThrows
 import org.junit.Assert.assertTrue
 import org.junit.Test
 
@@ -142,9 +142,19 @@ class SupabaseMappingTest {
         assertEquals("خدمة ممتازة ودقة في المواعيد", convertedBack.comment)
     }
 
+    /**
+     * The live project URL and anon key used to sit in [SupabaseConfig] as defaults, so a build
+     * with no credentials reached the real project with a key committed to source. An unconfigured
+     * build must now fail loudly instead.
+     */
     @Test
-    fun supabaseConfig_providesDefaults() {
-        assertNotNull(SupabaseConfig.url)
-        assertTrue(SupabaseConfig.url.contains("supabase.co") || SupabaseConfig.url.contains("wolngyvenfyuaigjxajs"))
+    fun supabaseConfig_hasNoBakedInFallback() {
+        if (SupabaseConfig.isConfigured) {
+            assertTrue(SupabaseConfig.url.startsWith("http"))
+            assertTrue(SupabaseConfig.anonKey.isNotEmpty())
+        } else {
+            assertThrows(IllegalStateException::class.java) { SupabaseConfig.url }
+            assertThrows(IllegalStateException::class.java) { SupabaseConfig.anonKey }
+        }
     }
 }

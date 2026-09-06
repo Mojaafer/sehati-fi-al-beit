@@ -11,6 +11,7 @@ const encoder = new TextEncoder();
 
 type RuntimeEnv = {
   ADMIN_USERNAME?: string;
+  ADMIN_PASSWORD_PBKDF2?: string;
   ADMIN_PASSWORD_SHA256?: string;
   ADMIN_SESSION_SECRET?: string;
 };
@@ -18,6 +19,7 @@ type RuntimeEnv = {
 function runtimeEnv(): RuntimeEnv {
   return {
     ADMIN_USERNAME: process.env.ADMIN_USERNAME,
+    ADMIN_PASSWORD_PBKDF2: process.env.ADMIN_PASSWORD_PBKDF2,
     ADMIN_PASSWORD_SHA256: process.env.ADMIN_PASSWORD_SHA256,
     ADMIN_SESSION_SECRET: process.env.ADMIN_SESSION_SECRET,
   };
@@ -42,6 +44,44 @@ async function sha256(value: string): Promise<string> {
   return bytesToHex(await crypto.subtle.digest("SHA-256", encoder.encode(value)));
 }
 
+/**
+ * Verifies a password against `pbkdf2$sha256$<iterations>$<salt-b64>$<hash-hex>`.
+ *
+ * The iteration count is stored inside the value, so raising it later is a matter of
+ * regenerating the env var — no code change and no redeploy of this file. Generate one with
+ * `node scripts/hash-admin-password.mjs`.
+ */
+async function verifyPbkdf2(password: string, stored: string): Promise<boolean> {
+  const [scheme, hash, iterationText, saltB64, expectedHex] = stored.trim().split("$");
+  if (scheme !== "pbkdf2" || hash !== "sha256" || !saltB64 || !expectedHex) return false;
+
+  const iterations = Number(iterationText);
+  if (!Number.isSafeInteger(iterations) || iterations < 1000) return false;
+
+  let decodedSalt: string;
+  try {
+    decodedSalt = atob(saltB64);
+  } catch {
+    return false;
+  }
+  if (decodedSalt.length === 0) return false;
+
+  // Built this way rather than with `Uint8Array.from` so the element type is `ArrayBuffer` and not
+  // `ArrayBufferLike`, which WebCrypto's `BufferSource` will not accept.
+  const salt = new Uint8Array(decodedSalt.length);
+  for (let index = 0; index < decodedSalt.length; index += 1) {
+    salt[index] = decodedSalt.charCodeAt(index);
+  }
+
+  const key = await crypto.subtle.importKey("raw", encoder.encode(password), "PBKDF2", false, ["deriveBits"]);
+  const bits = await crypto.subtle.deriveBits(
+    { name: "PBKDF2", salt, iterations, hash: "SHA-256" },
+    key,
+    256,
+  );
+  return constantTimeEqual(bytesToHex(bits), expectedHex.toLowerCase());
+}
+
 async function sign(value: string, secret: string): Promise<string> {
   const key = await crypto.subtle.importKey(
     "raw",
@@ -53,13 +93,35 @@ async function sign(value: string, secret: string): Promise<string> {
   return bytesToHex(await crypto.subtle.sign("HMAC", key, encoder.encode(value)));
 }
 
+/**
+ * Prefers `ADMIN_PASSWORD_PBKDF2`. Salted and stretched, so the stored value is useless for
+ * rainbow-table or GPU lookup even if the environment leaks.
+ *
+ * `ADMIN_PASSWORD_SHA256` is a single unsalted round — a leaked value is crackable offline in
+ * seconds. It is still honoured so that setting the new variable is a deliberate step rather than
+ * a lockout, but it warns on every use. Remove it once the PBKDF2 value is in place.
+ */
 export async function verifyAdminCredentials(username: string, password: string): Promise<boolean> {
-  const { ADMIN_USERNAME, ADMIN_PASSWORD_SHA256 } = runtimeEnv();
-  if (!ADMIN_USERNAME || !ADMIN_PASSWORD_SHA256 || !username || !password) return false;
+  const { ADMIN_USERNAME, ADMIN_PASSWORD_PBKDF2, ADMIN_PASSWORD_SHA256 } = runtimeEnv();
+  if (!ADMIN_USERNAME || !username || !password) return false;
 
-  const passwordHash = await sha256(password);
-  return constantTimeEqual(username, ADMIN_USERNAME)
-    && constantTimeEqual(passwordHash, ADMIN_PASSWORD_SHA256.toLowerCase());
+  // Always compare the username, even when the password check short-circuits, so the two
+  // branches cost the same.
+  const usernameMatches = constantTimeEqual(username, ADMIN_USERNAME);
+
+  if (ADMIN_PASSWORD_PBKDF2) {
+    return (await verifyPbkdf2(password, ADMIN_PASSWORD_PBKDF2)) && usernameMatches;
+  }
+
+  if (ADMIN_PASSWORD_SHA256) {
+    console.warn(
+      "ADMIN_PASSWORD_SHA256 is unsalted and deprecated; generate ADMIN_PASSWORD_PBKDF2 with scripts/hash-admin-password.mjs",
+    );
+    const passwordHash = await sha256(password);
+    return usernameMatches && constantTimeEqual(passwordHash, ADMIN_PASSWORD_SHA256.toLowerCase());
+  }
+
+  return false;
 }
 
 export async function createAdminSessionValue(): Promise<string> {

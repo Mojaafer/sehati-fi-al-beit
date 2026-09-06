@@ -42,14 +42,33 @@ service cloud.firestore {
 
     match /providers/{providerId} {
       // A patient rates a provider they do not own, so the rating transaction needs its own
-      // narrow opening. Bounding it to one extra review of 1-5 stars keeps a client from
-      // rewriting the average outright; without Cloud Functions this is as tight as it gets.
+      // narrow opening. It is bounded to one extra review of 1-5 stars, and the four fields must
+      // agree with each other: the displayed average has to be the sum over the count, and
+      // reviewsCount has to match ratingCount. That stops the interesting abuse — claiming one
+      // review while writing an arbitrary 5.0 average.
+      //
+      // What it still cannot do is prove that a matching rating document was written, because the
+      // provider payload carries no order id to check against. Closing that needs either the
+      // order id in this payload or a Cloud Function doing the aggregation — both bigger changes
+      // than a rules edit. The residual exposure is a signed-in user nudging an average by one
+      // review at a time.
       function onlyRatingAggregateChanged() {
         return request.resource.data.diff(resource.data).affectedKeys()
                  .hasOnly(['ratingSum', 'ratingCount', 'rating', 'reviewsCount'])
+          && request.resource.data.ratingSum is number
+          && request.resource.data.ratingCount is number
+          && request.resource.data.rating is number
+          && request.resource.data.reviewsCount is number
           && request.resource.data.ratingCount == resource.data.ratingCount + 1
           && request.resource.data.ratingSum >= resource.data.ratingSum + 1
-          && request.resource.data.ratingSum <= resource.data.ratingSum + 5;
+          && request.resource.data.ratingSum <= resource.data.ratingSum + 5
+          && request.resource.data.reviewsCount == request.resource.data.ratingCount
+          // Tolerance rather than equality: the client computes this in double precision and the
+          // rules engine re-derives it, and a rounding difference must not block a real review.
+          && request.resource.data.rating
+               >= (request.resource.data.ratingSum / request.resource.data.ratingCount) - 0.01
+          && request.resource.data.rating
+               <= (request.resource.data.ratingSum / request.resource.data.ratingCount) + 0.01;
       }
 
       allow read: if signedIn();
@@ -150,11 +169,29 @@ service cloud.firestore {
     // Document id must be the orderId: that makes a second rating an update,
     // which is denied, so each order can only ever be rated once.
     match /ratings/{orderId} {
+      // Because the id *is* the order id, the order can be fetched and checked directly. Without
+      // this, any signed-in user could post a review against any order id — one belonging to
+      // somebody else, or one that was never completed, or one that does not exist at all — and
+      // then use it to move a provider's average.
+      //
+      // COMPLETED matches the app, which only offers the rating screen for a completed, unrated
+      // order (MyOrdersScreen.kt). The provider is taken from the order too, so a patient cannot
+      // rate their own visit and credit the review to a different provider. Repeating the same
+      // `get` is not extra billing — identical document reads are cached for one evaluation.
+      function ratesOwnCompletedOrder() {
+        return exists(/databases/$(database)/documents/orders/$(orderId))
+          && get(/databases/$(database)/documents/orders/$(orderId)).data.patientUid == request.auth.uid
+          && get(/databases/$(database)/documents/orders/$(orderId)).data.status == 'COMPLETED'
+          && get(/databases/$(database)/documents/orders/$(orderId)).data.providerId == request.resource.data.providerId;
+      }
+
       allow read: if signedIn();
       allow create: if signedIn()
                     && request.resource.data.patientUid == request.auth.uid
+                    && request.resource.data.orderId == orderId
                     && request.resource.data.stars >= 1
-                    && request.resource.data.stars <= 5;
+                    && request.resource.data.stars <= 5
+                    && ratesOwnCompletedOrder();
       allow update, delete: if false;
     }
 

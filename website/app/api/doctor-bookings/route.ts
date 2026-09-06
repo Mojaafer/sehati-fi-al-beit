@@ -3,9 +3,17 @@ import { hasAdminSession } from "../../admin-auth";
 import { clinicDayValues, isSudanesePhone, makeCode, parseDays, text } from "../../doctor-data";
 import { getDb } from "../../../db";
 import { doctorBookings, doctors } from "../../../db/schema";
+import { pageParams, splitPage } from "../../../lib/pagination";
+import { checkRateLimit, tooManyRequests } from "../../../lib/rate-limit";
 
 export async function POST(request: Request) {
   try {
+    // Public endpoint that writes a row per call. 20/hour per IP leaves room for a family sharing
+    // one connection — Sudanese mobile networks put many subscribers behind a single address —
+    // while stopping a script from filling the bookings table.
+    const limit = await checkRateLimit("doctor-booking-create", request, 20, 3600);
+    if (!limit.allowed) return tooManyRequests(limit.retryAfterSeconds);
+
     const input = await request.json() as Record<string, unknown>;
     const doctorId = Number(input.doctorId);
     const patientName = text(input.patientName, 160);
@@ -57,9 +65,10 @@ export async function POST(request: Request) {
   }
 }
 
-export async function GET() {
+export async function GET(request: Request) {
   if (!(await hasAdminSession())) return Response.json({ error: "Unauthorized" }, { status: 401 });
-  const bookings = await getDb().select({
+  const page = pageParams(request);
+  const rows = await getDb().select({
     id: doctorBookings.id,
     bookingCode: doctorBookings.bookingCode,
     doctorId: doctorBookings.doctorId,
@@ -79,12 +88,15 @@ export async function GET() {
     supervisorPhone: doctors.supervisorPhone,
     createdAt: doctorBookings.createdAt,
   }).from(doctorBookings).leftJoin(doctors, eq(doctorBookings.doctorId, doctors.id))
-    .orderBy(desc(doctorBookings.createdAt));
+    .orderBy(desc(doctorBookings.createdAt))
+    .limit(page.fetchLimit).offset(page.offset);
+  const { rows: bookings, hasMore } = splitPage(rows, page, "doctor bookings list");
   return Response.json({
     bookings: bookings.map((booking) => ({
       ...booking,
       hasReceipt: Boolean(booking.hasReceipt),
       receiptUrl: booking.hasReceipt ? `/api/doctor-bookings/${booking.id}/receipt` : null,
     })),
+    hasMore,
   }, { headers: { "Cache-Control": "no-store" } });
 }

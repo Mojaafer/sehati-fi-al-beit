@@ -45,35 +45,54 @@ export default function AdminBookingsClient() {
 
   const load = useCallback(async () => {
     setLoading(true);
-    const response = await fetch("/api/doctor-bookings", { cache: "no-store" });
-    if (response.status === 401) return window.location.assign("/admin/login");
-    const data = await response.json() as { bookings?: Booking[]; error?: string };
-    if (!response.ok) setError(data.error || "تعذر تحميل الحجوزات.");
-    else setBookings(data.bookings || []);
-    setLoading(false);
+    try {
+      const response = await fetch("/api/doctor-bookings", { cache: "no-store" });
+      if (response.status === 401) return window.location.assign("/admin/login");
+      const data = await response.json() as { bookings?: Booking[]; error?: string };
+      if (!response.ok) setError(data.error || "تعذر تحميل الحجوزات.");
+      else setBookings(data.bookings || []);
+    } catch {
+      // A dropped connection, or a 500 answering with HTML instead of JSON, used to reject here
+      // and leave the screen stuck on its spinner for good.
+      setError("تعذر تحميل الحجوزات.");
+    } finally {
+      setLoading(false);
+    }
   }, []);
 
   useEffect(() => { const id = window.setTimeout(() => void load(), 0); return () => window.clearTimeout(id); }, [load]);
 
   async function update(id: number, status: string, adminNote?: string) {
     setSavingId(id); setError(""); setNotice("");
-    const response = await fetch(`/api/doctor-bookings/${id}`, {
-      method: "PATCH", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ status, adminNote }),
-    });
-    const data = await response.json() as { error?: string };
-    if (!response.ok) setError(data.error || "تعذر تحديث الحجز.");
-    else { setNotice("تم تحديث حالة الحجز."); await load(); }
-    setSavingId(null);
+    try {
+      const response = await fetch(`/api/doctor-bookings/${id}`, {
+        method: "PATCH", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ status, adminNote }),
+      });
+      if (response.status === 401) return window.location.assign("/admin/login");
+      const data = await response.json() as { error?: string };
+      if (!response.ok) setError(data.error || "تعذر تحديث الحجز.");
+      else { setNotice("تم تحديث حالة الحجز."); await load(); }
+    } catch {
+      setError("تعذر تحديث الحجز.");
+    } finally {
+      setSavingId(null);
+    }
   }
 
   async function remove(id: number) {
     if (!window.confirm("هل تريد حذف طلب الحجز وصورة الإشعار نهائياً؟")) return;
     setSavingId(id);
-    const response = await fetch(`/api/doctor-bookings/${id}`, { method: "DELETE" });
-    const data = await response.json() as { error?: string };
-    if (!response.ok) setError(data.error || "تعذر حذف الحجز.");
-    else { setNotice("تم حذف طلب الحجز."); await load(); }
-    setSavingId(null);
+    try {
+      const response = await fetch(`/api/doctor-bookings/${id}`, { method: "DELETE" });
+      if (response.status === 401) return window.location.assign("/admin/login");
+      const data = await response.json() as { error?: string };
+      if (!response.ok) setError(data.error || "تعذر حذف الحجز.");
+      else { setNotice("تم حذف طلب الحجز."); await load(); }
+    } catch {
+      setError("تعذر حذف الحجز.");
+    } finally {
+      setSavingId(null);
+    }
   }
 
   return <><AdminNav /><Localized><main className="admin-page" dir={direction}>

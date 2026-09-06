@@ -29,11 +29,17 @@ export default function AdminNav() {
   const [unreadCount, setUnreadCount] = useState(0);
 
   const loadNotifications = useCallback(async () => {
-    const response = await fetch("/api/admin/notifications", { cache: "no-store" });
-    if (!response.ok) return;
-    const data = await response.json() as { notifications?: Notification[]; unreadCount?: number };
-    setNotifications(data.notifications || []);
-    setUnreadCount(data.unreadCount || 0);
+    // Polled every 15 seconds, so a single offline blip used to raise an unhandled rejection on
+    // every tick. The badge simply keeps its last value until a poll succeeds again.
+    try {
+      const response = await fetch("/api/admin/notifications", { cache: "no-store" });
+      if (!response.ok) return;
+      const data = await response.json() as { notifications?: Notification[]; unreadCount?: number };
+      setNotifications(data.notifications || []);
+      setUnreadCount(data.unreadCount || 0);
+    } catch {
+      return;
+    }
   }, []);
 
   useEffect(() => {
@@ -43,16 +49,25 @@ export default function AdminNav() {
   }, [loadNotifications]);
 
   async function markRead(id?: number) {
-    await fetch("/api/admin/notifications", {
-      method: "PATCH",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(id ? { id } : { all: true }),
-    });
+    try {
+      await fetch("/api/admin/notifications", {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(id ? { id } : { all: true }),
+      });
+    } catch {
+      // Nothing to show the admin here; the next poll re-reads the real unread count.
+    }
     await loadNotifications();
   }
 
   async function logout() {
-    await fetch("/api/admin/logout", { method: "POST" });
+    try {
+      await fetch("/api/admin/logout", { method: "POST" });
+    } catch {
+      // Leaving the admin on the page with a dead button is worse than sending them to the
+      // login screen: the session cookie is short-lived and the next request re-checks it.
+    }
     window.location.assign("/admin/login");
   }
 

@@ -58,6 +58,9 @@ export default function AdminProvidersClient({ displayName }: { displayName: str
     setError("");
     try {
       const response = await fetch("/api/provider-applications", { cache: "no-store" });
+      // The other admin screens all bounce to the login page when the 8-hour session expires;
+      // without this one an expired session showed a bare "unauthorised" error instead.
+      if (response.status === 401) return window.location.assign("/admin/login");
       const data = await response.json() as { applications?: Application[]; error?: string };
       if (!response.ok) throw new Error(data.error || "تعذر تحميل الطلبات.");
       setApplications(data.applications || []);
@@ -88,6 +91,7 @@ export default function AdminProvidersClient({ displayName }: { displayName: str
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload),
       });
+      if (response.status === 401) return window.location.assign("/admin/login");
       const data = await response.json() as { error?: string };
       if (!response.ok) throw new Error(data.error || "تعذر حفظ التحديث.");
       await loadApplications();
@@ -107,6 +111,7 @@ export default function AdminProvidersClient({ displayName }: { displayName: str
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ id }),
       });
+      if (response.status === 401) return window.location.assign("/admin/login");
       const data = await response.json() as { error?: string };
       if (!response.ok) throw new Error(data.error || "تعذر حذف الطلب.");
       setSelectedId(null);

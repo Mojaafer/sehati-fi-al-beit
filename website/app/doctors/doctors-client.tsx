@@ -46,11 +46,18 @@ export default function DoctorsClient() {
   const [form, setForm] = useState({ patientName: "", patientPhone: "", requestedDate: "", patientNote: "", whatsappOptIn: false });
 
   const load = useCallback(async () => {
-    const response = await fetch("/api/doctors", { cache: "no-store" });
-    const data = await response.json() as { doctors?: Doctor[]; error?: string };
-    if (!response.ok) setError(data.error || "تعذر تحميل دليل الأطباء.");
-    else setDoctors(data.doctors || []);
-    setLoading(false);
+    try {
+      const response = await fetch("/api/doctors", { cache: "no-store" });
+      const data = await response.json() as { doctors?: Doctor[]; error?: string };
+      if (!response.ok) setError(data.error || "تعذر تحميل دليل الأطباء.");
+      else setDoctors(data.doctors || []);
+    } catch {
+      // A dropped connection, or a 500 answering with HTML instead of JSON, used to reject here
+      // and leave a visitor staring at "جاري تحميل الأطباء..." for good.
+      setError("تعذر تحميل دليل الأطباء.");
+    } finally {
+      setLoading(false);
+    }
   }, []);
   useEffect(() => { const id = window.setTimeout(() => void load(), 0); return () => window.clearTimeout(id); }, [load]);
   useEffect(() => {
@@ -78,32 +85,46 @@ export default function DoctorsClient() {
   async function submitBooking(event: FormEvent<HTMLFormElement>) {
     event.preventDefault(); if (!selectedDoctor) return;
     setSubmitting(true); setError("");
-    const response = await fetch("/api/doctor-bookings", {
-      method: "POST", headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ doctorId: selectedDoctor.id, ...form }),
-    });
-    const data = await response.json() as { bookingCode?: string; paymentInstructions?: string | null; error?: string };
-    if (!response.ok) setError(data.error || "تعذر إنشاء طلب الحجز.");
-    else { setBookingCode(data.bookingCode || ""); setPaymentInstructions(data.paymentInstructions ?? null); setNotice("تم إنشاء الطلب. ارفع صورة إشعار التحويل لإرساله للمراجعة."); }
-    setSubmitting(false);
+    try {
+      const response = await fetch("/api/doctor-bookings", {
+        method: "POST", headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ doctorId: selectedDoctor.id, ...form }),
+      });
+      const data = await response.json() as { bookingCode?: string; paymentInstructions?: string | null; error?: string };
+      if (!response.ok) setError(data.error || "تعذر إنشاء طلب الحجز.");
+      else { setBookingCode(data.bookingCode || ""); setPaymentInstructions(data.paymentInstructions ?? null); setNotice("تم إنشاء الطلب. ارفع صورة إشعار التحويل لإرساله للمراجعة."); }
+    } catch {
+      setError("تعذر إنشاء طلب الحجز.");
+    } finally {
+      setSubmitting(false);
+    }
   }
 
   async function uploadReceipt() {
     if (!receipt || !bookingCode) return;
     setSubmitting(true); setError("");
-    const payload = new FormData(); payload.set("bookingCode", bookingCode); payload.set("receipt", receipt);
-    const response = await fetch("/api/doctor-bookings/receipt", { method: "POST", body: payload });
-    const data = await response.json() as { error?: string };
-    if (!response.ok) setError(data.error || "تعذر رفع الإشعار.");
-    else { setNotice("تم رفع إشعار التحويل، وسيراجعه فريق صحتك."); setReceipt(null); }
-    setSubmitting(false);
+    try {
+      const payload = new FormData(); payload.set("bookingCode", bookingCode); payload.set("receipt", receipt);
+      const response = await fetch("/api/doctor-bookings/receipt", { method: "POST", body: payload });
+      const data = await response.json() as { error?: string };
+      if (!response.ok) setError(data.error || "تعذر رفع الإشعار.");
+      else { setNotice("تم رفع إشعار التحويل، وسيراجعه فريق صحتك."); setReceipt(null); }
+    } catch {
+      setError("تعذر رفع الإشعار.");
+    } finally {
+      setSubmitting(false);
+    }
   }
 
   async function optOut() {
-    const response = await fetch("/api/doctor-bookings/preferences", {
-      method: "PATCH", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ bookingCode, whatsappOptIn: false }),
-    });
-    if (response.ok) { setForm((current) => ({ ...current, whatsappOptIn: false })); setNotice("تم إلغاء تحديثات واتساب لهذا الطلب."); }
+    try {
+      const response = await fetch("/api/doctor-bookings/preferences", {
+        method: "PATCH", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ bookingCode, whatsappOptIn: false }),
+      });
+      if (response.ok) { setForm((current) => ({ ...current, whatsappOptIn: false })); setNotice("تم إلغاء تحديثات واتساب لهذا الطلب."); }
+    } catch {
+      setError("تعذر إلغاء تحديثات واتساب، حاول مرة أخرى.");
+    }
   }
 
   return <Localized><main className="doctors-page" dir={language === "ar" ? "rtl" : "ltr"}><div className="doctors-container">
