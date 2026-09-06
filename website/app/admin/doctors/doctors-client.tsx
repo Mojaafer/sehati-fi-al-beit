@@ -2,6 +2,8 @@
 
 import { FormEvent, useCallback, useEffect, useState } from "react";
 import AdminNav from "../admin-nav";
+import { AdminHeader } from "../../ui/AdminHeader";
+import { Button } from "../../ui/Button";
 import { dayOptions, parseDays, type ClinicDay } from "../../doctor-data";
 import { Localized, useLanguage } from "../../language";
 
@@ -148,7 +150,7 @@ export default function AdminDoctorsClient() {
   }
 
   return <><AdminNav /><Localized><main className="admin-page" dir={direction}>
-    <header className="admin-header"><div><span className="eyebrow">إدارة الدليل الطبي</span><h1>الأطباء والعيادات</h1><p>أضف الأطباء وحدد أيام وساعات العيادة وتعليمات الدفع.</p></div><div className="admin-header-actions"><button className="secondary-button" onClick={startCreate}>إضافة طبيب</button><button className="secondary-button" onClick={() => void loadDoctors()}>تحديث</button></div></header>
+    <AdminHeader eyebrow="إدارة الدليل الطبي" title="الأطباء والعيادات" description="أضف الأطباء وحدد أيام وساعات العيادة وتعليمات الدفع." actions={<div className="admin-header-actions"><Button variant="secondary" onClick={startCreate}>إضافة طبيب</Button><Button variant="secondary" onClick={() => void loadDoctors()}>تحديث</Button></div>} />
     {error && <div className="admin-error">{error}</div>}{notice && <div className="admin-success">{notice}</div>}
     <div className="admin-grid admin-doctors-grid">
       <section className="application-list">

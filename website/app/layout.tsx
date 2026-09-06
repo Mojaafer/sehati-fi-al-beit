@@ -1,6 +1,19 @@
 import type { Metadata } from "next";
+import { IBM_Plex_Sans_Arabic } from "next/font/google";
 import "./globals.css";
 import { LanguageProvider, LanguageSwitch, Localized } from "./language";
+
+/**
+ * Arabic-first typeface. Plex Sans Arabic carries the headings and UI text;
+ * the system stack underneath covers anything it doesn't (emoji, symbols).
+ * Loaded with display=swap so text never blocks on the font download.
+ */
+const arabicSans = IBM_Plex_Sans_Arabic({
+  subsets: ["arabic", "latin"],
+  weight: ["400", "500", "600", "700"],
+  display: "swap",
+  variable: "--font-sans-ar",
+});
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://sehatak-home-health.vercel.app"),
@@ -38,7 +51,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="ar" dir="rtl">
+    <html lang="ar" dir="rtl" className={arabicSans.variable}>
       <body><LanguageProvider><Localized>{children}</Localized><LanguageSwitch /></LanguageProvider></body>
     </html>
   );

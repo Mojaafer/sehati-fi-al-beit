@@ -1,5 +1,39 @@
 @import "tailwindcss";
 
+/**
+ * Brand tokens as Tailwind v4 theme values, so utilities like `bg-forest`,
+ * `text-cream` or `border-line` work alongside the hand-written classes below.
+ * The `:root` vars stay as the source of truth for the custom CSS; the values
+ * here are intentionally duplicated as literals (not var() references) so the
+ * generated utilities never depend on cascade order. Deliberately omitted:
+ * `white` (Tailwind default already exists) and `green` (an alias of sage that
+ * would read as the default palette).
+ */
+@theme {
+  --color-forest: #1f3526;
+  --color-forest-soft: #38584b;
+  --color-sage: #768572;
+  --color-cream: #f7ece1;
+  --color-sand: #dfc3a6;
+  --color-orange: #ea833d;
+  --color-orange-dark: #d66f2f;
+  --color-charcoal: #3f3f3f;
+  --color-navy: #1f3526;
+  --color-navy-2: #30473a;
+  --color-teal: #38584b;
+  --color-teal-dark: #2f4539;
+  --color-mint: #e4ebe3;
+  --color-ivory: #f7ece1;
+  --color-ink: #263128;
+  --color-muted: #6f746d;
+  --color-line: #ded2c4;
+  --color-danger: #a6463c;
+
+  --shadow-brand: 0 20px 60px rgba(31, 53, 38, 0.11);
+
+  --font-sans: var(--font-sans-ar), "Segoe UI", Tahoma, Arial, sans-serif;
+}
+
 :root {
   --forest: #1f3526;
   --forest-soft: #38584b;
@@ -47,7 +81,7 @@ html { scroll-behavior: smooth; }
 body {
   background: var(--ivory);
   color: var(--ink);
-  font-family: Tahoma, Arial, sans-serif;
+  font-family: var(--font-sans);
   line-height: 1.7;
   margin: 0;
   -webkit-font-smoothing: antialiased;
@@ -631,8 +665,7 @@ footer { background: var(--navy); color: #d7cec2; padding-top: 55px; }
 .sanad-messages article.user { background: var(--forest-soft); }
 .sanad-modal > form button { background: var(--orange); }
 
-/* Usability and responsive refinements */
-body { font-family: "Segoe UI", Tahoma, Arial, sans-serif; }
+/* Usability and responsive refinements (body font now comes from --font-sans above) */
 h1, h2, h3, .brand strong, .admin-header h1, .admin-login-card h1, .doctors-heading h1 { letter-spacing: 0; }
 .site-header { height: 78px; }
 .header-inner { gap: 18px; }

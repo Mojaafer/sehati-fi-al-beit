@@ -3,6 +3,8 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
 import Link from "next/link";
 import AdminNav from "../admin-nav";
+import { AdminHeader } from "../../ui/AdminHeader";
+import { Button } from "../../ui/Button";
 import { Localized, useLanguage } from "../../language";
 
 type DocumentRecord = {
@@ -125,17 +127,13 @@ export default function AdminProvidersClient({ displayName }: { displayName: str
 
   return (
     <><AdminNav /><Localized><main className="admin-page" dir={direction}>
-      <header className="admin-header">
-        <div>
-          <Link href="/" className="admin-back">← العودة للموقع</Link>
-          <span className="eyebrow">مركز التحقق</span>
-          <h1>طلبات مقدمي الخدمة</h1>
-          <p>مرحباً {displayName}. راجع الهوية والمؤهل والترخيص قبل تفعيل مقدم الخدمة.</p>
-        </div>
-        <div className="admin-header-actions">
-          <button className="secondary-button" onClick={() => void loadApplications()}>تحديث القائمة</button>
-        </div>
-      </header>
+      <AdminHeader
+        eyebrow="مركز التحقق"
+        title="طلبات مقدمي الخدمة"
+        description={`مرحباً ${displayName}. راجع الهوية والمؤهل والترخيص قبل تفعيل مقدم الخدمة.`}
+        before={<Link href="/" className="admin-back">← العودة للموقع</Link>}
+        actions={<div className="admin-header-actions"><Button variant="secondary" onClick={() => void loadApplications()}>تحديث القائمة</Button></div>}
+      />
 
       {error && <div className="admin-error">{error}</div>}
       <div className="admin-grid">

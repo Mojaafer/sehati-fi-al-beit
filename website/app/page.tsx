@@ -3,6 +3,7 @@
 import { FormEvent, useEffect, useState } from "react";
 import { LanguageSwitch, Localized } from "./language";
 import SanadAssistant from "./sanad-assistant";
+import { Button } from "./ui/Button";
 
 const services = [
   {
@@ -163,7 +164,7 @@ function BookingModal({
             <div><span>الموقع</span><strong>{form.city} · {form.neighborhood}</strong></div>
             <div><span>التكلفة</span><strong>تُؤكد بعد مراجعة التفاصيل</strong></div>
           </div>
-          <button className="primary-button full" onClick={onClose}>العودة للرئيسية ←</button>
+          <Button variant="primary" className="full" onClick={onClose}>العودة للرئيسية ←</Button>
         </div>
       </div>
     )}</Localized>;
@@ -276,8 +277,8 @@ function BookingModal({
         )}
 
         <div className="modal-actions">
-          {step > 0 && <button className="secondary-button" onClick={() => setStep((current) => current - 1)}>رجوع</button>}
-          <button className="primary-button" disabled={submitting} onClick={() => void next()}>{submitting ? "جاري الإرسال..." : step === 5 ? "إرسال الطلب" : "التالي"} ←</button>
+          {step > 0 && <Button variant="secondary" onClick={() => setStep((current) => current - 1)}>رجوع</Button>}
+          <Button variant="primary" disabled={submitting} onClick={() => void next()}>{submitting ? "جاري الإرسال..." : step === 5 ? "إرسال الطلب" : "التالي"} ←</Button>
         </div>
         {error && <div className="form-error">{error}</div>}
       </div>
@@ -322,7 +323,7 @@ function ProviderRegistrationModal({ onClose }: { onClose: () => void }) {
           <p className="modal-copy">حنراجع بياناتك ومستنداتك، ونتواصل معاك عبر الهاتف لتأكيد الخطوات القادمة.</p>
           <div className="request-number">{reference}<span>رقم الطلب</span></div>
           <p className="provider-success-note">✓ لا يستطيع مقدم الخدمة استقبال طلبات قبل إكمال التحقق من الهوية والمؤهل والترخيص المهني.</p>
-          <button className="primary-button full" onClick={onClose}>العودة للرئيسية ←</button>
+          <Button variant="primary" className="full" onClick={onClose}>العودة للرئيسية ←</Button>
         </div>
       </div>
     )}</Localized>;
@@ -375,7 +376,7 @@ function ProviderRegistrationModal({ onClose }: { onClose: () => void }) {
 
         <p className="privacy-note">✓ نستخدم بياناتك للتحقق والتواصل معك فقط، ولا نعرض معلوماتك الحساسة للمرضى.</p>
         {error && <p className="form-error">{error}</p>}
-        <div className="modal-actions"><button type="button" className="secondary-button" onClick={onClose}>إلغاء</button><button className="primary-button" disabled={submitting}>{submitting ? "جاري الإرسال..." : "إرسال طلب الانضمام ←"}</button></div>
+        <div className="modal-actions"><Button variant="secondary" onClick={onClose}>إلغاء</Button><Button variant="primary" disabled={submitting}>{submitting ? "جاري الإرسال..." : "إرسال طلب الانضمام ←"}</Button></div>
       </form>
     </div>
   )}</Localized>;
@@ -435,7 +436,7 @@ export default function Home() {
             <h1>الرعاية الصحية...<br /><em>لحد باب بيتك</em></h1>
             <p>اطلب خدمات صحية منزلية من مقدمي خدمات موثّقين، وحدد الوقت والمكان المناسب ليك.</p>
             <div className="hero-actions">
-              <button className="primary-button" onClick={() => openBooking()}>اطلب خدمة الآن <span>←</span></button>
+              <Button variant="primary" onClick={() => openBooking()}>اطلب خدمة الآن <span>←</span></Button>
               <button className="text-link" onClick={() => setProviderOpen(true)}>انضم كمقدم خدمة <span>↖</span></button>
             </div>
             <div className="hero-note">
@@ -550,7 +551,7 @@ export default function Home() {
             <div className="eligible-list">
               <span>✚ أطباء للحجز بالعيادة</span><span>♡ تمريض</span><span>✦ فنيو مختبر</span><span>◒ علاج طبيعي</span>
             </div>
-            <button className="light-button" onClick={() => setProviderOpen(true)}>إرسال طلب الانضمام <span>←</span></button>
+            <Button variant="light" onClick={() => setProviderOpen(true)}>إرسال طلب الانضمام <span>←</span></Button>
           </div>
           <div className="provider-visual" id="provider-steps">
             <span className="provider-kicker">طلب انضمام مقدم خدمة</span>

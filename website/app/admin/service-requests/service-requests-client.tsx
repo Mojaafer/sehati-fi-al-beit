@@ -2,6 +2,8 @@
 
 import { useCallback, useEffect, useState } from "react";
 import AdminNav from "../admin-nav";
+import { AdminHeader } from "../../ui/AdminHeader";
+import { Button } from "../../ui/Button";
 import { Localized, useLanguage } from "../../language";
 
 type ServiceRequest = {
@@ -66,7 +68,7 @@ export default function AdminServiceRequestsClient() {
   }
 
   return <><AdminNav /><Localized><main className="admin-page" dir={direction}>
-    <header className="admin-header"><div><span className="eyebrow">الخدمات المنزلية</span><h1>طلبات الخدمات المنزلية</h1><p>طلبات التمريض وسحب العينات والعلاج الطبيعي المحفوظة من الموقع.</p></div><button className="secondary-button" onClick={() => void load()}>تحديث القائمة</button></header>
+    <AdminHeader eyebrow="الخدمات المنزلية" title="طلبات الخدمات المنزلية" description="طلبات التمريض وسحب العينات والعلاج الطبيعي المحفوظة من الموقع." actions={<Button variant="secondary" onClick={() => void load()}>تحديث القائمة</Button>} />
     {error && <div className="admin-error">{error}</div>}{notice && <div className="admin-success">{notice}</div>}
     <section className="admin-card-list">
       {loading ? <div className="admin-empty">جاري تحميل الطلبات...</div> : requests.length ? requests.map((request) => (

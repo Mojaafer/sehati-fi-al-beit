@@ -2,6 +2,8 @@
 
 import { useCallback, useEffect, useState } from "react";
 import AdminNav from "../admin-nav";
+import { AdminHeader } from "../../ui/AdminHeader";
+import { Button } from "../../ui/Button";
 import { Localized, useLanguage } from "../../language";
 
 type Booking = {
@@ -96,7 +98,7 @@ export default function AdminBookingsClient() {
   }
 
   return <><AdminNav /><Localized><main className="admin-page" dir={direction}>
-    <header className="admin-header"><div><span className="eyebrow">مراجعة الحجوزات</span><h1>طلبات حجز الأطباء</h1><p>الحضور بأسبقية الوصول، ولا يعتمد الطلب قبل مراجعة التحويل.</p></div><button className="secondary-button" onClick={() => void load()}>تحديث القائمة</button></header>
+    <AdminHeader eyebrow="مراجعة الحجوزات" title="طلبات حجز الأطباء" description="الحضور بأسبقية الوصول، ولا يعتمد الطلب قبل مراجعة التحويل." actions={<Button variant="secondary" onClick={() => void load()}>تحديث القائمة</Button>} />
     {error && <div className="admin-error">{error}</div>}{notice && <div className="admin-success">{notice}</div>}
     <section className="admin-card-list">
       {loading ? <div className="admin-empty">جاري تحميل الحجوزات...</div> : bookings.length ? bookings.map((booking) => (
