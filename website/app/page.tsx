@@ -437,7 +437,7 @@ export default function Home() {
             <p>اطلب خدمات صحية منزلية من مقدمي خدمات موثّقين، وحدد الوقت والمكان المناسب ليك.</p>
             <div className="hero-actions">
               <Button variant="primary" onClick={() => openBooking()}>اطلب خدمة الآن <span>←</span></Button>
-              <button className="text-link" onClick={() => setProviderOpen(true)}>انضم كمقدم خدمة <span>↖</span></button>
+              <a href="#services" className="text-link">استكشف الخدمات <span>↖</span></a>
             </div>
             <div className="hero-note">
               <div className="avatar-stack"><span>م</span><span>أ</span><span>س</span></div>
