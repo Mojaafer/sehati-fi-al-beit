@@ -11,7 +11,7 @@ activityCompose = "1.10.1"
 kotlin = "2.2.10"
 # Last BOM on the Compose 1.8 line, which still targets compileSdk 35. The 2025.06+ BOMs move to
 # Compose 1.9 and want compileSdk 36, which this project is not on.
-composeBom = "2025.04.01"
+composeBom = "2026.08.00"
 navigationCompose = "2.8.9"
 kotlinxCoroutinesTest = "1.10.2"
 core = "1.7.0"
